@@ -11,6 +11,10 @@ namespace SeaBattle
     {
         public static PageSwitcher pageSwitcher;
 
+        /// <summary>
+        /// Переходит на заданную страницу
+        /// </summary>
+        /// <param name="newPage">Страница на которую нужно перейти</param>
         public static void SwitchPage(UserControl newPage)
         {
             pageSwitcher.Navigate(newPage);

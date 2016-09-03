@@ -15,3 +15,6 @@ E:\My\Labs\Epam\SeaBattle\SeaBattle\obj\Debug\Pages\Register.baml
 E:\My\Labs\Epam\SeaBattle\SeaBattle\obj\Debug\PageSwitcher.g.cs
 E:\My\Labs\Epam\SeaBattle\SeaBattle\obj\Debug\Pages\Login.g.cs
 E:\My\Labs\Epam\SeaBattle\SeaBattle\obj\Debug\Pages\Register.g.cs
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\bin\Debug\SeaBattle.exe.config
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle.exe
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle.pdb
