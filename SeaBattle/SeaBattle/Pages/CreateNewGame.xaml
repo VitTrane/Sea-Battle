@@ -70,7 +70,8 @@
                 VerticalAlignment="Center"
                 Width="200" 
                 Height="30" 
-                FontSize="18"/>
+                FontSize="18" 
+                Click="createGameButton_Click"/>
 
     </Grid>
 </UserControl>

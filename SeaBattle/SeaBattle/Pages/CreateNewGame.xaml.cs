@@ -29,5 +29,10 @@ namespace SeaBattle.Pages
         {
             Switcher.SwitchPage(new MainMenu());
         }
+
+        private void createGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.SwitchPage(new Game());
+        }
     }
 }
