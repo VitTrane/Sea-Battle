@@ -73,14 +73,24 @@
                 Width="200" 
                 Height="30" 
                 FontSize="16"/>
-        <Button x:Name="backButton" 
-                Content="&lt; Назад"
-                Margin="20,20,0,0"
-                HorizontalAlignment="Left"                 
-                VerticalAlignment="Top"
-                Width="70"
-                Height="30"                  
-                FontSize="16"
-                Click="backButton_Click"/>
+        <TextBlock x:Name="backTextBlock" 
+                   Style="{StaticResource ScaleTextBlockOnFocus}"
+                   Text="&lt; Назад"
+                   Margin="20,20,0,0"
+                   HorizontalAlignment="Left"  
+                   VerticalAlignment="Top"
+                   Width="70"
+                   Height="30"   
+                   FontSize="16"
+                   MouseLeftButtonDown="backTextBlock_MouseLeftButtonDown">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </UserControl>

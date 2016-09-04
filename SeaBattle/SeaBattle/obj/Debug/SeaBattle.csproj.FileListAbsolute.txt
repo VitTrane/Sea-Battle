@@ -32,3 +32,4 @@ E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle_MarkupCompile.
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle.g.resources
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle.Properties.Resources.resources
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\SeaBattle.csproj.GenerateResource.Cache
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\App.baml

@@ -5,51 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Storyboard x:Key="registerMouseEnter">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                           Storyboard.TargetName="registerTextBlock" 
-                                           Storyboard.TargetProperty="(UIElement.RenderTransform).
-                                           (TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-            
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                           Storyboard.TargetName="registerTextBlock" 
-                                           Storyboard.TargetProperty="(UIElement.RenderTransform).
-                                           (TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="registerMouseLeave">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                           Storyboard.TargetName="registerTextBlock" 
-                                           Storyboard.TargetProperty="(UIElement.RenderTransform).
-                                           (TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                           Storyboard.TargetName="registerTextBlock"
-                                           Storyboard.TargetProperty="(UIElement.RenderTransform).
-                                           (TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.2"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </UserControl.Resources>
-    
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="registerTextBlock">
-            <BeginStoryboard x:Name="registerMouseEnter_BeginStoryboard" 
-                             Storyboard="{StaticResource registerMouseEnter}"/>
-        </EventTrigger>
-        
-        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="registerTextBlock">
-            <BeginStoryboard x:Name="registerMouseLeave_BeginStoryboard" 
-                             Storyboard="{StaticResource registerMouseLeave}"/>
-        </EventTrigger>
-    </UserControl.Triggers>
     
     <Grid x:Name="loginPage" Background="White">
         <TextBlock x:Name="authorizationTextBlock" 
@@ -104,6 +59,7 @@
                 Height="30" 
                 FontSize="16"/>
         <TextBlock x:Name="registerTextBlock"
+                   Style="{StaticResource ScaleTextBlockOnFocus}"
                    Text="Регистрация"
                    Margin="300,300,0,0" 
                    HorizontalAlignment="Left"
