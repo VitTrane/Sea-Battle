@@ -1,0 +1,52 @@
+﻿<Page x:Class="SeaBattle.Pages.Game" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      mc:Ignorable="d"  
+      d:DesignHeight="600" d:DesignWidth="1000" 
+  Title="Game">
+
+    <Grid x:Name="pageGame" Background="White">
+        <Grid x:Name="sea" HorizontalAlignment="Left" Height="300" Margin="46,132,0,0" VerticalAlignment="Top" Width="300" Background="#FFA9E8E5"/>
+        <Grid HorizontalAlignment="Left" Height="300" Margin="390,132,0,0" VerticalAlignment="Top" Width="300" Background="#FFA9E8E5"/>
+        <TextBlock x:Name="authorizationTextBlock"  
+                   Margin="330,20,0,0"
+                   HorizontalAlignment="Left"  
+                   VerticalAlignment="Top"  
+                   Width="62"  
+                   Height="30"  
+                   Text="Игра"  
+                   FontSize="25" 
+                   FontWeight="Bold" TextWrapping="Wrap"/>
+        <TextBlock x:Name="labelCheckFinder"  
+                   Margin="140,70,0,0" 
+                   HorizontalAlignment="Left"  
+                   VerticalAlignment="Top"  
+                   Width="466"  
+                   Height="30"  
+                   Text="Ожидание подключения соперника..."  
+                   FontSize="25" 
+                   FontWeight="Bold" TextWrapping="Wrap" Foreground="#FFC9C9C9" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.134"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="labelBack"  
+                   Style="{StaticResource ScaleTextBlockOnFocus}"
+                   Margin="20,20,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"  
+                   Width="186"  
+                   Height="30"  
+                   Text="&lt; Покинуть игру"  
+                   FontSize="16" 
+                   TextWrapping="Wrap"/>
+    </Grid>
+</Page> 
+
