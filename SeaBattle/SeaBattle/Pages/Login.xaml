@@ -23,7 +23,7 @@
                    VerticalAlignment="Top" 
                    Width="100" 
                    Height="30" 
-                   Text="Логин" 
+                   Text="Логин:" 
                    TextWrapping="Wrap" 
                    FontSize="18"/>
         <TextBlock x:Name="passwordTextBlock" 
@@ -33,7 +33,7 @@
                    Width="100" 
                    Height="30" 
                    FontSize="18" 
-                   Text="Пароль" 
+                   Text="Пароль:" 
                    TextWrapping="Wrap"/>
         <TextBox x:Name="usernameTextBox"
                  Margin="300,220,0,0"
