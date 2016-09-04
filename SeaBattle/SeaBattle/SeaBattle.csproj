@@ -70,6 +70,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FindGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +90,9 @@
   <ItemGroup>
     <Compile Include="Pages\CreateNewGame.xaml.cs">
       <DependentUpon>CreateNewGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FindGame.xaml.cs">
+      <DependentUpon>FindGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

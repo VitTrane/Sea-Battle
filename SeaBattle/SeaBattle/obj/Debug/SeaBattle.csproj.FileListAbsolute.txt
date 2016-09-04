@@ -37,3 +37,5 @@ E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\CreateNewGame.baml
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\MainMenu.baml
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\CreateNewGame.g.cs
 E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\MainMenu.g.cs
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\FindGame.baml
+E:\My\Git\GitHubSeaBattle\SeaBattle\SeaBattle\obj\Debug\Pages\FindGame.g.cs
