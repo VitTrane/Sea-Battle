@@ -26,14 +26,27 @@
             </TextBlock.RenderTransform>
         </TextBlock>
         <TextBlock x:Name="newGameTextBlock" 
-                   Margin="330,20,0,0"
-                   HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
+                   Margin="0,0,0,500"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
                    Width="Auto" 
                    Height="30" 
                    Text="Подключиться к игре" 
                    TextWrapping="Wrap" 
                    FontSize="20"
                    FontWeight="Bold"/>
+        <ListView x:Name="gamesListView" 
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center" 
+                  Margin="0,0,0,330" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Имя пользователя" Width="200"/>
+                        <GridViewColumn Header="Время создания" Width="200"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

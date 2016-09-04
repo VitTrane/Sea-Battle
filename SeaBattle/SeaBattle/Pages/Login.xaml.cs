@@ -29,5 +29,10 @@ namespace SeaBattle.Pages
         {
             Switcher.SwitchPage(new Register());
         }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.SwitchPage(new MainMenu());
+        }
     }
 }
