@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid x:Name="registerPage" Background="White">
-        <TextBlock x:Name="authorizationTextBlock" 
+        <TextBlock x:Name="registrationTextBlock" 
                    Margin="330,20,0,0"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Top" 
