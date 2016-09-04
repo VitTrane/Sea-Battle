@@ -1,3 +1,2 @@
-#Игнорирования служебных файлов студии и дебага
-SeaBattle/SeaBattle/bin/
-SeaBattle/SeaBattle/obj/
+SeaBattle/SeaBattle/bin/*
+SeaBattle/SeaBattle/obj/*
