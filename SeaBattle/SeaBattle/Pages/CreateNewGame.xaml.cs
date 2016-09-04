@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace SeaBattle.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenu.xaml
+    /// Логика взаимодействия для CreateNewGame.xaml
     /// </summary>
-    public partial class MainMenu : UserControl
+    public partial class CreateNewGame : UserControl
     {
-        public MainMenu()
+        public CreateNewGame()
         {
             InitializeComponent();
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Switcher.SwitchPage(new Login());
+            Switcher.SwitchPage(new MainMenu());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SeaBattle
 {
     public static class Switcher
     {
-        public static PageSwitcher pageSwitcher;
+        private static PageSwitcher pageSwitcher;
 
         /// <summary>
         /// Переходит на заданную страницу
