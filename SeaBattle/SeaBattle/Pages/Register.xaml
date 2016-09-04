@@ -4,15 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="680">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid x:Name="registerPage" Background="White">
+        <TextBlock x:Name="authorizationTextBlock" 
+                   Margin="330,20,0,0"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   Width="140" 
+                   Height="30" 
+                   Text="Регистриция" 
+                   TextWrapping="Wrap" 
+                   FontSize="20"
+                   FontWeight="Bold"/>
         <TextBlock x:Name="usernameTextBlock" 
                    Margin="180,180,0,0"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Top" 
                    Width="110" 
                    Height="30" 
-                   Text="Username" 
+                   Text="Логин" 
                    TextWrapping="Wrap" 
                    FontSize="18"/>
         <TextBlock x:Name="emailTextBlock" 
@@ -22,7 +32,7 @@
                    Width="110" 
                    Height="30" 
                    FontSize="18" 
-                   Text="Email Address" />
+                   Text="Email" />
         <TextBlock x:Name="passwordTextBlock" 
                    Margin="180,260,0,0"
                    HorizontalAlignment="Left"
@@ -30,7 +40,7 @@
                    Width="110" 
                    Height="30" 
                    FontSize="18" 
-                   Text="Password" 
+                   Text="Пароль" 
                    TextWrapping="Wrap"/>
         <TextBox x:Name="usernameTextBox"
                  Margin="300,180,0,0"
@@ -56,20 +66,21 @@
                      Height="30" 
                      FontSize="18"/>
         <Button x:Name="registerButton"
-                Content="Register"
-                Margin="430,300,0,0" 
+                Content="Зарегистрироваться"
+                Margin="300,330,0,0" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Width="70" 
+                Width="200" 
                 Height="30" 
                 FontSize="16"/>
         <Button x:Name="backButton" 
-                Margin="20,0,0,20"
+                Content="&lt; Назад"
+                Margin="20,20,0,0"
                 HorizontalAlignment="Left"                 
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Top"
                 Width="70"
-                Height="30"  
-                Content="&lt; Back"
+                Height="30"                  
+                FontSize="16"
                 Click="backButton_Click"/>
     </Grid>
 </UserControl>

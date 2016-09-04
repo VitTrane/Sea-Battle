@@ -25,7 +25,7 @@ namespace SeaBattle.Pages
             InitializeComponent();
         }
 
-        private void registerButton_Click(object sender, RoutedEventArgs e)
+        private void registerTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Switcher.SwitchPage(new Register());
         }
