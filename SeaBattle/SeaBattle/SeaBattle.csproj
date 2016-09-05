@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ListViewItemStyleSelector.cs" />
     <Compile Include="Helpers\Switcher.cs" />
     <Page Include="PageSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>

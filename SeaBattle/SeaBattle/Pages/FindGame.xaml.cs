@@ -23,6 +23,11 @@ namespace SeaBattle.Pages
         public FindGame()
         {
             InitializeComponent();
+            gamesListView.Items.Add(1);
+            gamesListView.Items.Add(2);
+            gamesListView.Items.Add(3);
+            gamesListView.Items.Add(4);
+
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
