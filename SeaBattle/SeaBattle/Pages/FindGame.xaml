@@ -25,7 +25,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock x:Name="newGameTextBlock" 
+        <TextBlock x:Name="infoTextBlock" 
                    Margin="0,0,0,500"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 

@@ -42,7 +42,7 @@ namespace SeaBattle.Pages
 
         private void statisticsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Switcher.SwitchPage(new Statistic());
         }
     }
 }
