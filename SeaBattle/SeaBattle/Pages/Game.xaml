@@ -45,6 +45,64 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <DataGrid x:Name="playerSea" HorizontalAlignment="Left" Height="220" Margin="57,120,0,0" VerticalAlignment="Top" Width="220" MaxColumnWidth="16"/>
+        <Grid x:Name="seaPlayer" HorizontalAlignment="Left" Height="220" Margin="80,120,0,0" VerticalAlignment="Top" Width="220" Background="SkyBlue" MouseDown="Grid_MouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid x:Name="seaOpponent" HorizontalAlignment="Right" Height="220" Margin="0,120,80,0" VerticalAlignment="Top" Width="220" Background="SkyBlue" MouseDown="Grid_MouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <TextBox HorizontalAlignment="Left" Height="132" Margin="80,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640"/>
+        <TextBox HorizontalAlignment="Left" Height="53" Margin="80,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="492"/>
+        <Button Content="Отправить" HorizontalAlignment="Left" Height="25" Margin="579,510,0,0" VerticalAlignment="Top" Width="141"/>
     </Grid>
 </UserControl>
