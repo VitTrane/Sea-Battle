@@ -32,7 +32,7 @@ namespace SeaBattle.Pages
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.SwitchPage(new CreateNewGame());
+            Switcher.SwitchPage(new Game());
         }
 
         private void connectionGameButton_Click(object sender, RoutedEventArgs e)
