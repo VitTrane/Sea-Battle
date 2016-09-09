@@ -55,11 +55,11 @@ namespace SeaBattle.Pages
             {
                 var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Register(registerrequest);
-                RegisterResponse response = ClientManager.Instance.GetResponses<RegisterResponse>();
+                RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
                 if (response.IsSuccess)
                 {
                     var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                    AuthorizeResponse res = ClientManager.Instance.GetResponses<AuthorizeResponse>();
+                    AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
                     if (res.IsSuccess)
                     {
                         Switcher.SwitchPage(new MainMenu());

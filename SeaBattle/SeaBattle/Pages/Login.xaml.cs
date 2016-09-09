@@ -46,7 +46,7 @@ namespace SeaBattle.Pages
                 var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Authorize(authorizeRequest);
 
-                AuthorizeResponse res = ClientManager.Instance.GetResponses<AuthorizeResponse>();
+                AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
                 if (res.IsSuccess)
                 {
                     Switcher.SwitchPage(new MainMenu());

@@ -17,6 +17,9 @@ namespace SeaBattle.Managers
 
         public BattleShipCallback Callback { get; private set; }
 
+        /// <summary>
+        /// Возвращает клиент
+        /// </summary>
         public ServiceClient Client
         {
             get
@@ -49,7 +52,11 @@ namespace SeaBattle.Managers
             _responses = new Dictionary<Type, BaseResponse>();
         }
 
-        public T GetResponses<T>()
+        /// <summary>
+        /// Получает ответ от сервера
+        /// </summary>
+        /// <typeparam name="T">Тип ответа</typeparam>
+        public T GetResponse<T>()
             where T : BaseResponse
         {
             if (_responses.ContainsKey(typeof(T)))
@@ -58,7 +65,12 @@ namespace SeaBattle.Managers
             else return null;
         }
 
-        public void AddResponses<T>(BaseResponse response)
+        /// <summary>
+        /// Сохраняет ответ от сервера
+        /// </summary>
+        /// <typeparam name="T">Тип ответа</typeparam>
+        /// <param name="response">Ответ, который нужно сохранить</param>
+        public void AddResponse<T>(BaseResponse response)
             where T : BaseResponse
         {
             if (!_responses.ContainsKey(typeof(T)))
@@ -71,6 +83,9 @@ namespace SeaBattle.Managers
             }
         }
 
+        /// <summary>
+        /// Создает клиента
+        /// </summary>
         private void CreateClient()
         {
             if (_client == null)
