@@ -1,4 +1,6 @@
-﻿using SeaBattle.Helpers;
+﻿using SeaBattle.GameService;
+using SeaBattle.Helpers;
+using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,11 @@ namespace SeaBattle.Pages
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {            
+            Switcher.SwitchPage(new Login());
+        }
+
+        private void registerButton_Click(object sender, RoutedEventArgs e)
         {
             if (!Validator.IsValidUsername(usernameTextBox.Text))
             {
@@ -44,7 +51,33 @@ namespace SeaBattle.Pages
                 return;
             }
 
-            Switcher.SwitchPage(new Login());
+            try
+            {
+                var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
+                ClientManager.Instance.Client.Register(registerrequest);
+                RegisterResponse response = ClientManager.Instance.GetResponses<RegisterResponse>();
+                if (response.IsSuccess)
+                {
+                    var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+                    AuthorizeResponse res = ClientManager.Instance.GetResponses<AuthorizeResponse>();
+                    if (res.IsSuccess)
+                    {
+                        Switcher.SwitchPage(new MainMenu());
+                    }
+                    else
+                    {
+                        errorMessageTextBlock.Text = response.Error;
+                    }
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = response.Error;
+                }
+            }
+            catch (Exception)
+            {
+                //TODO: добавить выбрасывание popup c сообщением об ошибке
+            }
         }
     }
 }

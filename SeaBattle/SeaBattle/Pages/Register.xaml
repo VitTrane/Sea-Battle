@@ -72,7 +72,7 @@
                 VerticalAlignment="Center"
                 Width="200" 
                 Height="30" 
-                FontSize="16"/>
+                FontSize="16" Click="registerButton_Click"/>
         <TextBlock x:Name="backTextBlock" 
                    Style="{StaticResource ScaleTextBlockOnFocus}"
                    Text="&lt; Назад"
