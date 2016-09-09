@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Managers
 {
-    public class ClientManager
+    public class ClientManager : IDisposable
     {
         private static ClientManager _instance = null;
         private Dictionary<Type, BaseResponse> _responses;
@@ -91,8 +91,20 @@ namespace SeaBattle.Managers
             if (_client == null)
             {
                 Callback = new BattleShipCallback();
-                _client = new ServiceClient(new InstanceContext(Callback));
+                _client = new ServiceClient(new InstanceContext(Callback), "NetTcpBinding_IService");
             }
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                _client.Close();
+            }
+            catch (Exception)
+            {
+                _client.Abort();
+            }            
         }
     }
 }

@@ -19,17 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:62184/Service.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://aleksey6157.cloudapp.net:8080/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="3337cf49-6e56-4a03-9e4a-7e2a6a60c645" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd4" />
-    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="9386dcb6-0000-4b95-8c9e-0c65118cc05d" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?wsdl" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="06f6d2e9-7a9f-41d9-88b4-b174c637f338" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="980a7ab4-c6af-47a7-b3b8-af50115e0992" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd6" />
-    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="bc52200a-2075-4444-8f56-be3505790311" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd5" />
-    <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="c39366b7-26f9-4812-9918-6f437800625e" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service5.xsd" MetadataType="Schema" ID="f9d602e9-0dd0-473f-89f7-47e68b52f117" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd0" />
-    <MetadataFile FileName="Service6.xsd" MetadataType="Schema" ID="4fa83043-09d6-4dc1-bc67-8852a9dde4e7" SourceId="1" SourceUrl="http://localhost:62184/Service.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="1a4f6730-0175-447d-b0a2-f592df6804cb" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

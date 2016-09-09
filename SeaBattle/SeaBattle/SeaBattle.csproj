@@ -143,28 +143,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\GameService\Service.wsdl" />
-    <None Include="Service References\GameService\Service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GameService\Service6.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Service References\GameService\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
