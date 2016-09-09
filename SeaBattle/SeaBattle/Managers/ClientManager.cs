@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Managers
 {
+    /// <summary>
+    /// Делегат обработки уведомлений
+    /// </summary>
+    public delegate void NotificationHandler();
+
     public class ClientManager : IDisposable
     {
         private static ClientManager _instance = null;
+        private Dictionary<Type, NotificationHandler> _events;   
         private Dictionary<Type, BaseResponse> _responses;
         private ServiceClient _client;
 
@@ -50,6 +56,7 @@ namespace SeaBattle.Managers
         private ClientManager()
         {
             _responses = new Dictionary<Type, BaseResponse>();
+            _events = new Dictionary<Type, NotificationHandler>();
         }
 
         /// <summary>
@@ -59,10 +66,10 @@ namespace SeaBattle.Managers
         public T GetResponse<T>()
             where T : BaseResponse
         {
-            if (_responses.ContainsKey(typeof(T)))
-                return (T)_responses[typeof(T)];
+            if (!_responses.ContainsKey(typeof(T)))
+                return null;
 
-            else return null;
+           return (T)_responses[typeof(T)];;
         }
 
         /// <summary>
@@ -81,6 +88,7 @@ namespace SeaBattle.Managers
             {
                 _responses[typeof(T)] = response;
             }
+            OnGetResponse<T>();
         }
 
         /// <summary>
@@ -105,6 +113,40 @@ namespace SeaBattle.Managers
             {
                 _client.Abort();
             }            
+        }
+
+        /// <summary>
+        /// Добавляет метод обработки ответа от сервера
+        /// </summary>
+        /// <typeparam name="T">Тип ответа который нужно обработать</typeparam>
+        /// <param name="handler">Метод обработки который нужно выполнить при получении ответа</param>
+        public void SubscribeToResponse<T>(NotificationHandler handler)
+        {
+            if (!_events.ContainsKey(typeof(T)))
+                _events.Add(typeof(T), handler);
+            else
+                _events[typeof(T)] = handler;
+        }
+
+        /// <summary>
+        /// Удаляет метод обработки ответа
+        /// </summary>
+        /// <typeparam name="T">Тип ответа который больше не нужно обрабатывать</typeparam>
+        public void UnsubscribeFromResponse<T>()
+        {
+            if (_events.ContainsKey(typeof(T)))
+                _events.Remove(typeof(T));
+        }
+
+        /// <summary>
+        /// Выполняет метод
+        /// </summary>
+        /// <typeparam name="T">Тип ответа, для которого нужно выполнить метод</typeparam>
+        private void OnGetResponse<T>()
+        {
+            NotificationHandler handler = _events[typeof(T)];
+            if (handler != null)
+                handler();
         }
     }
 }

@@ -45,25 +45,30 @@ namespace SeaBattle.Pages
 
                 var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Authorize(authorizeRequest);
-
-                AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
-                if (res != null)
-                {
-                    if (res.IsSuccess)
-                    {
-                        Switcher.SwitchPage(new MainMenu());
-                    }
-                    else
-                    {
-                        errorMessageTextBlock.Text = res.Error;
-                    }
-                }
+                ClientManager.Instance.SubscribeToResponse<AuthorizeResponse>(Autorize);
             }
             catch (Exception ex)
             {
                 //TODO: добавить выбрасывание popup c сообщением об ошибке
                 string s = ex.Message;
             }
+        }
+
+        private void Autorize()
+        {
+            AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
+            if (res != null)
+            {
+                if (res.IsSuccess)
+                {
+                    Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = res.Error;
+                }
+            }
+            ClientManager.Instance.UnsubscribeFromResponse<AuthorizeResponse>();
         }
     }
 }

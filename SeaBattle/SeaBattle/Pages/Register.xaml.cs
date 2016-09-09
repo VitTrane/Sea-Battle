@@ -55,29 +55,45 @@ namespace SeaBattle.Pages
             {
                 var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Register(registerrequest);
-                RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
+                ClientManager.Instance.SubscribeToResponse<RegisterResponse>(Register);
+            }
+            catch (Exception)
+            {
+                //TODO: добавить выбрасывание popup c сообщением об ошибке
+            }
+        }
+
+        private void Register()
+        {
+            RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
+            if (response.IsSuccess)
+            {
+                var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+                ClientManager.Instance.Client.Authorize(AutorizeRequest);
+                ClientManager.Instance.SubscribeToResponse<AuthorizeRequest>(Register);
+            }
+            else
+            {
+                errorMessageTextBlock.Text = response.Error;
+            }
+            ClientManager.Instance.UnsubscribeFromResponse<RegisterResponse>();
+        }
+
+        private void Autorize()
+        {
+            AuthorizeResponse response = ClientManager.Instance.GetResponse<AuthorizeResponse>();
+            if (response != null)
+            {
                 if (response.IsSuccess)
                 {
-                    var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                    AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
-                    if (res.IsSuccess)
-                    {
-                        Switcher.SwitchPage(new MainMenu());
-                    }
-                    else
-                    {
-                        errorMessageTextBlock.Text = response.Error;
-                    }
+                    Switcher.SwitchPage(new MainMenu());
                 }
                 else
                 {
                     errorMessageTextBlock.Text = response.Error;
                 }
             }
-            catch (Exception)
-            {
-                //TODO: добавить выбрасывание popup c сообщением об ошибке
-            }
+            ClientManager.Instance.UnsubscribeFromResponse<AuthorizeResponse>();
         }
     }
 }
