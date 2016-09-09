@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Entity.GameEntities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:62184/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Entity.Enums" />
+  <xs:complexType name="Shot">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q1:ShotStatus" />
+      <xs:element minOccurs="0" name="XyCoordinate" nillable="true" type="tns:XYCoordinate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Shot" nillable="true" type="tns:Shot" />
+  <xs:complexType name="XYCoordinate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="X" type="xs:int" />
+      <xs:element minOccurs="0" name="Y" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="XYCoordinate" nillable="true" type="tns:XYCoordinate" />
+  <xs:complexType name="ArrayOfShip">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ship" nillable="true" type="tns:Ship" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShip" nillable="true" type="tns:ArrayOfShip" />
+  <xs:complexType name="Ship">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Decks" nillable="true" type="tns:ArrayOfDeck" />
+      <xs:element minOccurs="0" name="IsKilled" type="xs:boolean" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Orientation" type="q2:ShipOrientation" />
+      <xs:element minOccurs="0" name="StartPoint" nillable="true" type="tns:XYCoordinate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ship" nillable="true" type="tns:Ship" />
+  <xs:complexType name="ArrayOfDeck">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Deck" nillable="true" type="tns:Deck" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeck" nillable="true" type="tns:ArrayOfDeck" />
+  <xs:complexType name="Deck">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q3:DeckStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Deck" nillable="true" type="tns:Deck" />
+</xs:schema>

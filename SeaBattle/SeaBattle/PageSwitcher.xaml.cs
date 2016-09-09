@@ -24,7 +24,7 @@ namespace SeaBattle
         public PageSwitcher()
         {
             InitializeComponent();
-            Switcher.pageSwitcher = this;
+            Switcher.PageSwitcher = this;
             Switcher.SwitchPage(new Login()); 
         }
 

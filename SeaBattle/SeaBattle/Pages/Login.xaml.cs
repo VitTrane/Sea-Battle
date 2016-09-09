@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SeaBattle.GameService;
+using SeaBattle.Helpers;
+using SeaBattle.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +35,32 @@ namespace SeaBattle.Pages
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.SwitchPage(new MainMenu());
+            try
+            {
+                if (!Validator.IsValidUsername(usernameTextBox.Text) || !Validator.IsValidPassword(passwordBox.Password, 6))
+                {
+                    errorMessageTextBlock.Text = "Неверный логин или пароль";
+                    return;
+                }
+
+                var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+                ClientManager.Instance.Client.Authorize(authorizeRequest);
+
+                AuthorizeResponse res = ClientManager.Instance.GetResponses<AuthorizeResponse>();
+                if (res.IsSuccess)
+                {
+                    Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = res.Error;
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: добавить выбрасывание popup c сообщением об ошибке
+                string s = ex.Message;
+            }
         }
     }
 }

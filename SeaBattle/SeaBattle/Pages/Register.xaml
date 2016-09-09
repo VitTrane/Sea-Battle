@@ -92,5 +92,12 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
+        <TextBlock x:Name="errorMessageTextBlock" 
+                   TextAlignment="Center"
+                   Width="Auto" 
+                   Height="30" 
+                   Margin="0,180,0,0"
+                   FontSize="20"
+                   Foreground="Red"/>
     </Grid>
 </UserControl>

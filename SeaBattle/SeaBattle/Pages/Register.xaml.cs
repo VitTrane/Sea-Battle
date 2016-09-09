@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,22 @@ namespace SeaBattle.Pages
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!Validator.IsValidUsername(usernameTextBox.Text))
+            {
+                errorMessageTextBlock.Text = "Такой логин не подходит";
+                return;
+            }
+            if (!Validator.IsValidMailAddress(emailTextBox.Text))
+            {
+                errorMessageTextBlock.Text = "Вы ввели email неправильного формата";
+                return;
+            }
+            if (!Validator.IsValidPassword(passwordBox.Password, 6))
+            {
+                errorMessageTextBlock.Text = "Пароль должен иметь от 6 до 16 символов";
+                return;
+            }
+
             Switcher.SwitchPage(new Login());
         }
     }

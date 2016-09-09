@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,8 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BattleShipServiceCallback\BattleShipCallback.cs" />
     <Compile Include="Helpers\ListViewItemStyleSelector.cs" />
     <Compile Include="Helpers\Switcher.cs" />
+    <Compile Include="Managers\ClientManager.cs" />
+    <Compile Include="Service References\GameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Page Include="PageSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -133,9 +143,49 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\GameService\Service.wsdl" />
+    <None Include="Service References\GameService\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\Service6.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GameService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
