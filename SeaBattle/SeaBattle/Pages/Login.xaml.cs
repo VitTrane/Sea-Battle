@@ -1,4 +1,5 @@
-﻿using SeaBattle.GameService;
+﻿using SeaBattle.BattleShipServiceCallback;
+using SeaBattle.GameService;
 using SeaBattle.Helpers;
 using SeaBattle.Managers;
 using System;
@@ -43,27 +44,39 @@ namespace SeaBattle.Pages
                     return;
                 }
 
+                ClientManager.Instance.CreateClient();
+                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
                 var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(authorizeRequest);
-
-                AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
-                if (res != null)
-                {
-                    if (res.IsSuccess)
-                    {
-                        Switcher.SwitchPage(new MainMenu());
-                    }
-                    else
-                    {
-                        errorMessageTextBlock.Text = res.Error;
-                    }
-                }
+                ClientManager.Instance.Client.Authorize(authorizeRequest);                 
             }
             catch (Exception ex)
             {
                 //TODO: добавить выбрасывание popup c сообщением об ошибке
                 string s = ex.Message;
+                ClientManager.Instance.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Аторизует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший метод</param>
+        /// <param name="e">Данные события для обработки</param>
+        private void Autorize(object sender, ResponseEventArgs e)
+        {
+            AuthorizeResponse res = e.Response as AuthorizeResponse;
+            if (res != null)
+            {
+                if (res.IsSuccess)
+                {
+                    Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = res.Error;
+                }
+            }
+            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

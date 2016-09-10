@@ -1,4 +1,5 @@
-﻿using SeaBattle.GameService;
+﻿using SeaBattle.BattleShipServiceCallback;
+using SeaBattle.GameService;
 using SeaBattle.Helpers;
 using SeaBattle.Managers;
 using System;
@@ -53,31 +54,63 @@ namespace SeaBattle.Pages
 
             try
             {
+                ClientManager.Instance.CreateClient();
+                ClientManager.Instance.Callback.SetHandler<RegisterResponse>(RegisterPlayer);
+                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
                 var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Register(registerrequest);
-                RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
+                
+            }
+            catch (Exception)
+            {
+                //TODO: добавить выбрасывание popup c сообщением об ошибке
+            }
+        }
+
+        /// <summary>
+        /// Регистрирует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший мето</param>
+        /// <param name="e">Данные события для обработки</param>
+        private void RegisterPlayer(object sender, ResponseEventArgs e)
+        {
+            RegisterResponse response = e.Response as RegisterResponse;
+            if (response != null)
+            {
                 if (response.IsSuccess)
                 {
                     var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                    AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
-                    if (res.IsSuccess)
-                    {
-                        Switcher.SwitchPage(new MainMenu());
-                    }
-                    else
-                    {
-                        errorMessageTextBlock.Text = response.Error;
-                    }
+                    ClientManager.Instance.Client.Authorize(AutorizeRequest);
                 }
                 else
                 {
                     errorMessageTextBlock.Text = response.Error;
                 }
             }
-            catch (Exception)
+            ClientManager.Instance.Callback.RemoveHandler<RegisterResponse>();
+
+        }
+
+        /// <summary>
+        /// Аторизует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший метод</param>
+        /// <param name="e">Данные события для обработки</param>
+        private void Autorize(object sender, ResponseEventArgs e)
+        {
+            AuthorizeResponse response = e.Response as AuthorizeResponse;
+            if (response != null)
             {
-                //TODO: добавить выбрасывание popup c сообщением об ошибке
+                if (response.IsSuccess)
+                {
+                    Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = response.Error;
+                }
             }
+            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

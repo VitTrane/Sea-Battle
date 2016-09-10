@@ -618,17 +618,33 @@ namespace SeaBattle.GameService {
     public partial class ShotResponse : SeaBattle.GameService.BaseResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.Shot OpponentShotField;
+        private SeaBattle.GameService.Shot CurrentShotField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.DTOUser UserField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.Shot OpponentShot {
+        public SeaBattle.GameService.Shot CurrentShot {
             get {
-                return this.OpponentShotField;
+                return this.CurrentShotField;
             }
             set {
-                if ((object.ReferenceEquals(this.OpponentShotField, value) != true)) {
-                    this.OpponentShotField = value;
-                    this.RaisePropertyChanged("OpponentShot");
+                if ((object.ReferenceEquals(this.CurrentShotField, value) != true)) {
+                    this.CurrentShotField = value;
+                    this.RaisePropertyChanged("CurrentShot");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DTOUser User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -770,10 +786,10 @@ namespace SeaBattle.GameService {
     public partial class GetTopPlayersResponse : SeaBattle.GameService.BaseResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.DTOUser[] TopPlayersField;
+        private SeaBattle.GameService.DTOFullUserInfo[] TopPlayersField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.DTOUser[] TopPlayers {
+        public SeaBattle.GameService.DTOFullUserInfo[] TopPlayers {
             get {
                 return this.TopPlayersField;
             }
@@ -791,6 +807,22 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="GetLastGamesResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class GetLastGamesResponse : SeaBattle.GameService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.DTOFullGameInfo[] GamesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DTOFullGameInfo[] Games {
+            get {
+                return this.GamesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GamesField, value) != true)) {
+                    this.GamesField = value;
+                    this.RaisePropertyChanged("Games");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -805,83 +837,6 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthorizeResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class AuthorizeResponse : SeaBattle.GameService.BaseResponse {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTOAwaitingGame", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
-    [System.SerializableAttribute()]
-    public partial class DTOAwaitingGame : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.DTOUser CrearorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreationTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid GameIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.DTOUser Crearor {
-            get {
-                return this.CrearorField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CrearorField, value) != true)) {
-                    this.CrearorField = value;
-                    this.RaisePropertyChanged("Crearor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreationTime {
-            get {
-                return this.CreationTimeField;
-            }
-            set {
-                if ((this.CreationTimeField.Equals(value) != true)) {
-                    this.CreationTimeField = value;
-                    this.RaisePropertyChanged("CreationTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid GameId {
-            get {
-                return this.GameIdField;
-            }
-            set {
-                if ((this.GameIdField.Equals(value) != true)) {
-                    this.GameIdField = value;
-                    this.RaisePropertyChanged("GameId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -995,6 +950,317 @@ namespace SeaBattle.GameService {
                 if ((object.ReferenceEquals(this.LoginField, value) != true)) {
                     this.LoginField = value;
                     this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTOAwaitingGame", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class DTOAwaitingGame : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.DTOUser CrearorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreationTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GameIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DTOUser Crearor {
+            get {
+                return this.CrearorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CrearorField, value) != true)) {
+                    this.CrearorField = value;
+                    this.RaisePropertyChanged("Crearor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreationTime {
+            get {
+                return this.CreationTimeField;
+            }
+            set {
+                if ((this.CreationTimeField.Equals(value) != true)) {
+                    this.CreationTimeField = value;
+                    this.RaisePropertyChanged("CreationTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid GameId {
+            get {
+                return this.GameIdField;
+            }
+            set {
+                if ((this.GameIdField.Equals(value) != true)) {
+                    this.GameIdField = value;
+                    this.RaisePropertyChanged("GameId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTOFullUserInfo", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class DTOFullUserInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DataRegisterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GamesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PercentWonGamesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DataRegister {
+            get {
+                return this.DataRegisterField;
+            }
+            set {
+                if ((this.DataRegisterField.Equals(value) != true)) {
+                    this.DataRegisterField = value;
+                    this.RaisePropertyChanged("DataRegister");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Games {
+            get {
+                return this.GamesField;
+            }
+            set {
+                if ((this.GamesField.Equals(value) != true)) {
+                    this.GamesField = value;
+                    this.RaisePropertyChanged("Games");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PercentWonGames {
+            get {
+                return this.PercentWonGamesField;
+            }
+            set {
+                if ((this.PercentWonGamesField.Equals(value) != true)) {
+                    this.PercentWonGamesField = value;
+                    this.RaisePropertyChanged("PercentWonGames");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTOFullGameInfo", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class DTOFullGameInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LongTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NamePlayer1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NamePlayer2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartGameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WinnerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LongTime {
+            get {
+                return this.LongTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LongTimeField, value) != true)) {
+                    this.LongTimeField = value;
+                    this.RaisePropertyChanged("LongTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NamePlayer1 {
+            get {
+                return this.NamePlayer1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NamePlayer1Field, value) != true)) {
+                    this.NamePlayer1Field = value;
+                    this.RaisePropertyChanged("NamePlayer1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NamePlayer2 {
+            get {
+                return this.NamePlayer2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NamePlayer2Field, value) != true)) {
+                    this.NamePlayer2Field = value;
+                    this.RaisePropertyChanged("NamePlayer2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartGame {
+            get {
+                return this.StartGameField;
+            }
+            set {
+                if ((this.StartGameField.Equals(value) != true)) {
+                    this.StartGameField = value;
+                    this.RaisePropertyChanged("StartGame");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Winner {
+            get {
+                return this.WinnerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WinnerField, value) != true)) {
+                    this.WinnerField = value;
+                    this.RaisePropertyChanged("Winner");
                 }
             }
         }
