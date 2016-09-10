@@ -27,6 +27,7 @@ namespace SeaBattle.Pages
         public Login()
         {
             InitializeComponent();
+            usernameTextBox.MaxLength = Validator.MAX_LENGTH_USERNAME;
             passwordBox.MaxLength = Validator.MAX_LENGTH_PASSWORD;
         }
 

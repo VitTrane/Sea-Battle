@@ -15,8 +15,9 @@ namespace SeaBattle.Helpers
     public static class Validator
     {
         public static readonly int MIN_LENGTH_USERNAME = 1;
+        public static readonly int MAX_LENGTH_USERNAME = 16;
         public static readonly int MIN_LENGTH_PASSWORD = 6;
-        public static readonly int MAX_LENGTH_PASSWORD = 16;
+        public static readonly int MAX_LENGTH_PASSWORD = 16;        
 
         static Validator()
         {
@@ -24,6 +25,7 @@ namespace SeaBattle.Helpers
             if (config != null)
             {
                 MIN_LENGTH_USERNAME = config.MinLengthUsername;
+                MAX_LENGTH_USERNAME = config.MaxLengthUsername;
                 MIN_LENGTH_PASSWORD = config.MinLengthPassword;
                 MAX_LENGTH_PASSWORD = config.MaxLengthPassword;
             }

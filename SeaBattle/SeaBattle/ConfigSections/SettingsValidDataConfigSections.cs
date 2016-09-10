@@ -19,6 +19,16 @@ namespace SeaBattle.ConfigSections
             }
         }
 
+        [ConfigurationProperty("maxLengthUsername")]
+        public int MaxLengthUsername
+        {
+            get
+            {
+                var str = (base["maxLengthUsername"]).ToString();
+                return int.Parse(str);
+            }
+        }
+
         [ConfigurationProperty("minLengthPassword")]
         public int MinLengthPassword
         {
