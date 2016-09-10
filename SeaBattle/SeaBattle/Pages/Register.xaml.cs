@@ -26,6 +26,8 @@ namespace SeaBattle.Pages
         public Register()
         {
             InitializeComponent();
+            ClientManager.Instance.SubscribeToResponse<RegisterResponse>(RegisterPlayer);
+            ClientManager.Instance.SubscribeToResponse<AuthorizeRequest>(RegisterPlayer);
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -52,10 +54,10 @@ namespace SeaBattle.Pages
             }
 
             try
-            {
+            {                
                 var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Register(registerrequest);
-                ClientManager.Instance.SubscribeToResponse<RegisterResponse>(Register);
+                
             }
             catch (Exception)
             {
@@ -63,14 +65,13 @@ namespace SeaBattle.Pages
             }
         }
 
-        private void Register()
+        private void RegisterPlayer()
         {
             RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
             if (response.IsSuccess)
             {
                 var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(AutorizeRequest);
-                ClientManager.Instance.SubscribeToResponse<AuthorizeRequest>(Register);
+                ClientManager.Instance.Client.Authorize(AutorizeRequest);                
             }
             else
             {

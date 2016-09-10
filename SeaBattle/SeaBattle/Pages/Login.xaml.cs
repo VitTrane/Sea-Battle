@@ -26,6 +26,7 @@ namespace SeaBattle.Pages
         public Login()
         {
             InitializeComponent();
+            ClientManager.Instance.SubscribeToResponse<AuthorizeResponse>(Autorize);
         }
 
         private void registerTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -44,8 +45,7 @@ namespace SeaBattle.Pages
                 }
 
                 var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(authorizeRequest);
-                ClientManager.Instance.SubscribeToResponse<AuthorizeResponse>(Autorize);
+                ClientManager.Instance.Client.Authorize(authorizeRequest);                
             }
             catch (Exception ex)
             {
