@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -56,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BattleShipServiceCallback\BattleShipCallback.cs" />
+    <Compile Include="ConfigSections\SettingsValidDataConfigSections.cs" />
     <Compile Include="Helpers\ListViewItemStyleSelector.cs" />
     <Compile Include="Helpers\Switcher.cs" />
     <Compile Include="Managers\ClientManager.cs" />
@@ -144,6 +146,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Service References\GameService\Service1.wsdl" />
+    <None Include="SettingsValidData.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
