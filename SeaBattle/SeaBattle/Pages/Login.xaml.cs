@@ -57,6 +57,11 @@ namespace SeaBattle.Pages
             }
         }
 
+        /// <summary>
+        /// Аторизует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший метод</param>
+        /// <param name="e">Данные события для обработки</param>
         private void Autorize(object sender, ResponseEventArgs e)
         {
             AuthorizeResponse res = e.Response as AuthorizeResponse;

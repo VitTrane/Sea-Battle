@@ -67,6 +67,11 @@ namespace SeaBattle.Pages
             }
         }
 
+        /// <summary>
+        /// Регистрирует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший мето</param>
+        /// <param name="e">Данные события для обработки</param>
         private void RegisterPlayer(object sender, ResponseEventArgs e)
         {
             RegisterResponse response = e.Response as RegisterResponse;
@@ -86,6 +91,11 @@ namespace SeaBattle.Pages
 
         }
 
+        /// <summary>
+        /// Аторизует пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызвавший метод</param>
+        /// <param name="e">Данные события для обработки</param>
         private void Autorize(object sender, ResponseEventArgs e)
         {
             AuthorizeResponse response = e.Response as AuthorizeResponse;

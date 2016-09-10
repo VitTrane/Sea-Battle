@@ -26,6 +26,11 @@ namespace SeaBattle.BattleShipServiceCallback
             _handlers = new Dictionary<Type, EventHandler<ResponseEventArgs>>();
         }
 
+        /// <summary>
+        /// Добавляет обработчик ответа от сервера
+        /// </summary>
+        /// <typeparam name="T">Тип ответа, для которого нужен обработчик</typeparam>
+        /// <param name="handler">Метод обработки ответа</param>
         public void SetHandler<T>(EventHandler<ResponseEventArgs> handler)
         {
             if (!_handlers.ContainsKey(typeof(T)))
@@ -34,12 +39,21 @@ namespace SeaBattle.BattleShipServiceCallback
                 _handlers[typeof(T)] = handler;
         }
 
+        /// <summary>
+        /// Удаляет обработчик ответа
+        /// </summary>
+        /// <typeparam name="T">Тип ответа, который больше н нужно обрабатывать</typeparam>
         public void RemoveHandler<T>()
         {
             if (_handlers.ContainsKey(typeof(T)))
                 _handlers.Remove(typeof(T));
         }
 
+        /// <summary>
+        /// Вызывает обработчик ответа
+        /// </summary>
+        /// <typeparam name="T">Тип ответа, который нужно обработать</typeparam>
+        /// <param name="eventData">Данные для обработчика</param>
         private void OnBroadcast<T>(object eventData)
         {
             ResponseEventArgs eventArgs = new ResponseEventArgs() { Response = (AuthorizeResponse)eventData };
