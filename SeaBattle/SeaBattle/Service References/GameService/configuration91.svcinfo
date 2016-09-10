@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="E0uQKh6DeUlr8MA9c+NDmw4StXc=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="2cCvzvGP6XA5CZXUC8pWZ4CEcFo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IService">
       <properties>
@@ -215,10 +215,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSDualHttpBinding_IService" contract="GameService.IService" bindingType="wsDualHttpBinding" address="http://aleksey6157.cloudapp.net:8080/host.BattleShip" bindingConfiguration="WSDualHttpBinding_IService">
+    <endpoint name="WSDualHttpBinding_IService" contract="GameService.IService" bindingType="wsDualHttpBinding" address="http://localhost:8080/host.BattleShip" bindingConfiguration="WSDualHttpBinding_IService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://aleksey6157.cloudapp.net:8080/host.BattleShip</serializedValue>
+          <serializedValue>http://localhost:8080/host.BattleShip</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -300,10 +300,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IService" contract="GameService.IService" bindingType="netTcpBinding" address="net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip" bindingConfiguration="NetTcpBinding_IService">
+    <endpoint name="NetTcpBinding_IService" contract="GameService.IService" bindingType="netTcpBinding" address="net.tcp://localhost:45617/host.BattleShip" bindingConfiguration="NetTcpBinding_IService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip</serializedValue>
+          <serializedValue>net.tcp://localhost:45617/host.BattleShip</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

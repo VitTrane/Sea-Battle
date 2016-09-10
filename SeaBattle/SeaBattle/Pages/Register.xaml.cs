@@ -1,4 +1,5 @@
-﻿using SeaBattle.GameService;
+﻿using SeaBattle.BattleShipServiceCallback;
+using SeaBattle.GameService;
 using SeaBattle.Helpers;
 using SeaBattle.Managers;
 using System;
@@ -26,8 +27,6 @@ namespace SeaBattle.Pages
         public Register()
         {
             InitializeComponent();
-            ClientManager.Instance.SubscribeToResponse<RegisterResponse>(RegisterPlayer);
-            ClientManager.Instance.SubscribeToResponse<AuthorizeRequest>(RegisterPlayer);
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -54,7 +53,10 @@ namespace SeaBattle.Pages
             }
 
             try
-            {                
+            {
+                ClientManager.Instance.CreateClient();
+                ClientManager.Instance.Callback.SetHandler<RegisterResponse>(RegisterPlayer);
+                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
                 var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
                 ClientManager.Instance.Client.Register(registerrequest);
                 
@@ -65,24 +67,28 @@ namespace SeaBattle.Pages
             }
         }
 
-        private void RegisterPlayer()
+        private void RegisterPlayer(object sender, ResponseEventArgs e)
         {
-            RegisterResponse response = ClientManager.Instance.GetResponse<RegisterResponse>();
-            if (response.IsSuccess)
+            RegisterResponse response = e.Response as RegisterResponse;
+            if (response != null)
             {
-                var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(AutorizeRequest);                
+                if (response.IsSuccess)
+                {
+                    var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+                    ClientManager.Instance.Client.Authorize(AutorizeRequest);
+                }
+                else
+                {
+                    errorMessageTextBlock.Text = response.Error;
+                }
             }
-            else
-            {
-                errorMessageTextBlock.Text = response.Error;
-            }
-            ClientManager.Instance.UnsubscribeFromResponse<RegisterResponse>();
+            ClientManager.Instance.Callback.RemoveHandler<RegisterResponse>();
+
         }
 
-        private void Autorize()
+        private void Autorize(object sender, ResponseEventArgs e)
         {
-            AuthorizeResponse response = ClientManager.Instance.GetResponse<AuthorizeResponse>();
+            AuthorizeResponse response = e.Response as AuthorizeResponse;
             if (response != null)
             {
                 if (response.IsSuccess)
@@ -94,7 +100,7 @@ namespace SeaBattle.Pages
                     errorMessageTextBlock.Text = response.Error;
                 }
             }
-            ClientManager.Instance.UnsubscribeFromResponse<AuthorizeResponse>();
+            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

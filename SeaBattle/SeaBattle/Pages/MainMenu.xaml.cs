@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace SeaBattle.Pages
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ClientManager.Instance.Dispose();
             Switcher.SwitchPage(new Login());
         }
 

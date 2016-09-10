@@ -406,7 +406,8 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="OpponentShot" nillable="true" type="q1:Shot" />
+              <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="CurrentShot" nillable="true" type="q1:Shot" />
+              <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="User" nillable="true" type="q2:DTOUser" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -416,7 +417,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q2:ArrayOfDTOAwaitingGame" />
+              <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q3:ArrayOfDTOAwaitingGame" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -426,7 +427,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Opponent" nillable="true" type="q3:DTOUser" />
+              <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Opponent" nillable="true" type="q4:DTOUser" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -436,7 +437,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="ConflictShip" nillable="true" type="q4:ArrayOfShip" />
+              <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="ConflictShip" nillable="true" type="q5:ArrayOfShip" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -446,7 +447,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Winner" nillable="true" type="q5:DTOUser" />
+              <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Winner" nillable="true" type="q6:DTOUser" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -482,7 +483,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
-              <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="TopPlayers" nillable="true" type="q6:ArrayOfDTOUser" />
+              <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="TopPlayers" nillable="true" type="q7:ArrayOfDTOFullUserInfo" />
             </xs:sequence>
           </xs:extension>
         </xs:complexContent>
@@ -491,7 +492,9 @@
       <xs:complexType name="GetLastGamesResponse">
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
-            <xs:sequence />
+            <xs:sequence>
+              <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q8:ArrayOfDTOFullGameInfo" />
+            </xs:sequence>
           </xs:extension>
         </xs:complexContent>
       </xs:complexType>
@@ -507,6 +510,17 @@
     </xs:schema>
     <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:complexType name="DTOUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CurrentGameId" type="ser:guid" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Games" type="xs:int" />
+          <xs:element minOccurs="0" name="GamesWon" type="xs:int" />
+          <xs:element minOccurs="0" name="Id" type="ser:guid" />
+          <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DTOUser" nillable="true" type="tns:DTOUser" />
       <xs:complexType name="ArrayOfDTOAwaitingGame">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOAwaitingGame" nillable="true" type="tns:DTOAwaitingGame" />
@@ -521,23 +535,39 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="DTOAwaitingGame" nillable="true" type="tns:DTOAwaitingGame" />
-      <xs:complexType name="DTOUser">
+      <xs:complexType name="ArrayOfDTOFullUserInfo">
         <xs:sequence>
-          <xs:element minOccurs="0" name="CurrentGameId" type="ser:guid" />
-          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOFullUserInfo" nillable="true" type="tns:DTOFullUserInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDTOFullUserInfo" nillable="true" type="tns:ArrayOfDTOFullUserInfo" />
+      <xs:complexType name="DTOFullUserInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DataRegister" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Games" type="xs:int" />
-          <xs:element minOccurs="0" name="GamesWon" type="xs:int" />
           <xs:element minOccurs="0" name="Id" type="ser:guid" />
           <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PercentWonGames" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="DTOUser" nillable="true" type="tns:DTOUser" />
-      <xs:complexType name="ArrayOfDTOUser">
+      <xs:element name="DTOFullUserInfo" nillable="true" type="tns:DTOFullUserInfo" />
+      <xs:complexType name="ArrayOfDTOFullGameInfo">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOUser" nillable="true" type="tns:DTOUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOFullGameInfo" nillable="true" type="tns:DTOFullGameInfo" />
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="ArrayOfDTOUser" nillable="true" type="tns:ArrayOfDTOUser" />
+      <xs:element name="ArrayOfDTOFullGameInfo" nillable="true" type="tns:ArrayOfDTOFullGameInfo" />
+      <xs:complexType name="DTOFullGameInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="ser:guid" />
+          <xs:element minOccurs="0" name="LongTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NamePlayer1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NamePlayer2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StartGame" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Winner" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DTOFullGameInfo" nillable="true" type="tns:DTOFullGameInfo" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IService_Authorize_InputMessage">
@@ -1002,15 +1032,15 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="WSDualHttpBinding_IService" binding="tns:WSDualHttpBinding_IService">
-      <soap12:address location="http://aleksey6157.cloudapp.net:8080/host.BattleShip" />
+      <soap12:address location="http://localhost:8080/host.BattleShip" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://aleksey6157.cloudapp.net:8080/host.BattleShip</wsa10:Address>
+        <wsa10:Address>http://localhost:8080/host.BattleShip</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IService" binding="tns:NetTcpBinding_IService">
-      <soap12:address location="net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip" />
+      <soap12:address location="net.tcp://localhost:45617/host.BattleShip" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:45617/host.BattleShip</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

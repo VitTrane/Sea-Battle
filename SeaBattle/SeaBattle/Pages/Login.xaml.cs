@@ -1,4 +1,5 @@
-﻿using SeaBattle.GameService;
+﻿using SeaBattle.BattleShipServiceCallback;
+using SeaBattle.GameService;
 using SeaBattle.Helpers;
 using SeaBattle.Managers;
 using System;
@@ -26,7 +27,6 @@ namespace SeaBattle.Pages
         public Login()
         {
             InitializeComponent();
-            ClientManager.Instance.SubscribeToResponse<AuthorizeResponse>(Autorize);
         }
 
         private void registerTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -44,19 +44,22 @@ namespace SeaBattle.Pages
                     return;
                 }
 
+                ClientManager.Instance.CreateClient();
+                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
                 var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(authorizeRequest);                
+                ClientManager.Instance.Client.Authorize(authorizeRequest);                 
             }
             catch (Exception ex)
             {
                 //TODO: добавить выбрасывание popup c сообщением об ошибке
                 string s = ex.Message;
+                ClientManager.Instance.Dispose();
             }
         }
 
-        private void Autorize()
+        private void Autorize(object sender, ResponseEventArgs e)
         {
-            AuthorizeResponse res = ClientManager.Instance.GetResponse<AuthorizeResponse>();
+            AuthorizeResponse res = e.Response as AuthorizeResponse;
             if (res != null)
             {
                 if (res.IsSuccess)
@@ -68,7 +71,7 @@ namespace SeaBattle.Pages
                     errorMessageTextBlock.Text = res.Error;
                 }
             }
-            ClientManager.Instance.UnsubscribeFromResponse<AuthorizeResponse>();
+            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

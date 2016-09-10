@@ -2,47 +2,83 @@
 using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SeaBattle.BattleShipServiceCallback
 {
+    public class ResponseEventArgs : EventArgs
+    {
+        public BaseResponse Response { get; set; }
+    }
+
     public class BattleShipCallback : IServiceCallback
     {
+        private SynchronizationContext syncContext;
+        private Dictionary<Type, EventHandler<ResponseEventArgs>> _handlers;
+
+        public BattleShipCallback()
+        {
+            syncContext = AsyncOperationManager.SynchronizationContext;
+            _handlers = new Dictionary<Type, EventHandler<ResponseEventArgs>>();
+        }
+
+        public void SetHandler<T>(EventHandler<ResponseEventArgs> handler)
+        {
+            if (!_handlers.ContainsKey(typeof(T)))
+                _handlers.Add(typeof(T), handler);
+            else
+                _handlers[typeof(T)] = handler;
+        }
+
+        public void RemoveHandler<T>()
+        {
+            if (_handlers.ContainsKey(typeof(T)))
+                _handlers.Remove(typeof(T));
+        }
+
+        private void OnBroadcast<T>(object eventData)
+        {
+            ResponseEventArgs eventArgs = new ResponseEventArgs() { Response = (AuthorizeResponse)eventData };
+            _handlers[typeof(T)].Invoke(this, eventArgs);
+        }
+
         public void AuthorizeCallback(AuthorizeResponse response)
         {
-            ClientManager.Instance.AddResponse<AuthorizeResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<AuthorizeResponse>), response);
         }
 
         public void RegisterCallback(RegisterResponse response)
         {
-            ClientManager.Instance.AddResponse<RegisterResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<RegisterResponse>), response);
         }
 
         public void DoShotCallback(ShotResponse response)
         {
-            ClientManager.Instance.AddResponse<ShotResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<ShotResponse>), response);
         }
 
         public void GetListAvailableGames(GetListGamesResponse response)
         {
-            ClientManager.Instance.AddResponse<GetListGamesResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<GetListGamesResponse>), response);
         }
 
         public void GiveConnectedOpponentInfo(CurentGameResponse response)
         {
-            ClientManager.Instance.AddResponse<CurentGameResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<CurentGameResponse>), response);
         }
 
         public void ConnectToGameCallback(CurentGameResponse response)
         {
-            ClientManager.Instance.AddResponse<CurentGameResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<CurentGameResponse>), response);
         }
 
         public void SendReadyCallback(SendReadyResponse response)
         {
-            ClientManager.Instance.AddResponse<SendReadyResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<SendReadyResponse>), response);
         }
 
         public void StartGame()
@@ -51,37 +87,37 @@ namespace SeaBattle.BattleShipServiceCallback
 
         public void EndGame(EndGameResponse response)
         {
-            ClientManager.Instance.AddResponse<EndGameResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<EndGameResponse>), response);
         }
 
         public void AbortGame(AbortGameResponse response)
         {
-            ClientManager.Instance.AddResponse<AbortGameResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<AbortGameResponse>), response);
         }
 
         public void StartChat(StartChatResponse response)
         {
-            ClientManager.Instance.AddResponse<StartChatResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<StartChatResponse>), response);
         }
 
         public void RecieveMessage(RecieveMessageResponse response)
         {
-            ClientManager.Instance.AddResponse<RecieveMessageResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<RecieveMessageResponse>), response);
         }
 
         public void GetTopPlayersCallback(GetTopPlayersResponse response)
         {
-            ClientManager.Instance.AddResponse<GetTopPlayersResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<GetTopPlayersResponse>), response);
         }
 
         public void GetStatisticLastGamesCallBack(GetLastGamesResponse response)
         {
-            ClientManager.Instance.AddResponse<GetLastGamesResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<GetLastGamesResponse>), response);
         }
 
         public void CreateGameCallBack(CreateGameResponse response)
         {
-            ClientManager.Instance.AddResponse<CreateGameResponse>(response);
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<CreateGameResponse>), response);
         }
 
         public void SendOpponentIsReady()
