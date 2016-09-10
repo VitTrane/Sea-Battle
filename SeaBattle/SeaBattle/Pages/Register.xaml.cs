@@ -27,6 +27,7 @@ namespace SeaBattle.Pages
         public Register()
         {
             InitializeComponent();
+            passwordBox.MaxLength = Validator.MAX_LENGTH_PASSWORD;
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -46,7 +47,7 @@ namespace SeaBattle.Pages
                 errorMessageTextBlock.Text = "Вы ввели email неправильного формата";
                 return;
             }
-            if (!Validator.IsValidPassword(passwordBox.Password, 6))
+            if (!Validator.IsValidPassword(passwordBox.Password))
             {
                 errorMessageTextBlock.Text = "Пароль должен иметь от 6 до 16 символов";
                 return;

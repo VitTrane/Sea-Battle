@@ -27,6 +27,7 @@ namespace SeaBattle.Pages
         public Login()
         {
             InitializeComponent();
+            passwordBox.MaxLength = Validator.MAX_LENGTH_PASSWORD;
         }
 
         private void registerTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -38,7 +39,7 @@ namespace SeaBattle.Pages
         {
             try
             {
-                if (!Validator.IsValidUsername(usernameTextBox.Text) || !Validator.IsValidPassword(passwordBox.Password, 6))
+                if (!Validator.IsValidUsername(usernameTextBox.Text) || !Validator.IsValidPassword(passwordBox.Password))
                 {
                     errorMessageTextBlock.Text = "Неверный логин или пароль";
                     return;
