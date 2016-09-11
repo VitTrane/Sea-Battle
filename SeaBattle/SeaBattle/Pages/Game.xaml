@@ -23,7 +23,10 @@
                    Height="30"  
                    Text="Ожидание подключения соперника..."  
                    FontSize="25" 
-                   FontWeight="Bold" TextWrapping="Wrap" Foreground="#FFC9C9C9" RenderTransformOrigin="0.5,0.5">
+                   FontWeight="Bold" 
+                   TextWrapping="Wrap" 
+                   Foreground="#FFC9C9C9" 
+                   RenderTransformOrigin="0.5,0.5">
         </TextBlock>
         <TextBlock x:Name="labelBack"  
                    Style="{StaticResource ScaleTextBlockOnFocus}"
@@ -45,7 +48,12 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Grid x:Name="seaPlayer" HorizontalAlignment="Left" Height="220" Margin="80,120,0,0" VerticalAlignment="Top" Width="220" Background="SkyBlue" MouseDown="Grid_MouseDown">
+        <Grid x:Name="seaPlayer" 
+              HorizontalAlignment="Left" 
+              Height="220" Margin="80,120,0,0"
+              VerticalAlignment="Top" Width="220" 
+              Background="SkyBlue" 
+              MouseDown="Grid_MouseDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*" />
                 <RowDefinition Height="20*"/>
@@ -73,7 +81,12 @@
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Grid x:Name="seaOpponent" HorizontalAlignment="Right" Height="220" Margin="0,120,80,0" VerticalAlignment="Top" Width="220" Background="SkyBlue" MouseDown="Grid_MouseDown">
+        <Grid x:Name="seaOpponent" 
+              HorizontalAlignment="Right"
+              Height="220" Margin="0,120,80,0" 
+              VerticalAlignment="Top" Width="220"
+              Background="SkyBlue" 
+              MouseDown="Grid_MouseDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*" />
                 <RowDefinition Height="20*"/>
@@ -101,50 +114,67 @@
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Grid x:Name="Chat" Margin="80,345,80,10">
-            <TextBox HorizontalAlignment="Left" Margin="10,3,0,75" TextWrapping="Wrap" Width="620"/>
-            <TextBox HorizontalAlignment="Left" Height="53" Margin="10,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="512"/>
-            <Button Content="Отправить" HorizontalAlignment="Left" Height="26" Margin="527,189,0,0" VerticalAlignment="Top" Width="103"/>
+        <Grid x:Name="Chat" 
+              Margin="80,345,80,10">
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="10,3,0,75" 
+                     TextWrapping="Wrap" 
+                     Width="620"/>
+            <TextBox HorizontalAlignment="Left"
+                     Height="53"
+                     Margin="10,175,0,0" 
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top" 
+                     Width="512"/>
+            <Button Content="Отправить"
+                    HorizontalAlignment="Left" 
+                    Height="26" Margin="527,189,0,0"
+                    VerticalAlignment="Top"
+                    Width="103"/>
         </Grid>
-        <Grid x:Name="Ships" Margin="305,120,300,260">
-            <Grid Background="Azure" Margin="10,123,10,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="172*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <RadioButton HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Height="14">
-                        <Image Source="pack://application:,,,/Resources\fourpads.png" Height="14"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton HorizontalAlignment="Left" Margin="55,30,0,0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Height="14">
-                        <Image Source="pack://application:,,,/Resources\threepads.png" Height="14" VerticalAlignment="Top"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton HorizontalAlignment="Left" Margin="55,50,0,0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Height="14">
-                        <Image Source="pack://application:,,,/Resources\twopads.png" Height="14"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton  HorizontalAlignment="Left" Margin="55,70,0,0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Height="14">
-                        <Image Source="pack://application:,,,/Resources\onepads.png" Height="14"/>
-                    </StackPanel>
-                </RadioButton>
-            </Grid>
-            <Grid x:Name="Orientation" Margin="10,31,10,114" HorizontalAlignment="Center" Width="175" Background="AliceBlue">
-                <RadioButton x:Name="HorizontalOrientation" HorizontalAlignment="Center" Margin="10,10,81,0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Height="14">
-                        <Image Source="pack://application:,,,/Resources\fourpads.png" Height="14"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton x:Name="VerticalOrientation" HorizontalAlignment="Center" Margin="94,9,36,0" VerticalAlignment="Top" Height="51">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="pack://application:,,,/Resources\vertical.png" Height="48" VerticalAlignment="Center" Margin="0"/>
-                    </StackPanel>
-                </RadioButton>
-            </Grid>
+        <Grid x:Name="Ships"
+              Margin="300,120,300,355"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              Width="200"
+              Height="125">
+            <RadioButton x:Name="fourship" Margin="38,5,37,71" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="14">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </StackPanel>
+            </RadioButton>
+            <RadioButton x:Name="threeship" Margin="38,24,37,52" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image Source="pack://application:,,,/Resources\threepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </RadioButton>
+            <RadioButton x:Name="twoship" Margin="38,43,37,33" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="pack://application:,,,/Resources\twopads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </RadioButton>
+            <RadioButton x:Name="oneship" HorizontalAlignment="Center" Margin="38,62,37,14" VerticalAlignment="Center" Height="14" Width="100">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image Source="pack://application:,,,/Resources\onepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </RadioButton>
+        </Grid>
+        <Grid x:Name="Orientation"
+                  Margin="300,229,300,276" 
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="200" 
+                  Background="AliceBlue" Height="95">
+            <RadioButton x:Name="HorizontalOrientation" HorizontalAlignment="Center" Margin="10,10,81,0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="55" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </StackPanel>
+            </RadioButton>
+            <RadioButton x:Name="VerticalOrientation" HorizontalAlignment="Center" Margin="94,9,36,0" VerticalAlignment="Center" Height="51">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="pack://application:,,,/Resources\vertical.png" Margin="0,0,0,0" Height="48" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </RadioButton>
         </Grid>
     </Grid>
 </UserControl>
