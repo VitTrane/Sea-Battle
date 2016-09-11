@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -57,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BattleShipServiceCallback\BattleShipCallback.cs" />
+    <Compile Include="ConfigSections\SettingsValidDataConfigSections.cs" />
     <Compile Include="Helpers\ListViewItemStyleSelector.cs" />
     <Compile Include="Helpers\Switcher.cs" />
     <Compile Include="Managers\ClientManager.cs" />
@@ -144,7 +146,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\GameService\SeaBattle.GameService.AuthorizeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GameService\SeaBattle.GameService.RegisterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\GameService\Service1.wsdl" />
+    <None Include="SettingsValidData.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

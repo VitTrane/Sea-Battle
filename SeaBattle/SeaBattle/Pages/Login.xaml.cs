@@ -27,6 +27,8 @@ namespace SeaBattle.Pages
         public Login()
         {
             InitializeComponent();
+            usernameTextBox.MaxLength = Validator.MAX_LENGTH_USERNAME;
+            passwordBox.MaxLength = Validator.MAX_LENGTH_PASSWORD;
         }
 
         private void registerTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -38,16 +40,13 @@ namespace SeaBattle.Pages
         {
             try
             {
-                if (!Validator.IsValidUsername(usernameTextBox.Text) || !Validator.IsValidPassword(passwordBox.Password, 6))
+                if (!Validator.IsValidUsername(usernameTextBox.Text) || !Validator.IsValidPassword(passwordBox.Password))
                 {
                     errorMessageTextBlock.Text = "Неверный логин или пароль";
                     return;
                 }
 
-                ClientManager.Instance.CreateClient();
-                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
-                var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Authorize(authorizeRequest);                 
+                Autorize();
             }
             catch (Exception ex)
             {
@@ -60,23 +59,22 @@ namespace SeaBattle.Pages
         /// <summary>
         /// Аторизует пользователя
         /// </summary>
-        /// <param name="sender">Объект вызвавший метод</param>
-        /// <param name="e">Данные события для обработки</param>
-        private void Autorize(object sender, ResponseEventArgs e)
+        private void Autorize()
         {
-            AuthorizeResponse res = e.Response as AuthorizeResponse;
-            if (res != null)
+            ClientManager.Instance.CreateClient();
+            var authorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+            AuthorizeResponse response = ClientManager.Instance.Client.Authorize(authorizeRequest);  
+            if (response != null)
             {
-                if (res.IsSuccess)
+                if (response.IsSuccess)
                 {
                     Switcher.SwitchPage(new MainMenu());
                 }
                 else
                 {
-                    errorMessageTextBlock.Text = res.Error;
+                    errorMessageTextBlock.Text = response.Error;
                 }
             }
-            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

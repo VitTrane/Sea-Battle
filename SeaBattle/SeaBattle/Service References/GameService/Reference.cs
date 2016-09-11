@@ -28,6 +28,9 @@ namespace SeaBattle.GameService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ClientIdField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -35,6 +38,19 @@ namespace SeaBattle.GameService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ClientId {
+            get {
+                return this.ClientIdField;
+            }
+            set {
+                if ((this.ClientIdField.Equals(value) != true)) {
+                    this.ClientIdField = value;
+                    this.RaisePropertyChanged("ClientId");
+                }
             }
         }
         
@@ -457,81 +473,6 @@ namespace SeaBattle.GameService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Shot", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
-    [System.SerializableAttribute()]
-    public partial class Shot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.ShotStatus StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.XYCoordinate XyCoordinateField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.ShotStatus Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.XYCoordinate XyCoordinate {
-            get {
-                return this.XyCoordinateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XyCoordinateField, value) != true)) {
-                    this.XyCoordinateField = value;
-                    this.RaisePropertyChanged("XyCoordinate");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ShotStatus", Namespace="http://schemas.datacontract.org/2004/07/Entity.Enums")]
-    public enum ShotStatus : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Missed = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Hit = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Killed = 2,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.RegisterResponse))]
@@ -553,6 +494,9 @@ namespace SeaBattle.GameService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ClientIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -565,6 +509,19 @@ namespace SeaBattle.GameService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ClientId {
+            get {
+                return this.ClientIdField;
+            }
+            set {
+                if ((this.ClientIdField.Equals(value) != true)) {
+                    this.ClientIdField = value;
+                    this.RaisePropertyChanged("ClientId");
+                }
             }
         }
         
@@ -841,6 +798,67 @@ namespace SeaBattle.GameService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Shot", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
+    [System.SerializableAttribute()]
+    public partial class Shot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.ShotStatus StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.XYCoordinate XyCoordinateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.ShotStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.XYCoordinate XyCoordinate {
+            get {
+                return this.XyCoordinateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XyCoordinateField, value) != true)) {
+                    this.XyCoordinateField = value;
+                    this.RaisePropertyChanged("XyCoordinate");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTOUser", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
     [System.SerializableAttribute()]
     public partial class DTOUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -964,6 +982,20 @@ namespace SeaBattle.GameService {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ShotStatus", Namespace="http://schemas.datacontract.org/2004/07/Entity.Enums")]
+    public enum ShotStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Missed = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Hit = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Killed = 2,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTOAwaitingGame", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
@@ -974,10 +1006,10 @@ namespace SeaBattle.GameService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.DTOUser CrearorField;
+        private System.DateTime CreationTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreationTimeField;
+        private SeaBattle.GameService.DTOUser CreatorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid GameIdField;
@@ -993,19 +1025,6 @@ namespace SeaBattle.GameService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.DTOUser Crearor {
-            get {
-                return this.CrearorField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CrearorField, value) != true)) {
-                    this.CrearorField = value;
-                    this.RaisePropertyChanged("Crearor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime CreationTime {
             get {
                 return this.CreationTimeField;
@@ -1014,6 +1033,19 @@ namespace SeaBattle.GameService {
                 if ((this.CreationTimeField.Equals(value) != true)) {
                     this.CreationTimeField = value;
                     this.RaisePropertyChanged("CreationTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DTOUser Creator {
+            get {
+                return this.CreatorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreatorField, value) != true)) {
+                    this.CreatorField = value;
+                    this.RaisePropertyChanged("Creator");
                 }
             }
         }
@@ -1279,17 +1311,17 @@ namespace SeaBattle.GameService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameService.IService", CallbackContract=typeof(SeaBattle.GameService.IServiceCallback))]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Authorize")]
-        void Authorize(SeaBattle.GameService.AuthorizeRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Authorize", ReplyAction="http://tempuri.org/IService/AuthorizeResponse")]
+        SeaBattle.GameService.AuthorizeResponse Authorize(SeaBattle.GameService.AuthorizeRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Authorize")]
-        System.Threading.Tasks.Task AuthorizeAsync(SeaBattle.GameService.AuthorizeRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Authorize", ReplyAction="http://tempuri.org/IService/AuthorizeResponse")]
+        System.Threading.Tasks.Task<SeaBattle.GameService.AuthorizeResponse> AuthorizeAsync(SeaBattle.GameService.AuthorizeRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Register")]
-        void Register(SeaBattle.GameService.RegisterRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Register", ReplyAction="http://tempuri.org/IService/RegisterResponse")]
+        SeaBattle.GameService.RegisterResponse Register(SeaBattle.GameService.RegisterRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Register")]
-        System.Threading.Tasks.Task RegisterAsync(SeaBattle.GameService.RegisterRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Register", ReplyAction="http://tempuri.org/IService/RegisterResponse")]
+        System.Threading.Tasks.Task<SeaBattle.GameService.RegisterResponse> RegisterAsync(SeaBattle.GameService.RegisterRequest request);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/CreateGame")]
         void CreateGame(SeaBattle.GameService.CreateGameRequest request);
@@ -1414,19 +1446,19 @@ namespace SeaBattle.GameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Authorize(SeaBattle.GameService.AuthorizeRequest request) {
-            base.Channel.Authorize(request);
+        public SeaBattle.GameService.AuthorizeResponse Authorize(SeaBattle.GameService.AuthorizeRequest request) {
+            return base.Channel.Authorize(request);
         }
         
-        public System.Threading.Tasks.Task AuthorizeAsync(SeaBattle.GameService.AuthorizeRequest request) {
+        public System.Threading.Tasks.Task<SeaBattle.GameService.AuthorizeResponse> AuthorizeAsync(SeaBattle.GameService.AuthorizeRequest request) {
             return base.Channel.AuthorizeAsync(request);
         }
         
-        public void Register(SeaBattle.GameService.RegisterRequest request) {
-            base.Channel.Register(request);
+        public SeaBattle.GameService.RegisterResponse Register(SeaBattle.GameService.RegisterRequest request) {
+            return base.Channel.Register(request);
         }
         
-        public System.Threading.Tasks.Task RegisterAsync(SeaBattle.GameService.RegisterRequest request) {
+        public System.Threading.Tasks.Task<SeaBattle.GameService.RegisterResponse> RegisterAsync(SeaBattle.GameService.RegisterRequest request) {
             return base.Channel.RegisterAsync(request);
         }
         

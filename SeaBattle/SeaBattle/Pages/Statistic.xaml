@@ -1,80 +1,77 @@
 ﻿<UserControl x:Class="SeaBattle.Pages.Statistic"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
     <Grid x:Name="statisticGamePage" Background="White">
-        <TextBlock x:Name="backTextBlock" 
-                   Style="{StaticResource ScaleTextBlockOnFocus}"
-                   Text="&lt; Назад"
-                   Margin="18,18,0,0"
-                   HorizontalAlignment="Left"  
-                   VerticalAlignment="Top"
+        <TextBlock x:Name="backTextBlock"
                    Width="70"
-                   Height="30"   
+                   Height="30"
+                   Margin="18,18,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
                    FontSize="16"
-                   MouseLeftButtonDown="backTextBlock_MouseLeftButtonDown">
+                   MouseLeftButtonDown="backTextBlock_MouseLeftButtonDown"
+                   Style="{StaticResource ScaleTextBlockOnFocus}"
+                   Text="&lt; Назад">
             <TextBlock.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock x:Name="infoTextBlock" 
+        <TextBlock x:Name="infoTextBlock"
+                   Width="Auto"
+                   Height="30"
                    Margin="0,0,0,502"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   Width="Auto" 
-                   Height="30" 
-                   Text="Статистика" 
-                   TextWrapping="Wrap" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    FontSize="20"
-                   FontWeight="Bold"/>
-        <TabControl x:Name="statisticTabControl" 
-                  HorizontalAlignment="Center" 
-                  VerticalAlignment="Center" 
-                  Margin="0,0,0,330">
-            <TabItem Header="Рейтинг игроков"
-                     Width="150">
-                <ListView x:Name="playerRankingsListVIew" 
-                    ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
+                   FontWeight="Bold"
+                   Text="Статистика"
+                   TextWrapping="Wrap" />
+        <TabControl x:Name="statisticTabControl"
+                    Margin="0,0,0,330"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TabItem Width="150" Header="Рейтинг игроков">
+                <ListView x:Name="playerRankingsListVIew" ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Background" Value="LightGray" />
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Header="Имя пользователя" Width="150"/>
-                                <GridViewColumn Header="Кол-во игр" Width="150"/>
-                                <GridViewColumn Header="% побед" Width="150"/>
-                                <GridViewColumn Header="Дата регистрации" Width="150"/>
+                                <GridViewColumn Width="150" Header="Имя пользователя" />
+                                <GridViewColumn Width="150" Header="Кол-во игр" />
+                                <GridViewColumn Width="150" Header="% побед" />
+                                <GridViewColumn Width="150" Header="Дата регистрации" />
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
-                </ListView>                
+                </ListView>
             </TabItem>
-            <TabItem Header="Последние 100 игр"
-                     Width="150">
-                <ListView x:Name="lastGamesListView" 
-                    ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
+            <TabItem Width="150" Header="Последние 100 игр">
+                <ListView x:Name="lastGamesListView" ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Background" Value="LightGray" />
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Header="Имя победителя" Width="200"/>
-                                <GridViewColumn Header="Дата игры" Width="200"/>
-                                <GridViewColumn Header="Время игры" Width="200"/>
+                                <GridViewColumn Width="200" Header="Имя победителя" />
+                                <GridViewColumn Width="200" Header="Дата игры" />
+                                <GridViewColumn Width="200" Header="Время игры" />
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>

@@ -62,12 +62,10 @@ namespace SeaBattle.BattleShipServiceCallback
 
         public void AuthorizeCallback(AuthorizeResponse response)
         {
-            syncContext.Post(new SendOrPostCallback(OnBroadcast<AuthorizeResponse>), response);
         }
 
         public void RegisterCallback(RegisterResponse response)
         {
-            syncContext.Post(new SendOrPostCallback(OnBroadcast<RegisterResponse>), response);
         }
 
         public void DoShotCallback(ShotResponse response)
