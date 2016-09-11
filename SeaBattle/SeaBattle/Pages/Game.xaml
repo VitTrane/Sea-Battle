@@ -9,14 +9,14 @@
         <TextBlock x:Name="authorizationTextBlock"  
                    Margin="0,20,0,0"
                    HorizontalAlignment="Center"  
-                   VerticalAlignment="Top"  
+                   VerticalAlignment="Top"
                    Width="62"  
                    Height="30"  
                    Text="Игра"  
                    FontSize="25" 
                    FontWeight="Bold" TextWrapping="Wrap"/>
         <TextBlock x:Name="labelCheckFinder"  
-                   Margin="0,70,0,0" 
+                   Margin="0,50,0,0" 
                    HorizontalAlignment="Center"  
                    VerticalAlignment="Top"  
                    Width="466"  
@@ -33,7 +33,7 @@
                    Margin="20,20,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"  
-                   Width="186"  
+                   Width="132"  
                    Height="30"  
                    Text="&lt; Покинуть игру"  
                    FontSize="16" 
@@ -48,133 +48,153 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Grid x:Name="seaPlayer" 
-              HorizontalAlignment="Left" 
-              Height="220" Margin="80,120,0,0"
-              VerticalAlignment="Top" Width="220" 
+        <Grid x:Name="playingField"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,75,0,0"
+              Width="646"
+              Height="240"
+              >
+            <Grid x:Name="seaPlayer"  
+              Height="220" Margin="10,10,416,10"
+              VerticalAlignment="Center" 
+              HorizontalAlignment="Center"
+              Width="220" 
               Background="SkyBlue" 
               MouseDown="Grid_MouseDown">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*" />
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Grid x:Name="seaOpponent" 
-              HorizontalAlignment="Right"
-              Height="220" Margin="0,120,80,0" 
-              VerticalAlignment="Top" Width="220"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid x:Name="seaOpponent" 
+              HorizontalAlignment="Center"
+              Height="220" 
+              Margin="416,10,10,10" 
+              VerticalAlignment="Center" 
+              Width="220"
               Background="SkyBlue" 
               MouseDown="Grid_MouseDown">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*" />
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Grid x:Name="Chat" 
-              Margin="80,345,80,10">
-            <TextBox HorizontalAlignment="Left" 
-                     Margin="10,3,0,75" 
-                     TextWrapping="Wrap" 
-                     Width="620"/>
-            <TextBox HorizontalAlignment="Left"
-                     Height="53"
-                     Margin="10,175,0,0" 
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top" 
-                     Width="512"/>
-            <Button Content="Отправить"
-                    HorizontalAlignment="Left" 
-                    Height="26" Margin="527,189,0,0"
-                    VerticalAlignment="Top"
-                    Width="103"/>
-        </Grid>
-        <Grid x:Name="Ships"
-              Margin="300,120,300,355"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid x:Name="Ships"
+              Margin="235,10,235,104"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Width="200"
-              Height="125">
-            <RadioButton x:Name="fourship" Margin="38,5,37,71" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="14">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton x:Name="threeship" Margin="38,24,37,52" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Image Source="pack://application:,,,/Resources\threepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton x:Name="twoship" Margin="38,43,37,33" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Resources\twopads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton x:Name="oneship" HorizontalAlignment="Center" Margin="38,62,37,14" VerticalAlignment="Center" Height="14" Width="100">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Image Source="pack://application:,,,/Resources\onepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </RadioButton>
-        </Grid>
-        <Grid x:Name="Orientation"
-                  Margin="300,229,300,276" 
+              Width="176"
+              Height="126"
+              Background="AntiqueWhite">
+                <RadioButton x:Name="fourship" Margin="38,5,37,71" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="14">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="threeship" Margin="38,24,37,52" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Image Source="pack://application:,,,/Resources\threepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="twoship" Margin="38,43,37,33" VerticalAlignment="Center" HorizontalAlignment="Center" Height="14" Width="100">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image Source="pack://application:,,,/Resources\twopads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="oneship" HorizontalAlignment="Center" Margin="38,62,37,14" VerticalAlignment="Center" Height="14" Width="100">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="45" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Image Source="pack://application:,,,/Resources\onepads.png" Margin="0,0,0,0" Height="14" Width="65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </RadioButton>
+            </Grid>
+            <Grid x:Name="Orientation"
+                  Margin="235,141,235,16" 
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
-                  Width="200" 
-                  Background="AliceBlue" Height="95">
-            <RadioButton x:Name="HorizontalOrientation" HorizontalAlignment="Center" Margin="10,10,81,0" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="55" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton x:Name="VerticalOrientation" HorizontalAlignment="Center" Margin="94,9,36,0" VerticalAlignment="Center" Height="51">
-                <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Resources\vertical.png" Margin="0,0,0,0" Height="48" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </RadioButton>
+                  Width="176" 
+                  Background="AliceBlue" Height="83">
+                <RadioButton x:Name="HorizontalOrientation" HorizontalAlignment="Center" Margin="10,10,81,0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="14" Width="55" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Image Source="pack://application:,,,/Resources\fourpads.png" Margin="0,0,0,0" Height="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="VerticalOrientation" HorizontalAlignment="Center" Margin="94,9,36,0" VerticalAlignment="Center" Height="51">
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image Source="pack://application:,,,/Resources\vertical.png" Margin="0,0,0,0" Height="48" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </RadioButton>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Chat" 
+              Margin="0,309,0,0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top" 
+              Width="699" 
+              Height="245">
+            <TextBox x:Name="chatBox"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center"
+                     Margin="26,10,0,75" 
+                     TextWrapping="Wrap" 
+                     Width="650" Height="160"/>
+            <TextBox x:Name="inputBox" 
+                     HorizontalAlignment="Center"
+                     Height="52"
+                     Margin="26,176,161,17" 
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Center" 
+                     Width="512"/>
+            <Button x:Name="sendButton" 
+                    Content="Отправить"
+                    HorizontalAlignment="Center" 
+                    Height="26" Margin="546,186,23,33"
+                    VerticalAlignment="Center"
+                    Width="130"/>
         </Grid>
     </Grid>
 </UserControl>

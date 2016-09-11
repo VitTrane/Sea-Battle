@@ -75,8 +75,16 @@ namespace SeaBattle.Pages
                     map[i][j].Children.Add(b);
                     Grid.SetRow(map[i][j], i + 1);
                     Grid.SetColumn(map[i][j], j + 1);
-                    sea.Children.Add(map[i][j]);                   
+                    sea.Children.Add(map[i][j]);
+                    map[i][j].MouseMove += Game_MouseMove;
+                    
                 }
+        }
+
+        void Game_MouseMove(object sender, MouseEventArgs e)
+        {
+            Grid pad = (Grid)sender;
+            
         }
         /// <summary>
         /// Создает текст блок с присвоением строки и столбца, для добавления в Grid
