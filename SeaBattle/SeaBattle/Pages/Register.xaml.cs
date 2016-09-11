@@ -57,10 +57,7 @@ namespace SeaBattle.Pages
             try
             {
                 ClientManager.Instance.CreateClient();
-                ClientManager.Instance.Callback.SetHandler<RegisterResponse>(RegisterPlayer);
-                ClientManager.Instance.Callback.SetHandler<AuthorizeResponse>(Autorize);
-                var registerrequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
-                ClientManager.Instance.Client.Register(registerrequest);
+                RegisterPlayer();
                 
             }
             catch (Exception)
@@ -72,35 +69,31 @@ namespace SeaBattle.Pages
         /// <summary>
         /// Регистрирует пользователя
         /// </summary>
-        /// <param name="sender">Объект вызвавший мето</param>
-        /// <param name="e">Данные события для обработки</param>
-        private void RegisterPlayer(object sender, ResponseEventArgs e)
+        private void RegisterPlayer()
         {
-            RegisterResponse response = e.Response as RegisterResponse;
+            var registerRequest = new RegisterRequest() { Login = usernameTextBox.Text, Email = emailTextBox.Text, Password = passwordBox.Password };
+            RegisterResponse response = ClientManager.Instance.Client.Register(registerRequest);            
             if (response != null)
             {
                 if (response.IsSuccess)
                 {
-                    var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
-                    ClientManager.Instance.Client.Authorize(AutorizeRequest);
+                    Autorize();
+                    
                 }
                 else
                 {
                     errorMessageTextBlock.Text = response.Error;
                 }
             }
-            ClientManager.Instance.Callback.RemoveHandler<RegisterResponse>();
-
         }
 
         /// <summary>
         /// Аторизует пользователя
         /// </summary>
-        /// <param name="sender">Объект вызвавший метод</param>
-        /// <param name="e">Данные события для обработки</param>
-        private void Autorize(object sender, ResponseEventArgs e)
+        private void Autorize()
         {
-            AuthorizeResponse response = e.Response as AuthorizeResponse;
+            var AutorizeRequest = new AuthorizeRequest() { Login = usernameTextBox.Text, Password = passwordBox.Password };
+             AuthorizeResponse response = ClientManager.Instance.Client.Authorize(AutorizeRequest);
             if (response != null)
             {
                 if (response.IsSuccess)
@@ -112,7 +105,6 @@ namespace SeaBattle.Pages
                     errorMessageTextBlock.Text = response.Error;
                 }
             }
-            ClientManager.Instance.Callback.RemoveHandler<AuthorizeResponse>();
         }
     }
 }

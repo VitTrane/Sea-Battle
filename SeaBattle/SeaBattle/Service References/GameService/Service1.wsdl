@@ -24,8 +24,8 @@
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Common.Request" />
-      <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" />
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Common.Respose" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" />
       <xs:element name="Authorize">
         <xs:complexType>
           <xs:sequence>
@@ -33,38 +33,52 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="AuthorizeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="AuthorizeResult" nillable="true" type="q2:AuthorizeResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="Register">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q2:RegisterRequest" />
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q3:RegisterRequest" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegisterResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="RegisterResult" nillable="true" type="q4:RegisterResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="CreateGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q3:CreateGameRequest" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q5:CreateGameRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="DoShot">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="shot" nillable="true" type="q4:Shot" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="shot" nillable="true" type="q6:Shot" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ConnectToGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q5:ConnectToGameRequest" />
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q7:ConnectToGameRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendReady">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q6:SendReadyRequest" />
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q8:SendReadyRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -81,56 +95,56 @@
       <xs:element name="SendMessage">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q7:SendMessageRequest" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q9:SendMessageRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AuthorizeCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q8:AuthorizeResponse" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q10:AuthorizeResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="RegisterCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q9:RegisterResponse" />
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q11:RegisterResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="DoShotCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q10:ShotResponse" />
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q12:ShotResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetListAvailableGames">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q11:GetListGamesResponse" />
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q13:GetListGamesResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GiveConnectedOpponentInfo">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q12:CurentGameResponse" />
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q14:CurentGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ConnectToGameCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q13:CurentGameResponse" />
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q15:CurentGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendReadyCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q14:SendReadyResponse" />
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q16:SendReadyResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -142,49 +156,49 @@
       <xs:element name="EndGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q15:EndGameResponse" />
+            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q17:EndGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AbortGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q16:AbortGameResponse" />
+            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q18:AbortGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="StartChat">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q17:StartChatResponse" />
+            <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q19:StartChatResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="RecieveMessage">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q18:RecieveMessageResponse" />
+            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q20:RecieveMessageResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetTopPlayersCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q19:GetTopPlayersResponse" />
+            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q21:GetTopPlayersResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetStatisticLastGamesCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q20:GetLastGamesResponse" />
+            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q22:GetLastGamesResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="CreateGameCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q21:CreateGameResponse" />
+            <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q23:CreateGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -250,7 +264,9 @@
       </xs:complexType>
       <xs:element name="AuthorizeRequest" nillable="true" type="tns:AuthorizeRequest" />
       <xs:complexType name="BaseRequest">
-        <xs:sequence />
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
+        </xs:sequence>
         <xs:attribute ref="ser:Id" />
         <xs:attribute ref="ser:Ref" />
       </xs:complexType>
@@ -308,75 +324,8 @@
       </xs:complexType>
       <xs:element name="SendMessageRequest" nillable="true" type="tns:SendMessageRequest" />
     </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Entity.GameEntities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.Enums" />
-      <xs:complexType name="Shot">
-        <xs:sequence>
-          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q1:ShotStatus" />
-          <xs:element minOccurs="0" name="XyCoordinate" nillable="true" type="tns:XYCoordinate" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="Shot" nillable="true" type="tns:Shot" />
-      <xs:complexType name="XYCoordinate">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="X" type="xs:int" />
-          <xs:element minOccurs="0" name="Y" type="xs:int" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="XYCoordinate" nillable="true" type="tns:XYCoordinate" />
-      <xs:complexType name="ArrayOfShip">
-        <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="Ship" nillable="true" type="tns:Ship" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="ArrayOfShip" nillable="true" type="tns:ArrayOfShip" />
-      <xs:complexType name="Ship">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Decks" nillable="true" type="tns:ArrayOfDeck" />
-          <xs:element minOccurs="0" name="IsKilled" type="xs:boolean" />
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Orientation" type="q2:ShipOrientation" />
-          <xs:element minOccurs="0" name="StartPoint" nillable="true" type="tns:XYCoordinate" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="Ship" nillable="true" type="tns:Ship" />
-      <xs:complexType name="ArrayOfDeck">
-        <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="Deck" nillable="true" type="tns:Deck" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="ArrayOfDeck" nillable="true" type="tns:ArrayOfDeck" />
-      <xs:complexType name="Deck">
-        <xs:sequence>
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q3:DeckStatus" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="Deck" nillable="true" type="tns:Deck" />
-    </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Entity.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Entity.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:simpleType name="ShotStatus">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="Missed" />
-          <xs:enumeration value="Hit" />
-          <xs:enumeration value="Killed" />
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:element name="ShotStatus" nillable="true" type="tns:ShotStatus" />
-      <xs:simpleType name="DeckStatus">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="Ok" />
-          <xs:enumeration value="Damaged" />
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:element name="DeckStatus" nillable="true" type="tns:DeckStatus" />
-      <xs:simpleType name="ShipOrientation">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="Horisontal" />
-          <xs:enumeration value="Vertical" />
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:element name="ShipOrientation" nillable="true" type="tns:ShipOrientation" />
-    </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Common.Respose" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.Respose" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Common.Respose" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.Respose" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" />
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Common.DTO" />
       <xs:complexType name="AuthorizeResponse">
@@ -389,6 +338,7 @@
       <xs:element name="AuthorizeResponse" nillable="true" type="tns:AuthorizeResponse" />
       <xs:complexType name="BaseResponse">
         <xs:sequence>
+          <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
           <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
         </xs:sequence>
@@ -508,6 +458,74 @@
       </xs:complexType>
       <xs:element name="CreateGameResponse" nillable="true" type="tns:CreateGameResponse" />
     </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Entity.GameEntities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.Enums" />
+      <xs:complexType name="Shot">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q1:ShotStatus" />
+          <xs:element minOccurs="0" name="XyCoordinate" nillable="true" type="tns:XYCoordinate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Shot" nillable="true" type="tns:Shot" />
+      <xs:complexType name="XYCoordinate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="X" type="xs:int" />
+          <xs:element minOccurs="0" name="Y" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="XYCoordinate" nillable="true" type="tns:XYCoordinate" />
+      <xs:complexType name="ArrayOfShip">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Ship" nillable="true" type="tns:Ship" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfShip" nillable="true" type="tns:ArrayOfShip" />
+      <xs:complexType name="Ship">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Decks" nillable="true" type="tns:ArrayOfDeck" />
+          <xs:element minOccurs="0" name="IsKilled" type="xs:boolean" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Orientation" type="q2:ShipOrientation" />
+          <xs:element minOccurs="0" name="StartPoint" nillable="true" type="tns:XYCoordinate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Ship" nillable="true" type="tns:Ship" />
+      <xs:complexType name="ArrayOfDeck">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Deck" nillable="true" type="tns:Deck" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDeck" nillable="true" type="tns:ArrayOfDeck" />
+      <xs:complexType name="Deck">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Entity.Enums" minOccurs="0" name="Status" type="q3:DeckStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Deck" nillable="true" type="tns:Deck" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Entity.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Entity.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="ShotStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Missed" />
+          <xs:enumeration value="Hit" />
+          <xs:enumeration value="Killed" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ShotStatus" nillable="true" type="tns:ShotStatus" />
+      <xs:simpleType name="DeckStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ok" />
+          <xs:enumeration value="Damaged" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="DeckStatus" nillable="true" type="tns:DeckStatus" />
+      <xs:simpleType name="ShipOrientation">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Horisontal" />
+          <xs:enumeration value="Vertical" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ShipOrientation" nillable="true" type="tns:ShipOrientation" />
+    </xs:schema>
     <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xs:complexType name="DTOUser">
@@ -529,8 +547,8 @@
       <xs:element name="ArrayOfDTOAwaitingGame" nillable="true" type="tns:ArrayOfDTOAwaitingGame" />
       <xs:complexType name="DTOAwaitingGame">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Crearor" nillable="true" type="tns:DTOUser" />
           <xs:element minOccurs="0" name="CreationTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:DTOUser" />
           <xs:element minOccurs="0" name="GameId" type="ser:guid" />
         </xs:sequence>
       </xs:complexType>
@@ -573,8 +591,14 @@
   <wsdl:message name="IService_Authorize_InputMessage">
     <wsdl:part name="parameters" element="tns:Authorize" />
   </wsdl:message>
+  <wsdl:message name="IService_Authorize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizeResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_Register_InputMessage">
     <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IService_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
   </wsdl:message>
   <wsdl:message name="IService_CreateGame_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGame" />
@@ -648,9 +672,11 @@
   <wsdl:portType name="IService">
     <wsdl:operation name="Authorize">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Authorize" message="tns:IService_Authorize_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AuthorizeResponse" message="tns:IService_Authorize_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Register" message="tns:IService_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RegisterResponse" message="tns:IService_Register_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateGame" message="tns:IService_CreateGame_InputMessage" />
@@ -730,12 +756,18 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Register">
       <soap12:operation soapAction="http://tempuri.org/IService/Register" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateGame">
       <soap12:operation soapAction="http://tempuri.org/IService/CreateGame" style="document" />
@@ -884,12 +916,18 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Register">
       <soap12:operation soapAction="http://tempuri.org/IService/Register" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateGame">
       <soap12:operation soapAction="http://tempuri.org/IService/CreateGame" style="document" />
@@ -1032,15 +1070,15 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="WSDualHttpBinding_IService" binding="tns:WSDualHttpBinding_IService">
-      <soap12:address location="http://localhost:8080/host.BattleShip" />
+      <soap12:address location="http://aleksey6157.cloudapp.net:8080/host.BattleShip" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:8080/host.BattleShip</wsa10:Address>
+        <wsa10:Address>http://aleksey6157.cloudapp.net:8080/host.BattleShip</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IService" binding="tns:NetTcpBinding_IService">
-      <soap12:address location="net.tcp://localhost:45617/host.BattleShip" />
+      <soap12:address location="net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:45617/host.BattleShip</wsa10:Address>
+        <wsa10:Address>net.tcp://aleksey6157.cloudapp.net:45617/host.BattleShip</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
