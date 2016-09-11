@@ -60,8 +60,7 @@
               VerticalAlignment="Center" 
               HorizontalAlignment="Center"
               Width="220" 
-              Background="SkyBlue" 
-              MouseDown="Grid_MouseDown">
+              Background="SkyBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
                     <RowDefinition Height="20*"/>
@@ -95,8 +94,7 @@
               Margin="416,10,10,10" 
               VerticalAlignment="Center" 
               Width="220"
-              Background="SkyBlue" 
-              MouseDown="Grid_MouseDown">
+              Background="SkyBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
                     <RowDefinition Height="20*"/>
