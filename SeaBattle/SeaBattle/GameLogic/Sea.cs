@@ -83,7 +83,7 @@ namespace SeaBattle.GameLogic
                     Grid.SetRow(Map[i][j].Square, i + 1);
                     Grid.SetColumn(Map[i][j].Square, j + 1);
                     SeaGrid.Children.Add(Map[i][j].Square);
-                    Map[i][j].Square.MouseMove += Map[i][j].Game_MouseMove;
+                    Map[i][j].Square.MouseMove += Game_MouseMove;
                 }
         }
         /// <summary>
@@ -101,6 +101,13 @@ namespace SeaBattle.GameLogic
             Grid.SetRow(text, i);
             Grid.SetColumn(text, j);
             return text;
+        }
+
+        private void Game_MouseMove(object sender, MouseEventArgs e)
+        {
+            Grid pad = (Grid)sender;
+            var converter = new System.Windows.Media.BrushConverter();
+            pad.Background = (Brush)converter.ConvertFromString("#b5e61d");
         }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="ConfigSections\SettingsValidDataConfigSections.cs" />
     <Compile Include="GameLogic\Field.cs" />
     <Compile Include="GameLogic\Sea.cs" />
+    <Compile Include="GameLogic\ShipToggles.cs" />
     <Compile Include="Helpers\ListViewItemStyleSelector.cs" />
     <Compile Include="Helpers\Switcher.cs" />
     <Compile Include="Managers\ClientManager.cs" />

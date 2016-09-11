@@ -40,13 +40,6 @@ namespace SeaBattle.GameLogic
             {
                 _square = value;
             }
-        }
-
-        public void Game_MouseMove(object sender, MouseEventArgs e)
-        {
-            Grid pad = (Grid)sender;
-            var converter = new System.Windows.Media.BrushConverter();
-            pad.Background = (Brush)converter.ConvertFromString("#b5e61d");
-        }
+        }        
     }
 }

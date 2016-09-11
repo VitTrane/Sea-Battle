@@ -25,6 +25,15 @@ namespace SeaBattle.Pages
         public Game()
         {
             InitializeComponent();
+            ShipToggles toggles = new ShipToggles();
+
+            toggles.DeckTogglesDictionary.Add(fourship, Deck.fourdeck);
+            toggles.DeckTogglesDictionary.Add(threeship, Deck.threedeck);
+            toggles.DeckTogglesDictionary.Add(twoship, Deck.twodeck);
+            toggles.DeckTogglesDictionary.Add(oneship, Deck.onedeck);
+
+            toggles.OrientationTogglesDictionary.Add(VerticalOrientation, ShipOrientation.Vertical);
+            toggles.OrientationTogglesDictionary.Add(HorizontalOrientation, ShipOrientation.Horizontal);
 
             Sea playerSquare = new Sea(seaPlayer);
             Sea opponentSquare = new Sea(seaOpponent);
