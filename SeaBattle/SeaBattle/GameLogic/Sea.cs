@@ -17,16 +17,30 @@ namespace SeaBattle.GameLogic
 {
     class Sea
     {
+        /// <summary>
+        /// Контейнер игрового поля
+        /// </summary>
         public Grid SeaGrid { get; set; }
-
+        
+        /// <summary>
+        /// Двумерный массив ячеек поля
+        /// </summary>
         public Field[][] Map = new Field[10][];
-
+        
+        /// <summary>
+        /// Инициализация игрового поля
+        /// </summary>
+        /// <param name="bigSquare">Контрол игрового поля</param>
         public Sea (Grid bigSquare)
         {
             SeaGrid = bigSquare;
             setBattleMap();
             setMapNames();
         }
+        
+        /// <summary>
+        /// Создает на поле клетки с именами столбцов и строк
+        /// </summary>
         private void setMapNames()
         {
             SeaGrid.Children.Add(textGrid("А", 0, 1));
@@ -52,6 +66,9 @@ namespace SeaBattle.GameLogic
             SeaGrid.Children.Add(textGrid("10", 10, 0));
         }
 
+        /// <summary>
+        /// Создает клетки для постановки кораблей
+        /// </summary>
         private void setBattleMap()
         {
             for (int i = 0; i < 10; i++)
