@@ -729,7 +729,23 @@ namespace SeaBattle.GameService {
     public partial class RecieveMessageResponse : SeaBattle.GameService.BaseResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateTime {
+            get {
+                return this.DateTimeField;
+            }
+            set {
+                if ((this.DateTimeField.Equals(value) != true)) {
+                    this.DateTimeField = value;
+                    this.RaisePropertyChanged("DateTime");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Message {
@@ -1345,6 +1361,12 @@ namespace SeaBattle.GameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/CreateGame")]
         System.Threading.Tasks.Task CreateGameAsync(SeaBattle.GameService.CreateGameRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/LeaveGame")]
+        void LeaveGame();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/LeaveGame")]
+        System.Threading.Tasks.Task LeaveGameAsync();
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/DoShot")]
         void DoShot(SeaBattle.GameService.Shot shot);
         
@@ -1369,6 +1391,12 @@ namespace SeaBattle.GameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetTopPlayers")]
         System.Threading.Tasks.Task GetTopPlayersAsync();
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetA")]
+        void GetA();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetA")]
+        System.Threading.Tasks.Task GetAAsync();
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetStatisticLastGames")]
         void GetStatisticLastGames();
         
@@ -1380,6 +1408,12 @@ namespace SeaBattle.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(SeaBattle.GameService.SendMessageRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetListAvailableGames")]
+        void GetListAvailableGames();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetListAvailableGames")]
+        System.Threading.Tasks.Task GetListAvailableGamesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1388,8 +1422,8 @@ namespace SeaBattle.GameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/DoShotCallback")]
         void DoShotCallback(SeaBattle.GameService.ShotResponse response);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetListAvailableGames")]
-        void GetListAvailableGames(SeaBattle.GameService.GetListGamesResponse response);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetListAvailableGamesCallback")]
+        void GetListAvailableGamesCallback(SeaBattle.GameService.GetListGamesResponse response);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GiveConnectedOpponentInfo")]
         void GiveConnectedOpponentInfo(SeaBattle.GameService.CurentGameResponse response);
@@ -1480,6 +1514,14 @@ namespace SeaBattle.GameService {
             return base.Channel.CreateGameAsync(request);
         }
         
+        public void LeaveGame() {
+            base.Channel.LeaveGame();
+        }
+        
+        public System.Threading.Tasks.Task LeaveGameAsync() {
+            return base.Channel.LeaveGameAsync();
+        }
+        
         public void DoShot(SeaBattle.GameService.Shot shot) {
             base.Channel.DoShot(shot);
         }
@@ -1512,6 +1554,14 @@ namespace SeaBattle.GameService {
             return base.Channel.GetTopPlayersAsync();
         }
         
+        public void GetA() {
+            base.Channel.GetA();
+        }
+        
+        public System.Threading.Tasks.Task GetAAsync() {
+            return base.Channel.GetAAsync();
+        }
+        
         public void GetStatisticLastGames() {
             base.Channel.GetStatisticLastGames();
         }
@@ -1526,6 +1576,14 @@ namespace SeaBattle.GameService {
         
         public System.Threading.Tasks.Task SendMessageAsync(SeaBattle.GameService.SendMessageRequest request) {
             return base.Channel.SendMessageAsync(request);
+        }
+        
+        public void GetListAvailableGames() {
+            base.Channel.GetListAvailableGames();
+        }
+        
+        public System.Threading.Tasks.Task GetListAvailableGamesAsync() {
+            return base.Channel.GetListAvailableGamesAsync();
         }
     }
 }

@@ -130,12 +130,12 @@ namespace SeaBattle.BattleShipServiceCallback
 
         public void StartGame(StartGameResponse response)
         {
-            throw new NotImplementedException();
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<StartGameResponse>), response);
         }
 
         public void SendOpponentIsReady(SendOpponentIsReadyResponse response)
         {
-            throw new NotImplementedException();
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<SendOpponentIsReadyResponse>), response);
         }
     }
 }

@@ -61,6 +61,11 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="LeaveGame">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DoShot">
         <xs:complexType>
           <xs:sequence>
@@ -87,6 +92,11 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="GetA">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="GetStatisticLastGames">
         <xs:complexType>
           <xs:sequence />
@@ -99,6 +109,11 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="GetListAvailableGames">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DoShotCallback">
         <xs:complexType>
           <xs:sequence>
@@ -106,7 +121,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="GetListAvailableGames">
+      <xs:element name="GetListAvailableGamesCallback">
         <xs:complexType>
           <xs:sequence>
             <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q11:GetListGamesResponse" />
@@ -421,6 +436,7 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
+              <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
               <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
             </xs:sequence>
           </xs:extension>
@@ -609,6 +625,9 @@
   <wsdl:message name="IService_CreateGame_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGame" />
   </wsdl:message>
+  <wsdl:message name="IService_LeaveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGame" />
+  </wsdl:message>
   <wsdl:message name="IService_DoShot_InputMessage">
     <wsdl:part name="parameters" element="tns:DoShot" />
   </wsdl:message>
@@ -621,17 +640,23 @@
   <wsdl:message name="IService_GetTopPlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTopPlayers" />
   </wsdl:message>
+  <wsdl:message name="IService_GetA_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetA" />
+  </wsdl:message>
   <wsdl:message name="IService_GetStatisticLastGames_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStatisticLastGames" />
   </wsdl:message>
   <wsdl:message name="IService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
+  <wsdl:message name="IService_GetListAvailableGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListAvailableGames" />
+  </wsdl:message>
   <wsdl:message name="IService_DoShotCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DoShotCallback" />
   </wsdl:message>
-  <wsdl:message name="IService_GetListAvailableGames_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:GetListAvailableGames" />
+  <wsdl:message name="IService_GetListAvailableGamesCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GetListAvailableGamesCallback" />
   </wsdl:message>
   <wsdl:message name="IService_GiveConnectedOpponentInfo_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GiveConnectedOpponentInfo" />
@@ -681,6 +706,9 @@
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateGame" message="tns:IService_CreateGame_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LeaveGame" message="tns:IService_LeaveGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DoShot">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/DoShot" message="tns:IService_DoShot_InputMessage" />
     </wsdl:operation>
@@ -693,17 +721,23 @@
     <wsdl:operation name="GetTopPlayers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetTopPlayers" message="tns:IService_GetTopPlayers_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetA">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetA" message="tns:IService_GetA_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetStatisticLastGames">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetStatisticLastGames" message="tns:IService_GetStatisticLastGames_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SendMessage" message="tns:IService_SendMessage_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetListAvailableGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetListAvailableGames" message="tns:IService_GetListAvailableGames_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DoShotCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IService/DoShotCallback" message="tns:IService_DoShotCallback_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetListAvailableGames">
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetListAvailableGames" message="tns:IService_GetListAvailableGames_OutputCallbackMessage" />
+    <wsdl:operation name="GetListAvailableGamesCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetListAvailableGamesCallback" message="tns:IService_GetListAvailableGamesCallback_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="GiveConnectedOpponentInfo">
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GiveConnectedOpponentInfo" message="tns:IService_GiveConnectedOpponentInfo_OutputCallbackMessage" />
@@ -769,6 +803,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IService/LeaveGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DoShot">
       <soap12:operation soapAction="http://tempuri.org/IService/DoShot" style="document" />
       <wsdl:input>
@@ -793,6 +833,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="GetA">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="GetStatisticLastGames">
       <soap12:operation soapAction="http://tempuri.org/IService/GetStatisticLastGames" style="document" />
       <wsdl:input>
@@ -805,14 +851,20 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="GetListAvailableGames">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DoShotCallback">
       <soap12:operation soapAction="http://tempuri.org/IService/DoShotCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetListAvailableGames">
-      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+    <wsdl:operation name="GetListAvailableGamesCallback">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGamesCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -917,6 +969,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IService/LeaveGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DoShot">
       <soap12:operation soapAction="http://tempuri.org/IService/DoShot" style="document" />
       <wsdl:input>
@@ -941,6 +999,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="GetA">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="GetStatisticLastGames">
       <soap12:operation soapAction="http://tempuri.org/IService/GetStatisticLastGames" style="document" />
       <wsdl:input>
@@ -953,14 +1017,20 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="GetListAvailableGames">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DoShotCallback">
       <soap12:operation soapAction="http://tempuri.org/IService/DoShotCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetListAvailableGames">
-      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+    <wsdl:operation name="GetListAvailableGamesCallback">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGamesCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
