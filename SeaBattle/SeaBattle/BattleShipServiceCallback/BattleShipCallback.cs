@@ -93,10 +93,6 @@ namespace SeaBattle.BattleShipServiceCallback
             syncContext.Post(new SendOrPostCallback(OnBroadcast<SendReadyResponse>), response);
         }
 
-        public void StartGame()
-        {
-        }
-
         public void EndGame(EndGameResponse response)
         {
             syncContext.Post(new SendOrPostCallback(OnBroadcast<EndGameResponse>), response);
@@ -132,8 +128,14 @@ namespace SeaBattle.BattleShipServiceCallback
             syncContext.Post(new SendOrPostCallback(OnBroadcast<CreateGameResponse>), response);
         }
 
-        public void SendOpponentIsReady()
+        public void StartGame(StartGameResponse response)
         {
+            throw new NotImplementedException();
+        }
+
+        public void SendOpponentIsReady(SendOpponentIsReadyResponse response)
+        {
+            throw new NotImplementedException();
         }
     }
 }

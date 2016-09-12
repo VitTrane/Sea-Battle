@@ -480,6 +480,7 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.GetListGamesResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.CurentGameResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.SendReadyResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.StartGameResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.EndGameResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.AbortGameResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.StartChatResponse))]
@@ -487,6 +488,7 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.GetTopPlayersResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.GetLastGamesResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.CreateGameResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.SendOpponentIsReadyResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeaBattle.GameService.AuthorizeResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -678,6 +680,13 @@ namespace SeaBattle.GameService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StartGameResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
+    [System.SerializableAttribute()]
+    public partial class StartGameResponse : SeaBattle.GameService.BaseResponse {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EndGameResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class EndGameResponse : SeaBattle.GameService.BaseResponse {
@@ -787,6 +796,13 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateGameResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class CreateGameResponse : SeaBattle.GameService.BaseResponse {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SendOpponentIsReadyResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
+    [System.SerializableAttribute()]
+    public partial class SendOpponentIsReadyResponse : SeaBattle.GameService.BaseResponse {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1369,12 +1385,6 @@ namespace SeaBattle.GameService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/AuthorizeCallback")]
-        void AuthorizeCallback(SeaBattle.GameService.AuthorizeResponse response);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/RegisterCallback")]
-        void RegisterCallback(SeaBattle.GameService.RegisterResponse response);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/DoShotCallback")]
         void DoShotCallback(SeaBattle.GameService.ShotResponse response);
         
@@ -1391,7 +1401,7 @@ namespace SeaBattle.GameService {
         void SendReadyCallback(SeaBattle.GameService.SendReadyResponse response);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/StartGame")]
-        void StartGame();
+        void StartGame(SeaBattle.GameService.StartGameResponse response);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/EndGame")]
         void EndGame(SeaBattle.GameService.EndGameResponse response);
@@ -1415,7 +1425,7 @@ namespace SeaBattle.GameService {
         void CreateGameCallBack(SeaBattle.GameService.CreateGameResponse response);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendOpponentIsReady")]
-        void SendOpponentIsReady();
+        void SendOpponentIsReady(SeaBattle.GameService.SendOpponentIsReadyResponse response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
