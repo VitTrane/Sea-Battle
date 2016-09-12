@@ -1,0 +1,63 @@
+﻿#content{
+    display:block;
+}
+#tabUnderline {
+    z-index: 1
+}
+.btn-flat{
+    width: 100%
+}
+.logo{
+    width: 100px;
+}
+.logoLittle{
+    width: 40px;
+}
+
+#chatTextArea {
+    display:block;
+    overflow-y: scroll;
+    max-height: 100px;
+    resize: none; 
+}
+.Field{
+    display:table;
+    resize: none; 
+}
+.FieldRow{
+    display:table-row;
+    resize: none; 
+    clear:both;
+}
+
+
+.cell {
+  position: relative;
+  height: 2em;
+  width: 2em;
+  float:left;
+  display:table-column;
+  border: 1px solid black;
+}
+
+.cell.clean {
+  background:white;
+}
+
+.cell.miss {
+  background: #b2dfdb;
+}
+.cell.damaged {
+  background: #ff8a80;
+}
+
+.cell.killed {
+  background: #c62828;
+}
+
+
+
+.cell .ship {
+  background: #212121;
+}
+
