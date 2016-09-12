@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattle", "SeaBattle\SeaBattle.csproj", "{C7906AFC-9A94-40A5-BD05-B22B4738B138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattleWebUi", "..\SeaBattleWeb\SeaBattleWeb\SeaBattleWebUi.csproj", "{DAC6B4E2-557D-49C7-9653-6978C045F0E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattleWebUi", "SeaBattleWeb\SeaBattleWebUi.csproj", "{DAC6B4E2-557D-49C7-9653-6978C045F0E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
