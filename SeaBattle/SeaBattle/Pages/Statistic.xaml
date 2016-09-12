@@ -41,7 +41,9 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TabItem Width="150" Header="Рейтинг игроков">
-                <ListView x:Name="playerRankingsListVIew" ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
+                <ListView x:Name="topPlayersListView"
+                          ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}"
+                          ItemsSource="{Binding TopPlayers}">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="Background" Value="LightGray" />
@@ -50,17 +52,28 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Width="150" Header="Имя пользователя" />
-                                <GridViewColumn Width="150" Header="Кол-во игр" />
-                                <GridViewColumn Width="150" Header="% побед" />
-                                <GridViewColumn Width="150" Header="Дата регистрации" />
+                                <GridViewColumn Width="150"
+                                                DisplayMemberBinding="{Binding Login}"
+                                                Header="Имя пользователя" />
+                                <GridViewColumn Width="150"
+                                                DisplayMemberBinding="{Binding Games}"
+                                                Header="Кол-во игр" />
+                                <GridViewColumn Width="150"
+                                                DisplayMemberBinding="{Binding PercentWonGames}"
+                                                Header="% побед" />
+                                <GridViewColumn Width="150"
+                                                DisplayMemberBinding="{Binding DataRegister,
+                                                                               StringFormat='{}{0:dd.MM.yyyy}'}"
+                                                Header="Дата регистрации" />
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </TabItem>
             <TabItem Width="150" Header="Последние 100 игр">
-                <ListView x:Name="lastGamesListView" ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}">
+                <ListView x:Name="lastGamesListView"
+                          ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}"
+                          ItemsSource="{Binding LastGames}">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="Background" Value="LightGray" />
@@ -69,9 +82,16 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Width="200" Header="Имя победителя" />
-                                <GridViewColumn Width="200" Header="Дата игры" />
-                                <GridViewColumn Width="200" Header="Время игры" />
+                                <GridViewColumn Width="200"
+                                                DisplayMemberBinding="{Binding Winner}"
+                                                Header="Имя победителя" />
+                                <GridViewColumn Width="200"
+                                                DisplayMemberBinding="{Binding StartGame,
+                                                                               StringFormat='{}{0:dd.MM.yyyy}'}"
+                                                Header="Дата игры" />
+                                <GridViewColumn Width="200"
+                                                DisplayMemberBinding="{Binding LongTime}"
+                                                Header="Время игры" />
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>

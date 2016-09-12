@@ -53,7 +53,7 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Crearor.Login}"
+                                        DisplayMemberBinding="{Binding Creator.Login}"
                                         Header="Имя пользователя" />
                         <GridViewColumn Width="200"
                                         DisplayMemberBinding="{Binding CreationTime}"
