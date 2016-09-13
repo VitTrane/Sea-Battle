@@ -27,6 +27,7 @@ Board.prototype.create_board = function() {
 };
 
 Board.prototype.play = function (i, j) {
+    var temp = this.board[i][j];
     if (this.board[i][j] != CONST.Clean)
         return false;
     else

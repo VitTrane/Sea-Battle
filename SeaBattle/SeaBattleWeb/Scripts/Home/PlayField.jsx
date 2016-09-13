@@ -2,10 +2,9 @@
     render: function() {
         var classes = "cell " + this.props.color;
 		var cellClick = function(e) {
-			var temp = e.target;
-			if (e.target.props.board.play(e.target.props.row, e.target.props.col))
-				e.target.props.onPlay();
-				console.log(this);
+			var temp = this;
+			if (this.props.board.play(this.props.row, this.props.col))
+				this.props.onPlay();
 				};
         return (
             <div className={classes} onClick={cellClick.bind(this)}></div>
@@ -15,16 +14,13 @@
  
 var Row = React.createClass({
  render: function(){
-   var i = this.props.row;
-   var b = this.props.board;
-   var onPlayf = this.props.onPlay;
-   var hc = this.props.handleClick;
+   var getCells = function(object,j){
+					 return (<Cell board={this.props.board} color={object} row={this.props.row} col={j} onPlay={this.props.onPlay} key={j} />);
+				}
    return(<div className="FieldRow">
-    {this.props.cells.map(function(object, j) {
-     return (
-      <Cell board={b} color={object} row={i} col={j} onPlay={onPlayf} key={j} />
-      );    
-    })}
+    {
+		this.props.cells.map(getCells.bind(this))
+	}
    </div>);  
  }
      
@@ -40,16 +36,16 @@ var PlayField = React.createClass({
     },
  
  render: function() {
-    var onPlayf= this.onBoardUpdate;
-    var b = this.state.board;
-    var hc = this.props.handleClick;
-    return(<div className="Field">
-      {this.props.board.board.map(function(object,i){        
-         return (
-         <Row board={b} cells={object} row={i} onPlay={onPlayf} key={i}/>
-         );
-       })}
+	var getRows = function(object,i){
+					 return (<Row board={this.state.board} cells={object} row={i} onPlay={this.onBoardUpdate} key={i}/>);
+				}		
+    return(
+		<div className="Field">
+		{
+			this.props.board.board.map(getRows.bind(this))
+		}
       </div>);
-          }
- 
+
+	}
+          
 });

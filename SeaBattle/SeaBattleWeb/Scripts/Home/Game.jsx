@@ -3,7 +3,7 @@
 		var createItem = function(item) {
 		  return <p key={item.id}>{item.text}</p>;
 		};
-		return <div id="chatTextArea">{this.props.items.map(createItem)}</div>;		
+		return <div id="chatTextArea">{this.props.items.map(createItem.bind(this))}</div>;		
 
 	}
 });
