@@ -19,22 +19,42 @@ namespace SeaBattle.GameLogic
     class ShipToggles
     {
         public Dictionary<DeckCount, byte> CountsOfDecks { get; private set; }
-        public Dictionary<DeckCount, byte> CountsOfShips { get; private set; }
+        public Dictionary<byte, byte> CountsOfShips { get; private set; }
 
+        /// <summary>
+        /// Словарь радибатонов, для управления ими
+        /// </summary>
+        public Dictionary<byte, RadioButton> toggles = new Dictionary<byte, RadioButton>();
+        
         public ShipToggles()
         {
             CountsOfDecks = new Dictionary<DeckCount, byte>(4);
-            CountsOfShips = new Dictionary<DeckCount, byte>(4);
+            CountsOfShips = new Dictionary<byte, byte>(4);
 
             CountsOfDecks.Add(DeckCount.onedeck, 1);
             CountsOfDecks.Add(DeckCount.twodeck, 2);
             CountsOfDecks.Add(DeckCount.threedeck, 3);
             CountsOfDecks.Add(DeckCount.fourdeck, 4);
 
-            CountsOfShips.Add(DeckCount.onedeck, 4);
-            CountsOfShips.Add(DeckCount.twodeck, 3);
-            CountsOfShips.Add(DeckCount.threedeck, 2);
-            CountsOfShips.Add(DeckCount.fourdeck, 1);
+            CountsOfShips.Add(1, 4);
+            CountsOfShips.Add(2, 3);
+            CountsOfShips.Add(3, 2);
+            CountsOfShips.Add(4, 1);
+        }
+        
+        /// <summary>
+        /// Отнимает единицу от количества допустимых кораблей 
+        /// </summary>
+        /// <param name="shipDecks">Количество палуб в корабле</param>
+        public void dicShipCount(byte shipDecks)
+        {            
+            CountsOfShips[shipDecks]--;
+            if(CountsOfShips[shipDecks]==0)
+            {
+                var toggle = toggles[shipDecks];
+                toggle.IsEnabled = false;
+                toggle.IsChecked = false;
+            }
         }
     }    
 }

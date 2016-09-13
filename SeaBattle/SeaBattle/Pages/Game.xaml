@@ -211,6 +211,7 @@
                                Source="pack://application:,,,/Resources\onepads.png" />
                     </StackPanel>
                 </RadioButton>
+                <Label x:Name="messageLabel" Content="" HorizontalAlignment="Center" Height="27" Margin="20,99,38,0" VerticalAlignment="Top" Width="118"/>
             </Grid>
             <Grid x:Name="Orientation"
                   Width="176"

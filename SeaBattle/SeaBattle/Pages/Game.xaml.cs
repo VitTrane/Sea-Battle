@@ -39,6 +39,11 @@ namespace SeaBattle.Pages
             _shipToggles = new ShipToggles();
             _seaPlayer = new Sea(playerSquare);
             _seaOpponent = new Sea(opponentSquare);
+
+            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.fourdeck], fourship);
+            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.threedeck], threeship);
+            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.twodeck], twoship);
+            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.onedeck], oneship);
         }
 
         private void labelBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -55,12 +60,19 @@ namespace SeaBattle.Pages
                 int column = Grid.GetColumn(element);
                 if (row > 0 && column > 0) 
                 {
-                    _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
+                    if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
+                    {
+                        _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
+                        _shipToggles.dicShipCount(GetDeckCount());
+                        messageLabel.Content = "";
+                    }
+                    else
+                        messageLabel.Content = "Превышено количество кораблей";
                 }
             }
         }
 
-        private int GetDeckCount()
+        private byte GetDeckCount()
         {
             if ((bool)fourship.IsChecked)
                 return _shipToggles.CountsOfDecks[DeckCount.fourdeck];
