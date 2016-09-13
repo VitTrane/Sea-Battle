@@ -11,16 +11,9 @@
 var Game = React.createClass({
     
     getInitialState: function() {
-         var arr = [];
-            for(i=0; i< 10; i++)
-            {
-	            arr[i]=[];
-	            for(j=0; j< 10; j++)
-	            {
-		            arr[i][j] = {status: 'clean', x: j, y: i};
-	            }
-            }
-        return {itemsMessages: [], text: '', playerCells:arr, enemyCells:arr, isReady: false};
+         var board1 = new Board();
+		 var board2 = new Board();
+        return {itemsMessages: [], text: '', playerCells:board1, enemyCells:board2, isReady: false};
     },
 
     render: function(){

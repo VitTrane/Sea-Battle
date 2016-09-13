@@ -219,8 +219,11 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Home\Board.js" />
     <Content Include="Scripts\Home\EnemyField.jsx" />
+    <Content Include="Scripts\Home\Field.jsx" />
     <Content Include="Scripts\Home\PlayField.jsx" />
+    <Content Include="Scripts\Home\ShipFieldHelper.js" />
     <Content Include="Scripts\Home\Waiting.jsx" />
     <Content Include="Scripts\Home\Game.jsx" />
     <Content Include="Scripts\Home\Index.jsx" />

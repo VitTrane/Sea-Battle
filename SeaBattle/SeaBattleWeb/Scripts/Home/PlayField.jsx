@@ -1,52 +1,55 @@
-﻿var Row = React.createClass({
-	getInitialState: function() { 
-        return {cells: []};
-    },
-	render: function(){
-			return ( 
-					<div className="FieldRow">
-						 {this.props.cells.map(function(object, j) {
-								switch(object.status)
-								{
-									case 'clean':
-										return <div className="cell clean" status={object.status} y={object.y} x={object.x} onClick={this.cellClick} key={j}></div>;
-									case 'miss':
-										return <div className="cell miss" status={object.status} y={object.y} x={object.x} onClick={this.cellClick} key={j}></div>;
-									case 'damaged':
-										return <div className="cell damaged" status={object.status} y={object.y} x={object.x} onClick={this.cellClick} key={j}></div>;
-									case 'killed':
-										return <div className="cell killed" status={object.status} y={object.y} x={object.x} onClick={this.cellClick} key={j}></div>;
-									default:
-										return <div className="cell ship" status={object.status} y={object.y} x={object.x} onClick={this.cellClick} key={j}></div>;
-								}
-						})}
-					</div>
-					);		
-	},
-    cellClick: function(e)
-    {
-       this.props.cells[e.target.y][e.target.x].status = 'ship';
+﻿var Cell = React.createClass({
+    render: function() {
+        var classes = "cell " + this.props.color;
+		var cellClick = function(e) {
+			var temp = e.target;
+			if (e.target.props.board.play(e.target.props.row, e.target.props.col))
+				e.target.props.onPlay();
+				console.log(this);
+				};
+        return (
+            <div className={classes} onClick={cellClick.bind(this)}></div>
+        );
     }
 });
-
-var PlayField = React.createClass({	
-	
-	getInitialState: function() { 
-        return {cells: this.props.cells, isReady: 'false', isPlayer: this.props.isPlayer};
-    },	
-	
-  render: function() {
-				var i = -1;
-				return(
-					 <div className="Field">
-							{this.props.cells.map(function(item, i) {
-							  i++;
-							  return (
-								<Row cells={item} key={i}></Row>
-							  );
-							})}
-						</div>
-					  )
+ 
+var Row = React.createClass({
+ render: function(){
+   var i = this.props.row;
+   var b = this.props.board;
+   var onPlayf = this.props.onPlay;
+   var hc = this.props.handleClick;
+   return(<div className="FieldRow">
+    {this.props.cells.map(function(object, j) {
+     return (
+      <Cell board={b} color={object} row={i} col={j} onPlay={onPlayf} key={j} />
+      );    
+    })}
+   </div>);  
+ }
+     
+});
+ 
+var PlayField = React.createClass({
+ 
+ getInitialState: function() {
+        return {board: this.props.board, isReady:this.props.isReady, isPlayer: this.props.isPlayer};
+    },
+ onBoardUpdate: function() {
+        this.setState({board: this.props.board});
+    },
+ 
+ render: function() {
+    var onPlayf= this.onBoardUpdate;
+    var b = this.state.board;
+    var hc = this.props.handleClick;
+    return(<div className="Field">
+      {this.props.board.board.map(function(object,i){        
+         return (
+         <Row board={b} cells={object} row={i} onPlay={onPlayf} key={i}/>
+         );
+       })}
+      </div>);
           }
-
+ 
 });
