@@ -68,7 +68,10 @@ namespace SeaBattle.Pages
                         messageLabel.Content = "";
                     }
                     else
-                        messageLabel.Content = "Нельзя!";
+                    {
+                        if (row>0 && column>0)
+                        messageLabel.Content = "Нельзя!"; 
+                    }
                 }
                 else
                     messageLabel.Content = "Превышено количество кораблей";
@@ -84,7 +87,7 @@ namespace SeaBattle.Pages
         /// <returns></returns>
         private bool CanShipStayThere(byte deckCount, int i, int j, ShipOrientation orientation)
         {
-            if (i < 1 && j < 1)
+            if (i < 1 || j < 1)
                 return false;
             
             if (orientation == ShipOrientation.Horisontal)
