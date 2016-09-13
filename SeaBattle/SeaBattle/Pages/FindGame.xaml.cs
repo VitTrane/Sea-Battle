@@ -39,7 +39,8 @@ namespace SeaBattle.Pages
             _games = new ObservableCollection<DTOAwaitingGame>();
 
             gamesListView.ItemsSource = _games;
-            ClientManager.Instance.Callback.SetHandler<GetListGamesResponse>(GetAvailableGames);            
+            ClientManager.Instance.Callback.SetHandler<GetListGamesResponse>(GetAvailableGames);
+            ClientManager.Instance.Client.GetListAvailableGames();
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -62,10 +63,15 @@ namespace SeaBattle.Pages
             DTOAwaitingGame game = (DTOAwaitingGame)gamesListView.ItemContainerGenerator.ItemFromContainer(dep);
 
             ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetAvailableGames);
-            var request = new ConnectToGameRequest() { GameId = game.GameId, ExtensionData = game.ExtensionData};
+            var request = new ConnectToGameRequest() { GameId = game.GameId};
             ClientManager.Instance.Client.ConnectToGame(request);            
         }
 
+        /// <summary>
+        /// Возвращает список полученных игр
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GetAvailableGames(object sender, ResponseEventArgs e)
         {
             var c = this;
@@ -80,6 +86,11 @@ namespace SeaBattle.Pages
             }
         }
 
+        /// <summary>
+        /// Поключаеться к игре
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GetConnectToGames(object sender, ResponseEventArgs e)
         {
             CurentGameResponse response = e.Response as CurentGameResponse;

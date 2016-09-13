@@ -1408,6 +1408,12 @@ namespace SeaBattle.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetListAvailableGames")]
         System.Threading.Tasks.Task GetListAvailableGamesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetLastGames")]
+        void GetLastGames();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetLastGames")]
+        System.Threading.Tasks.Task GetLastGamesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1570,6 +1576,14 @@ namespace SeaBattle.GameService {
         
         public System.Threading.Tasks.Task GetListAvailableGamesAsync() {
             return base.Channel.GetListAvailableGamesAsync();
+        }
+        
+        public void GetLastGames() {
+            base.Channel.GetLastGames();
+        }
+        
+        public System.Threading.Tasks.Task GetLastGamesAsync() {
+            return base.Channel.GetLastGamesAsync();
         }
     }
 }
