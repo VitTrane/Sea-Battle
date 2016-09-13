@@ -75,7 +75,9 @@ namespace SeaBattle.GameLogic
                 if (orientation == ShipOrientation.Horisontal)
                 {
                     var converter = new System.Windows.Media.BrushConverter();
-                    Map[startPositionY, startPositionX].Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    var field = Map[startPositionY, startPositionX]; 
+                    field.Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    field.State = FieldState.Ship;
                     startPositionX++;
                 }
                 else 

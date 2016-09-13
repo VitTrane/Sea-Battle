@@ -21,6 +21,8 @@ namespace SeaBattle.GameLogic
         
         public int Column { get; private set; }
 
+        public FieldState State = FieldState.Sea;
+
         public Field(int row, int column)
         {
             Row = row;
@@ -32,5 +34,10 @@ namespace SeaBattle.GameLogic
             b.BorderThickness = new Thickness(0.5);
             Children.Add(b);
         }       
+    }
+    public enum FieldState
+    {
+        Ship,
+        Sea
     }
 }

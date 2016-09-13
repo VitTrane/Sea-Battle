@@ -58,18 +58,107 @@ namespace SeaBattle.Pages
                 var element = (UIElement)e.Source;
                 int row = Grid.GetRow(element);
                 int column = Grid.GetColumn(element);
-                if (row > 0 && column > 0) 
+                if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
                 {
-                    if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
+                    if (CanShipStayThere(GetDeckCount(), row, column, GetOrientation()))
                     {
+
                         _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
                         _shipToggles.dicShipCount(GetDeckCount());
                         messageLabel.Content = "";
                     }
                     else
-                        messageLabel.Content = "Превышено количество кораблей";
+                        messageLabel.Content = "Нельзя!";
+                }
+                else
+                    messageLabel.Content = "Превышено количество кораблей";
+            }
+        }
+        /// <summary>
+        /// Провеярем можно ли здесь  установить корабль
+        /// </summary>
+        /// <param name="deckCount">Количество палуб</param>
+        /// <param name="i">Координаты по строке</param>
+        /// <param name="j">Координаты по столбцу</param>
+        /// <param name="orientation">Ориентация корабля</param>
+        /// <returns></returns>
+        private bool CanShipStayThere(byte deckCount, int i, int j, ShipOrientation orientation)
+        {
+            if (i < 1 && j < 1)
+                return false;
+            
+            if (orientation == ShipOrientation.Horisontal)
+            {
+                if (j + deckCount - 1 > 10) // можно ли приватные константы из класса Sea сделать публичными и проверять на них?
+                    return false;
+            }
+            else
+            {
+                if (j + deckCount - 1 > 10) // аналогичный вопрос
+                    return false;
+            }
+            
+            if (orientation == ShipOrientation.Horisontal)
+            {
+                if (j+deckCount<11)
+                {
+                    //Проверяем правый край корабля
+                    if (IsShipThere(i,j + deckCount))
+                        return false;
+                    //Проверяем правый верхний угол корабля
+                    if (i-1>0)
+                        if (IsShipThere(i-1,j+deckCount))
+                            return false;
+                    //Проверяем правый нижний угол корабля
+                    if (i+1<11)
+                        if (IsShipThere(i+1,j+deckCount))
+                            return false;
+                }
+                if (j-1>0)
+                {
+                    //Проверяем левую сторону корабля
+                    if (IsShipThere(i,j - 1))
+                        return false;
+                    //Проверяем левый верхний угол корабля
+                    if (i - 1 > 0)
+                        if (IsShipThere(i - 1,j - 1))
+                            return false;
+                    //Проверяем левый нижний угол корабля
+                    if (i + 1 < 11)
+                        if (IsShipThere(i + 1,j - 1))
+                            return false;
+                }
+
+                //Проверяем верхнюю грань корабля
+                if (i-1>0)
+                {
+                    for (int k = j; k < j + deckCount; k++)
+                        if (IsShipThere(i-1, k))
+                            return false;
+                }
+                //Проверяем нижнюю грань корабля
+                if (i+1<11)
+                {
+                    for (int k = j; k < j + deckCount; k++)
+                        if (IsShipThere(i + 1,k))
+                            return false;
                 }
             }
+
+            return true;
+        }
+        /// <summary>
+        /// Проверяет наличие корабля в клетке
+        /// </summary>
+        /// <param name="j">Координата колонки (от 1 до 10)</param>
+        /// <param name="i">Координата строки (от 1 до 10)</param>
+        /// <returns></returns>
+        private bool IsShipThere(int i, int j)
+        {
+            if (_seaPlayer.Map[i - 1, j - 1].State == FieldState.Ship)
+                return true;
+            else 
+                return false;
         }
 
         private byte GetDeckCount()
