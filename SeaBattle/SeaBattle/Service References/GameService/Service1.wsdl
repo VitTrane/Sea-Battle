@@ -112,6 +112,11 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="GetLastGames">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DoShotCallback">
         <xs:complexType>
           <xs:sequence>
@@ -647,6 +652,9 @@
   <wsdl:message name="IService_GetListAvailableGames_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListAvailableGames" />
   </wsdl:message>
+  <wsdl:message name="IService_GetLastGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastGames" />
+  </wsdl:message>
   <wsdl:message name="IService_DoShotCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DoShotCallback" />
   </wsdl:message>
@@ -724,6 +732,9 @@
     </wsdl:operation>
     <wsdl:operation name="GetListAvailableGames">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetListAvailableGames" message="tns:IService_GetListAvailableGames_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetLastGames" message="tns:IService_GetLastGames_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DoShotCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IService/DoShotCallback" message="tns:IService_DoShotCallback_OutputCallbackMessage" />
@@ -839,6 +850,12 @@
     </wsdl:operation>
     <wsdl:operation name="GetListAvailableGames">
       <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastGames">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetLastGames" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -999,6 +1016,12 @@
     </wsdl:operation>
     <wsdl:operation name="GetListAvailableGames">
       <soap12:operation soapAction="http://tempuri.org/IService/GetListAvailableGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastGames">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetLastGames" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

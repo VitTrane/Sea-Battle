@@ -57,7 +57,11 @@ namespace SeaBattle.BattleShipServiceCallback
         private void OnBroadcast<T>(object eventData)
         {
             ResponseEventArgs eventArgs = new ResponseEventArgs() { Response = (AuthorizeResponse)eventData };
-            _handlers[typeof(T)].Invoke(this, eventArgs);
+
+            if (_handlers.ContainsKey(typeof(T)) && _handlers[typeof(T)] != null)
+            {
+                _handlers[typeof(T)].Invoke(this, eventArgs);
+            }
         }
 
         public void DoShotCallback(ShotResponse response)
