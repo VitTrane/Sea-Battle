@@ -83,7 +83,9 @@ namespace SeaBattle.GameLogic
                 else 
                 {
                     var converter = new System.Windows.Media.BrushConverter();
-                    Map[startPositionY, startPositionX].Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    var field = Map[startPositionY, startPositionX];
+                    field.Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    field.State = FieldState.Ship;
                     startPositionY++;
                 }
             }

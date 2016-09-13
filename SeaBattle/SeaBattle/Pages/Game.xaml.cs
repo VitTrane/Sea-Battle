@@ -94,54 +94,140 @@ namespace SeaBattle.Pages
             }
             else
             {
-                if (j + deckCount - 1 > 10) // аналогичный вопрос
+                if (i + deckCount - 1 > 10) // аналогичный вопрос
                     return false;
             }
             
             if (orientation == ShipOrientation.Horisontal)
             {
-                if (j+deckCount<11)
+                //Начало проверки правой части корабля
+                if (j + deckCount < 11)
                 {
                     //Проверяем правый край корабля
-                    if (IsShipThere(i,j + deckCount))
+                    if (IsShipThere(i, j + deckCount))
                         return false;
                     //Проверяем правый верхний угол корабля
-                    if (i-1>0)
-                        if (IsShipThere(i-1,j+deckCount))
+                    if (i - 1 > 0)
+                        if (IsShipThere(i - 1, j + deckCount))
                             return false;
                     //Проверяем правый нижний угол корабля
-                    if (i+1<11)
-                        if (IsShipThere(i+1,j+deckCount))
+                    if (i + 1 < 11)
+                        if (IsShipThere(i + 1, j + deckCount))
                             return false;
                 }
-                if (j-1>0)
+                //Начало проверки левой части корабля
+                if (j - 1 > 0)
                 {
                     //Проверяем левую сторону корабля
-                    if (IsShipThere(i,j - 1))
+                    if (IsShipThere(i, j - 1))
                         return false;
                     //Проверяем левый верхний угол корабля
                     if (i - 1 > 0)
-                        if (IsShipThere(i - 1,j - 1))
+                    {
+                        if (IsShipThere(i - 1, j - 1))
                             return false;
+                    }
                     //Проверяем левый нижний угол корабля
                     if (i + 1 < 11)
-                        if (IsShipThere(i + 1,j - 1))
+                    {
+                        if (IsShipThere(i + 1, j - 1))
                             return false;
+                    }
                 }
 
                 //Проверяем верхнюю грань корабля
-                if (i-1>0)
+                if (i - 1 > 0)
                 {
                     for (int k = j; k < j + deckCount; k++)
-                        if (IsShipThere(i-1, k))
+                    {
+                        if (IsShipThere(i - 1, k))
                             return false;
+                    }
                 }
                 //Проверяем нижнюю грань корабля
-                if (i+1<11)
+                if (i + 1 < 11)
                 {
                     for (int k = j; k < j + deckCount; k++)
-                        if (IsShipThere(i + 1,k))
+                    {
+                        if (IsShipThere(i + 1, k))
                             return false;
+                    }
+                }
+
+                //Проверяем не ложится ли корабль поверх другого корабля
+                for (int k = j; k < j + deckCount; k++)
+                {
+                    if (IsShipThere(i, k))
+                        return false;
+                }
+            }
+            else
+            {
+                //Проверяем верхнюю часть корабля
+                if (i-1>0)
+                {
+                    //Проверяем верхний правый угол
+                    if (j-1>0)
+                    {
+                        if (IsShipThere(i - 1, j - 1))
+                            return false;
+                    }
+                    //Проверяем верх корабля
+                    if (IsShipThere(i - 1, j))
+                        return false;
+                    //Проверяем верхний левый угол
+                    if (j+1<11)
+                    {
+                        if (IsShipThere(i - 1, j + 1))
+                            return false;
+                    }
+                }
+
+                //Проверяем нижнюю часть корабля
+                if (i+deckCount<11)
+                {
+                    //Прверяем нижний левый угол
+                    if (j-1>0)
+                    {
+                        if (IsShipThere(i + deckCount, j - 1))
+                            return false;
+                    }
+                    //Проверяем низ корабля
+                    if (IsShipThere(i + deckCount, j))
+                        return false;
+                    //Проверяем правый нижний угол
+                    if (j+1<11)
+                    {
+                        if (IsShipThere(i + deckCount, j + 1))
+                            return false;
+                    }
+                }
+
+                //Проверяем левую грань
+                if (j - 1 > 0)
+                {
+                    for (int k = i; k < i + deckCount; k++)
+                    {
+                        if (IsShipThere(k,j-1))
+                            return false;
+                    }
+                }
+
+                //Проверяем не ложится ли корабль поверх других кораблей
+                for (int k = i; k < i + deckCount; k++)
+                {
+                    if (IsShipThere(k, j))
+                        return false;
+                }
+
+                //Проверяем правую грань корабля
+                if(j+1<11)
+                {
+                    for (int k = i;k<i+deckCount;k++)
+                    {
+                        if (IsShipThere(k, j + 1))
+                            return false;
+                    }
                 }
             }
 
