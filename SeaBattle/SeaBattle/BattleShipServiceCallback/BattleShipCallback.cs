@@ -60,22 +60,9 @@ namespace SeaBattle.BattleShipServiceCallback
             _handlers[typeof(T)].Invoke(this, eventArgs);
         }
 
-        public void AuthorizeCallback(AuthorizeResponse response)
-        {
-        }
-
-        public void RegisterCallback(RegisterResponse response)
-        {
-        }
-
         public void DoShotCallback(ShotResponse response)
         {
             syncContext.Post(new SendOrPostCallback(OnBroadcast<ShotResponse>), response);
-        }
-
-        public void GetListAvailableGames(GetListGamesResponse response)
-        {
-            syncContext.Post(new SendOrPostCallback(OnBroadcast<GetListGamesResponse>), response);
         }
 
         public void GiveConnectedOpponentInfo(CurentGameResponse response)
@@ -136,6 +123,11 @@ namespace SeaBattle.BattleShipServiceCallback
         public void SendOpponentIsReady(SendOpponentIsReadyResponse response)
         {
             syncContext.Post(new SendOrPostCallback(OnBroadcast<SendOpponentIsReadyResponse>), response);
+        }
+
+        public void GetListAvailableGamesCallback(GetListGamesResponse response)
+        {
+            throw new NotImplementedException();
         }
     }
 }

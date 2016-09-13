@@ -15,31 +15,22 @@ using System.Windows.Shapes;
 
 namespace SeaBattle.GameLogic
 {
-    class Field
+    public class Field : Grid
     {
-        int Row { get; set; }
+        public int Row { get; private set; }
+        
+        public int Column { get; private set; }
 
-        int Column { get; set; }
-
-        Grid _square = new Grid();
-
-        public Field()
+        public Field(int row, int column)
         {
-            _square.Background = Brushes.Azure;
-            _square.ShowGridLines = true;
+            Row = row;
+            Column = column;
+            Background = Brushes.Azure;
+            ShowGridLines = true;
             Border b = new Border();
             b.BorderBrush = Brushes.Black;
             b.BorderThickness = new Thickness(0.5);
-            _square.Children.Add(b);
-        }
-        
-        public Grid Square
-        {
-            get { return _square; }
-            set
-            {
-                _square = value;
-            }
-        }        
+            Children.Add(b);
+        }       
     }
 }

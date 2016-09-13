@@ -25,7 +25,7 @@ namespace SeaBattle
         {
             InitializeComponent();
             Switcher.PageSwitcher = this;
-            Switcher.SwitchPage(new Login()); 
+            Switcher.SwitchPage(new Game()); 
         }
 
         public void Navigate(UserControl nextPage)

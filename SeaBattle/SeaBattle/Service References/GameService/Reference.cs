@@ -1379,6 +1379,12 @@ namespace SeaBattle.GameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/ConnectToGame")]
         System.Threading.Tasks.Task ConnectToGameAsync(SeaBattle.GameService.ConnectToGameRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Logout")]
+        void Logout(System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Logout")]
+        System.Threading.Tasks.Task LogoutAsync(System.Guid userId);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendReady")]
         void SendReady(SeaBattle.GameService.SendReadyRequest request);
         
@@ -1390,18 +1396,6 @@ namespace SeaBattle.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetTopPlayers")]
         System.Threading.Tasks.Task GetTopPlayersAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetA")]
-        void GetA();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetA")]
-        System.Threading.Tasks.Task GetAAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetStatisticLastGames")]
-        void GetStatisticLastGames();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/GetStatisticLastGames")]
-        System.Threading.Tasks.Task GetStatisticLastGamesAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendMessage")]
         void SendMessage(SeaBattle.GameService.SendMessageRequest request);
@@ -1538,6 +1532,14 @@ namespace SeaBattle.GameService {
             return base.Channel.ConnectToGameAsync(request);
         }
         
+        public void Logout(System.Guid userId) {
+            base.Channel.Logout(userId);
+        }
+        
+        public System.Threading.Tasks.Task LogoutAsync(System.Guid userId) {
+            return base.Channel.LogoutAsync(userId);
+        }
+        
         public void SendReady(SeaBattle.GameService.SendReadyRequest request) {
             base.Channel.SendReady(request);
         }
@@ -1552,22 +1554,6 @@ namespace SeaBattle.GameService {
         
         public System.Threading.Tasks.Task GetTopPlayersAsync() {
             return base.Channel.GetTopPlayersAsync();
-        }
-        
-        public void GetA() {
-            base.Channel.GetA();
-        }
-        
-        public System.Threading.Tasks.Task GetAAsync() {
-            return base.Channel.GetAAsync();
-        }
-        
-        public void GetStatisticLastGames() {
-            base.Channel.GetStatisticLastGames();
-        }
-        
-        public System.Threading.Tasks.Task GetStatisticLastGamesAsync() {
-            return base.Channel.GetStatisticLastGamesAsync();
         }
         
         public void SendMessage(SeaBattle.GameService.SendMessageRequest request) {

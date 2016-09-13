@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.GameService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,9 @@ namespace SeaBattle.GameLogic
 {
     class Sea
     {
+        private const int MAP_WIDTH = 10;
+        private const int MAP_HEIGHT = 10;
+
         /// <summary>
         /// Контейнер игрового поля
         /// </summary>
@@ -25,19 +29,64 @@ namespace SeaBattle.GameLogic
         /// <summary>
         /// Двумерный массив ячеек поля
         /// </summary>
-        public Field[][] Map = new Field[10][];
-        
+        public Field[,] Map { get; set; }
+
+        /// <summary>
+        /// Список кораблей
+        /// </summary>
+        public List<Ship> Ships { get; private set; }
+
         /// <summary>
         /// Инициализация игрового поля
         /// </summary>
         /// <param name="bigSquare">Контрол игрового поля</param>
-        public Sea (Grid bigSquare)
+        public Sea(Grid bigSquare)
         {
+            Map = new Field[MAP_WIDTH, MAP_HEIGHT];
+            Ships = new List<Ship>();
             SeaGrid = bigSquare;
             setBattleMap();
             setMapNames();
         }
-        
+
+        /// <summary>
+        /// Добавляет корабль на карту
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
+        /// <param name="countDeck">Количество палуб</param>
+        /// <param name="orientation">Ориентация корабля</param>
+        public void CreateShip(int x, int y, int countDeck, ShipOrientation orientation) 
+        {
+            Ship ship = new Ship();
+            ship.Orientation = orientation;
+            ship.StartPoint = new XYCoordinate() { X = x, Y = y };
+            ship.Decks = new Deck[countDeck];
+            for (int i = 0; i < countDeck; i++)
+            {
+                ship.Decks[i] = new Deck();
+            }
+            Ships.Add(ship);
+
+            int startPositionX = x;
+            int startPositionY = y;
+            for (int i = 0; i < countDeck; i++)
+            {
+                if (orientation == ShipOrientation.Horisontal)
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Map[startPositionY, startPositionX].Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    startPositionX++;
+                }
+                else 
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Map[startPositionY, startPositionX].Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    startPositionY++;
+                }
+            }
+        }
+
         /// <summary>
         /// Создает на поле клетки с именами столбцов и строк
         /// </summary>
@@ -71,21 +120,18 @@ namespace SeaBattle.GameLogic
         /// </summary>
         private void setBattleMap()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < MAP_WIDTH; i++)
             {
-                Map[i] = new Field[10];
-            }
-            for (int i = 0; i < 10; i++)
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < MAP_HEIGHT; j++)
                 {
-                    Map[i][j] = new Field();
-
-                    Grid.SetRow(Map[i][j].Square, i + 1);
-                    Grid.SetColumn(Map[i][j].Square, j + 1);
-                    SeaGrid.Children.Add(Map[i][j].Square);
-                    Map[i][j].Square.MouseMove += Game_MouseMove;
+                    Map[i, j] = new Field(i, j);
+                    Grid.SetRow(Map[i, j], i + 1);
+                    Grid.SetColumn(Map[i, j], j + 1);
+                    SeaGrid.Children.Add(Map[i, j]);
                 }
+            }
         }
+
         /// <summary>
         /// Создает текст блок с присвоением строки и столбца, для добавления в Grid
         /// </summary>
@@ -95,19 +141,12 @@ namespace SeaBattle.GameLogic
         /// <returns>Текстовый блок (TextBlock)</returns>
         private TextBlock textGrid(string t, int i, int j)
         {
-            TextBlock text = new TextBlock();
-            text.TextAlignment = TextAlignment.Center;
-            text.Text = t;
-            Grid.SetRow(text, i);
-            Grid.SetColumn(text, j);
-            return text;
-        }
-
-        private void Game_MouseMove(object sender, MouseEventArgs e)
-        {
-            Grid pad = (Grid)sender;
-            var converter = new System.Windows.Media.BrushConverter();
-            pad.Background = (Brush)converter.ConvertFromString("#b5e61d");
+            TextBlock textBlock = new TextBlock();
+            textBlock.TextAlignment = TextAlignment.Center;
+            textBlock.Text = t;
+            Grid.SetRow(textBlock, i);
+            Grid.SetColumn(textBlock, j);
+            return textBlock;
         }
     }
 }
