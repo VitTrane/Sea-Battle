@@ -18,8 +18,8 @@ namespace SeaBattle.GameLogic
 {
     class Sea
     {
-        private const int MAP_WIDTH = 10;
-        private const int MAP_HEIGHT = 10;
+        public const int MAP_WIDTH = 10;
+        public const int MAP_HEIGHT = 10;
 
         /// <summary>
         /// Контейнер игрового поля
@@ -67,7 +67,6 @@ namespace SeaBattle.GameLogic
                 ship.Decks[i] = new Deck();
             }
             Ships.Add(ship);
-
             int startPositionX = x;
             int startPositionY = y;
             for (int i = 0; i < countDeck; i++)

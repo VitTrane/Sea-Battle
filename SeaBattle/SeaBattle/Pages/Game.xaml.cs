@@ -25,6 +25,7 @@ namespace SeaBattle.Pages
         private ShipToggles _shipToggles;
         private Sea _seaPlayer;
         private Sea _seaOpponent;
+        private StateGame _stateGame;
 
 
         public Game()
@@ -32,6 +33,8 @@ namespace SeaBattle.Pages
             InitializeComponent();
             fourship.IsChecked = true;
             HorizontalOrientation.IsChecked = true;
+
+            _stateGame = StateGame.OpponentWaiting;
 
             _shipToggles = new ShipToggles();
             _seaPlayer = new Sea(playerSquare);
@@ -50,33 +53,39 @@ namespace SeaBattle.Pages
 
         private void seaPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender != null)
+            if (_stateGame == StateGame.PreparationGame)
             {
-                var element = (UIElement)e.Source;
-                int row = Grid.GetRow(element);
-                int column = Grid.GetColumn(element);
-                if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
+                if (sender != null)
                 {
-                    if (_seaPlayer.CanShipStayThere(GetDeckCount(), row, column, GetOrientation()))
+                    var element = (UIElement)e.Source;
+                    int row = Grid.GetRow(element);
+                    int column = Grid.GetColumn(element);
+                    if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
                     {
-
-                        _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
-                        _shipToggles.dicShipCount(GetDeckCount());
-                        messageTextBlock.Text = "";
+                        if (_seaPlayer.CanShipStayThere(GetDeckCount(), row, column, GetOrientation()))
+                        {
+                            _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
+                            _shipToggles.dicShipCount(GetDeckCount());
+                            messageTextBlock.Text = "";
+                        }
+                        else
+                        {
+                            if (row > 0 && column > 0)
+                                messageTextBlock.Text = "В это место корабль поставить нельзя!";
+                        }
                     }
                     else
                     {
-                        if (row > 0 && column > 0)
-                            messageTextBlock.Text = "В это место корабль поставить нельзя!";
+                        messageTextBlock.Text = "Превышено количество кораблей";
                     }
-                }
-                else
-                {
-                    messageTextBlock.Text = "Превышено количество кораблей";
                 }
             }
         }        
 
+        /// <summary>
+        /// Возвращает количество палуб для выбраного корабля
+        /// </summary>
+        /// <returns></returns>
         private byte GetDeckCount()
         {
             if ((bool)fourship.IsChecked)
@@ -94,6 +103,10 @@ namespace SeaBattle.Pages
             return _shipToggles.CountsOfDecks[DeckCount.fourdeck];
         }
 
+        /// <summary>
+        /// Возвращает выбраную ориентацию корабля
+        /// </summary>
+        /// <returns></returns>
         private ShipOrientation GetOrientation()
         {
             if ((bool)HorizontalOrientation.IsChecked)
