@@ -4,7 +4,8 @@
 //React.render(<PlayField board={board} isReady={false} isPlayer={true} />,document.getElementById('content'));
 
 var board = new Board();
-ReactDOM.render(<PlayField board={board} isReady={false}/>,document.getElementById('content'));
+//ReactDOM.render(<PlayField board={board} isReady={false}/>,document.getElementById('content'));
+ReactDOM.render(<Game/>,document.getElementById('content'));
 
 //var board = new Board();
 //ReactDOM.render(<PlayField board={board} isReady={false} isPlayer={true}/>,document.getElementById('content'));

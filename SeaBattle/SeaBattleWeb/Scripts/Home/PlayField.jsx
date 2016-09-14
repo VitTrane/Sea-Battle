@@ -67,7 +67,7 @@ var PlayField = React.createClass({
 					{(() => {
 							switch (this.state.bt) {
 							  case "5":  return (<form action=""> 
-														<p><a className="waves-effect red lighten-2 btn" id="5" onClick={clickSt.bind(this)}>Rotate</a></p>
+														<a className="waves-effect red lighten-2 btn" id="5" onClick={clickSt.bind(this)}>Rotate</a>
 														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
 														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
 														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 

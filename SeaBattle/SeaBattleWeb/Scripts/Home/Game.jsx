@@ -24,7 +24,6 @@ var Game = React.createClass({
                                  <PlayField cells={this.state.playerCells} isPlayer={true}/>
 					         </div>
                             <div className="col right"  id = "Enemy">
-                                <PlayField cells={this.state.enemyCells} isPlayer={false}/>
 					        </div>
                        </div> 
                        <div className="row">      
