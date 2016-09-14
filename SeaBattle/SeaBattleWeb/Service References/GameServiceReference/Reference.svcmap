@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://testwcfforbattleship.cloudapp.net/Service.svc?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://aleksey6157.cloudapp.net:8080/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="6bdddccf-f331-4d4d-b169-49c029356031" SourceId="1" SourceUrl="http://testwcfforbattleship.cloudapp.net/Service.svc?singleWsdl" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="c6d7a1b3-0cf2-41c9-abd4-698f374e18b9" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
