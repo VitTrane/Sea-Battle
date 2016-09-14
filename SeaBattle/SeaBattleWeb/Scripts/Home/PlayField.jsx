@@ -2,8 +2,7 @@
     render: function() {
         var classes = "cell " + this.props.color;
 		var cellClick = function(e) {
-			var temp = this;
-			if (this.props.board.createBoard(this.props.row, this.props.col,3,false))
+			if (this.props.board.createBoard(this.props.row, this.props.col,this.props.btAct,false))
 				this.props.onPlay();
 				};
         return (
@@ -15,7 +14,7 @@
 var Row = React.createClass({
  render: function(){
    var getCells = function(object,j){
-					 return (<Cell board={this.props.board} color={object} row={this.props.row} col={j} onPlay={this.props.onPlay} key={j} />);
+					 return (<Cell board={this.props.board} color={object} row={this.props.row} col={j} onPlay={this.props.onPlay} btAct = {this.props.btAct} key={j} />);
 				}
    return(<div className="FieldRow">
     {
@@ -37,7 +36,7 @@ var Field = React.createClass({
  
  render: function() {
 	var getRows = function(object,i){
-					 return (<Row board={this.state.board} cells={object} row={i} onPlay={this.onBoardUpdate} key={i}/>);
+					 return (<Row board={this.state.board} cells={object} row={i} onPlay={this.onBoardUpdate} btAct = {this.props.btAct} key={i}/>);
 				}		
     return(
 		<div className="Field">
@@ -50,40 +49,83 @@ var Field = React.createClass({
           
 });
 
+
 var PlayField = React.createClass({
 	getInitialState: function() {
-        return {board: this.props.board, decks:4};
+        return {board: this.props.board, bt:5};
     },
-	onDeckChanged: function (e) {
-		this.setState({
-		  decks: e.currentTarget.value
-		  });
-	},
 	render: function() {
-		
+		var clickSt = function(e)
+		{
+			this.setState({bt: e.currentTarget.id});
+		};
 		return(
 			<div>
 				<div className="col">
-					<Field board={board} isReady={false}/>
+					<Field board={board} isReady={false} btAct={this.state.bt}/>
 				</div>
-					<form action=""> 
-						<p>
-							<input className="with-gap" name="group1" type="radio" id="d4" value={4} checked={this.state.decks === 4} onChange={this.onDeckChanged}/>
-								  <label for="d4">4</label>
-						</p>
-						<p>
-							<input className="with-gap" name="group1" type="radio" id="d3" value={3} checked={this.state.decks === 3} onChange={this.onDeckChanged}/>
-								  <label for="d3">3</label>
-						</p>
-						<p>
-							<input className="with-gap" name="group1" type="radio" id="d2" value={2} checked={this.state.decks === 2} onChange={this.onDeckChanged}/>
-								  <label for="d4">2</label>
-						</p>
-						<p>
-							<input className="with-gap" name="group1" type="radio" id="d1" value={1} checked={this.state.decks === 4} onChange={this.onDeckChanged}/>
-								  <label for="d4">1</label>
-						</p>
-					</form>
+					{(() => {
+							switch (this.state.bt) {
+							  case "5":  return (<form action=""> 
+														<p><a className="waves-effect red lighten-2 btn" id="5" onClick={clickSt.bind(this)}>Rotate</a></p>
+														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect waves-teal btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect waves-teal btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>);
+							  case "4":	return (
+													<form action=""> 
+														<a className="waves-effect waves-teal btn" id="5" onClick={clickSt.bind(this)}>Rotate</a> 
+														<a className="waves-effect red lighten-2 btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect waves-teal btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect waves-teal btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>
+												);
+							  case "3":  return (
+													<form action=""> 
+														<a className="waves-effect waves-teal btn" id="5" onClick={clickSt.bind(this)}>Rotate</a> 
+														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect red lighten-2 btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect waves-teal btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect waves-teal btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>
+													);
+							  case "2":  return (
+													<form action=""> 
+														<a className="waves-effect waves-teal btn" id="5" onClick={clickSt.bind(this)}>Rotate</a> 
+														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect red lighten-2 btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect waves-teal btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect waves-teal btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>
+													);
+							  case "1":  return (
+													<form action=""> 
+														<a className="waves-effect waves-teal btn" id="5" onClick={clickSt.bind(this)}>Rotate</a> 
+														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect red lighten-2 btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect waves-teal btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>
+													);
+							  default:   return (
+													<form action=""> 
+														<a className="waves-effect waves-teal btn" id="5" onClick={clickSt.bind(this)}>Rotate</a> 
+														<a className="waves-effect waves-teal btn" id="4" onClick={clickSt.bind(this)}>4</a> 
+														<a className="waves-effect waves-teal btn" id="3" onClick={clickSt.bind(this)}>3</a> 
+														<a className="waves-effect waves-teal btn" id="2" onClick={clickSt.bind(this)}>2</a> 
+														<a className="waves-effect waves-teal btn" id="1" onClick={clickSt.bind(this)}>1</a> 
+														<a className="waves-effect red lighten-2 btn" id="0"onClick={clickSt.bind(this)}>Delete</a> 
+													</form>	
+												);
+							}
+					})()}
 			</div>
 		);
 	}

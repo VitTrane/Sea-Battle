@@ -66,27 +66,30 @@ Board.prototype.createBoard = function (i, j, decks, isHorizontal) {
         return false;
     }
 };
-Board.prototype.canBeCreated = function(i,j, decks, isHorizontal)
+Board.prototype.canBeCreated = function(i,j, bt, isHorizontal)
 {
     var iMin = (i == 0) ? i : i - 1;
     var jMin = (j == 0) ? j : j - 1;
+    var iMax = 0;
+    var jMax = 0;
+    decks = parseInt(bt, 10);
     if(isHorizontal)
     {
         if (j + decks - 1 > this.size)
         {
             return false;
         }
-        var jMax = ((j + decks) == this.size) ? j + decks - 1 : j + decks;
-        var iMax = (i == this.size - 1) ? i : i + 1; 
+            jMax = ((j + decks) == this.size) ? j + decks - 1 : j + decks;
+            iMax = (i == this.size - 1) ? i : i + 1; 
     }
     else
     {
-        if (i + decks - 1 > this.size)
+        if (i + decks - 1 > 10)
         {
             return false;
         }
-        var iMax = ((i + decks) == this.size) ? i + decks - 1 : i + decks;
-        var jMax = (j == this.size - 1) ? j : j + 1;
+            iMax = ((i + decks) == this.size) ? i + decks - 1 : i + decks;
+             jMax = (j == this.size - 1) ? j : j + 1;
     }
     for (var r = iMin; r < iMax + 1; r++) {
         for (var c = jMin; c < jMax + 1; c++) {
