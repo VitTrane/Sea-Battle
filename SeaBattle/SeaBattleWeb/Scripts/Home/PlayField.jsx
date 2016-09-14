@@ -3,7 +3,7 @@
         var classes = "cell " + this.props.color;
 		var cellClick = function(e) {
 			var temp = this;
-			if (this.props.board.play(this.props.row, this.props.col))
+			if (this.props.board.createBoard(this.props.row, this.props.col,3,false))
 				this.props.onPlay();
 				};
         return (
@@ -26,13 +26,13 @@ var Row = React.createClass({
      
 });
  
-var PlayField = React.createClass({
+var Field = React.createClass({
  
  getInitialState: function() {
-        return {board: this.props.board, isReady:this.props.isReady, isPlayer: this.props.isPlayer};
+        return {board: this.props.board};
     },
  onBoardUpdate: function() {
-        this.setState({board: this.props.board});
+       this.setState({board: this.props.board});
     },
  
  render: function() {
@@ -48,4 +48,44 @@ var PlayField = React.createClass({
 
 	}
           
+});
+
+var PlayField = React.createClass({
+	getInitialState: function() {
+        return {board: this.props.board, decks:4};
+    },
+	onDeckChanged: function (e) {
+		this.setState({
+		  decks: e.currentTarget.value
+		  });
+	},
+	render: function() {
+		
+		return(
+			<div>
+				<div className="col">
+					<Field board={board} isReady={false}/>
+				</div>
+					<form action=""> 
+						<p>
+							<input className="with-gap" name="group1" type="radio" id="d4" value={4} checked={this.state.decks === 4} onChange={this.onDeckChanged}/>
+								  <label for="d4">4</label>
+						</p>
+						<p>
+							<input className="with-gap" name="group1" type="radio" id="d3" value={3} checked={this.state.decks === 3} onChange={this.onDeckChanged}/>
+								  <label for="d3">3</label>
+						</p>
+						<p>
+							<input className="with-gap" name="group1" type="radio" id="d2" value={2} checked={this.state.decks === 2} onChange={this.onDeckChanged}/>
+								  <label for="d4">2</label>
+						</p>
+						<p>
+							<input className="with-gap" name="group1" type="radio" id="d1" value={1} checked={this.state.decks === 4} onChange={this.onDeckChanged}/>
+								  <label for="d4">1</label>
+						</p>
+					</form>
+			</div>
+		);
+	}
+
 });
