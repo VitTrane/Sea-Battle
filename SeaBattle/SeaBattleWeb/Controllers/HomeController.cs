@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using SeaBattle.Models;
 using React;
+using SeaBattle.GameServiceReference;
+using SeaBattle.Common;
 
 namespace SeaBattle.Controllers
 {
@@ -12,51 +14,91 @@ namespace SeaBattle.Controllers
     {
         //
         // GET: /Index/
-        private User tempUser;
 
         public ActionResult Index()
         { 
-
             return View();
         }
 
+        /// <summary>
+        /// Метод авторизации пользователя.
+        /// </summary>
+        /// <param name="u">Экземпляр пользователя с указанным логином и паролем.</param>
+        /// <returns>Json ответ о состоянии авторизации.</returns>
         [HttpPost]
         public JsonResult UserLogin(User u)
         {
-           // make u logged in.
-            tempUser = u;
             bool status = false;
             string message = "";
+
             if (ModelState.IsValid)
             {
-                  
-                    status = true;
-                    message = "";
+                try
+                {
+                    ClientManager.Instance.CreateClient();
+                    var authrequest = new AuthorizeRequest { Login = u.Login, Password = u.Password };
+                    AuthorizeResponse authresponse = ClientManager.Instance.Client.Authorize(authrequest);
+                    if (authresponse.IsSuccess)
+                    {
+                        status = true;
+                        message = "Ok";
+                    }
+                    else
+                    {
+                        message = "Error: " + authresponse.Error;
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = "Exception: " + e.Message;
+                    ClientManager.Instance.Dispose();
+                }
             }
             else
             {
-                message = "Failed! Please try again";
+                message = "Error: Login or password are uncorrect";
             }
+
             return new JsonResult { Data = new { status = status, message = message } };
         }
 
+        /// <summary>
+        /// Метод регистрации пользователя.
+        /// </summary>
+        /// <param name="u">Экземпляр пользователя с логином, паролем и почтой.</param>
+        /// <returns>Json ответ о состоянии регистрации.</returns>
         [HttpPost]
         public JsonResult UserRegister(User u)
         {
-            // register u and log in.
-            tempUser = u;
             bool status = false;
             string message = "";
-            if (ModelState.IsValid)
+            try
             {
+                if (ModelState.IsValid)
+                {
+                    ClientManager.Instance.CreateClient();
+                    var registerrequeest = new RegisterRequest() { Login = u.Login, Password = u.Password, Email = u.Email };
+                    RegisterResponse registerresponse = ClientManager.Instance.Client.Register(registerrequeest);
+                    if (registerresponse.IsSuccess)
+                    {
+                        status = true;
+                        message = "Ok";
+                    }
+                    else
+                    {
+                        message = "Error: " + registerresponse.Error;
+                    }
+                }
+                else
+                {
+                    message = "Error: Login or password are uncorrect";
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Exception: " + e.Message;
+            }
 
-                status = true;
-                message = "ok";
-            }
-            else
-            {
-                message = "Failed! Please try again";
-            }
             return new JsonResult { Data = new { status = status, message = message } };
         }
 
@@ -77,6 +119,7 @@ namespace SeaBattle.Controllers
             {
                 message = "Failed! Please try again";
             }
+
             return new JsonResult { Data = new { status = status, message = message } };
         }
     }

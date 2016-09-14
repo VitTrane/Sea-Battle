@@ -21,6 +21,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -157,6 +158,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ReactConfig.cs" />
+    <Compile Include="Common\BattleShipCallback.cs" />
+    <Compile Include="Common\ClientManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,12 +249,12 @@
     <Content Include="Scripts\react\react-with-addons.min.js" />
     <Content Include="Scripts\react\react.js" />
     <Content Include="Scripts\react\react.min.js" />
-    <Content Include="Service References\GameServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\GameServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\GameServiceReference\Reference.svcmap">
+    <None Include="Service References\GameServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\GameServiceReference\configuration.svcinfo" />
+    <None Include="Service References\GameServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -263,30 +266,13 @@
     <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.AuthorizeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.CreateGameResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.CurentGameResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.GetLastGamesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.GetTopPlayersResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.RegisterResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.SendReadyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\GameServiceReference\SeaBattle.GameServiceReference.ShotResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
     <Content Include="Scripts\jquery-2.1.4.js" />
+    <None Include="Service References\GameServiceReference\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,9 +314,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\GameServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Service References\GameServiceReference\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

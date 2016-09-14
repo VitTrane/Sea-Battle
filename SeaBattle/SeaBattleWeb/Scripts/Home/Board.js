@@ -36,7 +36,8 @@ Board.prototype.play = function (i, j) {
         return true;
     }
 };
-Board.prototype.createBoard = function (i, j, decks, isHorizontal) {
+Board.prototype.createBoard = function (i, j, bt, isHorizontal) {
+    decks = parseInt(bt, 10);
     if (this.AvailableShips[decks - 1] != 0)
     {
         if (this.canBeCreated(i, j, decks, isHorizontal))
@@ -66,13 +67,12 @@ Board.prototype.createBoard = function (i, j, decks, isHorizontal) {
         return false;
     }
 };
-Board.prototype.canBeCreated = function(i,j, bt, isHorizontal)
+Board.prototype.canBeCreated = function(i,j, decks, isHorizontal)
 {
     var iMin = (i == 0) ? i : i - 1;
     var jMin = (j == 0) ? j : j - 1;
     var iMax = 0;
     var jMax = 0;
-    decks = parseInt(bt, 10);
     if(isHorizontal)
     {
         if (j + decks - 1 > this.size)
