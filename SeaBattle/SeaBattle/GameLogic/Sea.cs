@@ -77,6 +77,7 @@ namespace SeaBattle.GameLogic
                     var field = Map[startPositionY, startPositionX]; 
                     field.Background = (Brush)converter.ConvertFromString("#b5e61d");
                     field.State = FieldState.Ship;
+                    field.Ship = ship;
                     startPositionX++;
                 }
                 else 
@@ -85,11 +86,41 @@ namespace SeaBattle.GameLogic
                     var field = Map[startPositionY, startPositionX];
                     field.Background = (Brush)converter.ConvertFromString("#b5e61d");
                     field.State = FieldState.Ship;
+                    field.Ship = ship;
                     startPositionY++;
                 }
             }
         }
 
+        public void DeleteShip(Ship ship)
+        {
+            int startPositionX = ship.StartPoint.X;
+            int startPositionY = ship.StartPoint.Y;
+
+            for (int i = 0; i < ship.Decks.Length; i++)
+            {
+                if (ship.Orientation == ShipOrientation.Horisontal)
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var field = Map[startPositionY, startPositionX];
+                    field.Background = Brushes.Azure;
+                    field.State = FieldState.Sea;
+                    field.Ship = null;
+                    startPositionX++;
+                }
+                else
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var field = Map[startPositionY, startPositionX];
+                    field.Background = Brushes.Azure;
+                    field.State = FieldState.Sea;
+                    field.Ship = null;
+                    startPositionY++;
+                }
+            }
+
+            Ships.Remove(ship);
+        }
         /// <summary>
         /// Создает на поле клетки с именами столбцов и строк
         /// </summary>

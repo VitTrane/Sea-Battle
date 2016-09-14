@@ -62,7 +62,8 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Background="SkyBlue"
-                  MouseLeftButtonDown="seaPlayer_MouseLeftButtonDown">
+                  MouseLeftButtonDown="seaPlayer_MouseLeftButtonDown"
+                  MouseRightButtonDown="seaPlayer_MouseRightButtonDown">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
                     <RowDefinition Height="20*" />

@@ -81,6 +81,27 @@ namespace SeaBattle.Pages
             }
         }        
 
+        private void seaPlayer_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_stateGame == StateGame.PreparationGame)
+            {
+                if (sender != null)
+                {
+                    var element = (UIElement)e.Source;
+                    int row = Grid.GetRow(element);
+                    int column = Grid.GetColumn(element);
+
+                    if (row > 0 && column > 0)
+                    {
+                        if (_seaPlayer.Map[row-1,column-1].Ship!=null)
+                        {
+                            _shipToggles.incShipCount((byte)_seaPlayer.Map[row - 1, column - 1].Ship.Decks.Length);
+                            _seaPlayer.DeleteShip(_seaPlayer.Map[row - 1, column - 1].Ship);                            
+                        }
+                    }
+                }
+            }
+        }
         /// <summary>
         /// Возвращает количество палуб для выбраного корабля
         /// </summary>

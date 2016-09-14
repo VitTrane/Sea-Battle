@@ -57,5 +57,20 @@ namespace SeaBattle.GameLogic
                 toggle.IsChecked = false;
             }
         }
+
+        /// <summary>
+        /// Прибавляет единицу к количеству допустимых кораблей 
+        /// </summary>
+        /// <param name="shipDecks">Количество палуб в корабле</param>
+        public void incShipCount(byte shipDecks)
+        {
+            CountsOfShips[shipDecks]++;
+            if (CountsOfShips[shipDecks] != 0)
+            {
+                var toggle = Toggles[shipDecks];
+                toggle.IsEnabled = true;
+                toggle.IsChecked = true;
+            }
+        }
     }    
 }
