@@ -22,9 +22,6 @@ namespace SeaBattle.Pages
     /// </summary>
     public partial class Game : UserControl
     {
-        private const int MAP_WIDTH = 10;
-        private const int MAP_HEIGHT = 10;
-
         private ShipToggles _shipToggles;
         private Sea _seaPlayer;
         private Sea _seaOpponent;
@@ -40,10 +37,10 @@ namespace SeaBattle.Pages
             _seaPlayer = new Sea(playerSquare);
             _seaOpponent = new Sea(opponentSquare);
 
-            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.fourdeck], fourship);
-            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.threedeck], threeship);
-            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.twodeck], twoship);
-            _shipToggles.toggles.Add(_shipToggles.CountsOfDecks[DeckCount.onedeck], oneship);
+            _shipToggles.Toggles.Add(_shipToggles.CountsOfDecks[DeckCount.fourdeck], fourship);
+            _shipToggles.Toggles.Add(_shipToggles.CountsOfDecks[DeckCount.threedeck], threeship);
+            _shipToggles.Toggles.Add(_shipToggles.CountsOfDecks[DeckCount.twodeck], twoship);
+            _shipToggles.Toggles.Add(_shipToggles.CountsOfDecks[DeckCount.onedeck], oneship);
         }
 
         private void labelBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -60,195 +57,25 @@ namespace SeaBattle.Pages
                 int column = Grid.GetColumn(element);
                 if (_shipToggles.CountsOfShips[GetDeckCount()] > 0)
                 {
-                    if (CanShipStayThere(GetDeckCount(), row, column, GetOrientation()))
+                    if (_seaPlayer.CanShipStayThere(GetDeckCount(), row, column, GetOrientation()))
                     {
 
                         _seaPlayer.CreateShip(column - 1, row - 1, GetDeckCount(), GetOrientation());
                         _shipToggles.dicShipCount(GetDeckCount());
-                        messageLabel.Content = "";
+                        messageTextBlock.Text = "";
                     }
                     else
                     {
-                        if (row>0 && column>0)
-                        messageLabel.Content = "Нельзя!"; 
+                        if (row > 0 && column > 0)
+                            messageTextBlock.Text = "В это место корабль поставить нельзя!";
                     }
                 }
                 else
-                    messageLabel.Content = "Превышено количество кораблей";
-            }
-        }
-        /// <summary>
-        /// Провеярем можно ли здесь  установить корабль
-        /// </summary>
-        /// <param name="deckCount">Количество палуб</param>
-        /// <param name="i">Координаты по строке</param>
-        /// <param name="j">Координаты по столбцу</param>
-        /// <param name="orientation">Ориентация корабля</param>
-        /// <returns></returns>
-        private bool CanShipStayThere(byte deckCount, int i, int j, ShipOrientation orientation)
-        {
-            if (i < 1 || j < 1)
-                return false;
-            
-            if (orientation == ShipOrientation.Horisontal)
-            {
-                if (j + deckCount - 1 > 10) // можно ли приватные константы из класса Sea сделать публичными и проверять на них?
-                    return false;
-            }
-            else
-            {
-                if (i + deckCount - 1 > 10) // аналогичный вопрос
-                    return false;
-            }
-            
-            if (orientation == ShipOrientation.Horisontal)
-            {
-                //Начало проверки правой части корабля
-                if (j + deckCount < 11)
                 {
-                    //Проверяем правый край корабля
-                    if (IsShipThere(i, j + deckCount))
-                        return false;
-                    //Проверяем правый верхний угол корабля
-                    if (i - 1 > 0)
-                        if (IsShipThere(i - 1, j + deckCount))
-                            return false;
-                    //Проверяем правый нижний угол корабля
-                    if (i + 1 < 11)
-                        if (IsShipThere(i + 1, j + deckCount))
-                            return false;
-                }
-                //Начало проверки левой части корабля
-                if (j - 1 > 0)
-                {
-                    //Проверяем левую сторону корабля
-                    if (IsShipThere(i, j - 1))
-                        return false;
-                    //Проверяем левый верхний угол корабля
-                    if (i - 1 > 0)
-                    {
-                        if (IsShipThere(i - 1, j - 1))
-                            return false;
-                    }
-                    //Проверяем левый нижний угол корабля
-                    if (i + 1 < 11)
-                    {
-                        if (IsShipThere(i + 1, j - 1))
-                            return false;
-                    }
-                }
-
-                //Проверяем верхнюю грань корабля
-                if (i - 1 > 0)
-                {
-                    for (int k = j; k < j + deckCount; k++)
-                    {
-                        if (IsShipThere(i - 1, k))
-                            return false;
-                    }
-                }
-                //Проверяем нижнюю грань корабля
-                if (i + 1 < 11)
-                {
-                    for (int k = j; k < j + deckCount; k++)
-                    {
-                        if (IsShipThere(i + 1, k))
-                            return false;
-                    }
-                }
-
-                //Проверяем не ложится ли корабль поверх другого корабля
-                for (int k = j; k < j + deckCount; k++)
-                {
-                    if (IsShipThere(i, k))
-                        return false;
+                    messageTextBlock.Text = "Превышено количество кораблей";
                 }
             }
-            else
-            {
-                //Проверяем верхнюю часть корабля
-                if (i-1>0)
-                {
-                    //Проверяем верхний правый угол
-                    if (j-1>0)
-                    {
-                        if (IsShipThere(i - 1, j - 1))
-                            return false;
-                    }
-                    //Проверяем верх корабля
-                    if (IsShipThere(i - 1, j))
-                        return false;
-                    //Проверяем верхний левый угол
-                    if (j+1<11)
-                    {
-                        if (IsShipThere(i - 1, j + 1))
-                            return false;
-                    }
-                }
-
-                //Проверяем нижнюю часть корабля
-                if (i+deckCount<11)
-                {
-                    //Прверяем нижний левый угол
-                    if (j-1>0)
-                    {
-                        if (IsShipThere(i + deckCount, j - 1))
-                            return false;
-                    }
-                    //Проверяем низ корабля
-                    if (IsShipThere(i + deckCount, j))
-                        return false;
-                    //Проверяем правый нижний угол
-                    if (j+1<11)
-                    {
-                        if (IsShipThere(i + deckCount, j + 1))
-                            return false;
-                    }
-                }
-
-                //Проверяем левую грань
-                if (j - 1 > 0)
-                {
-                    for (int k = i; k < i + deckCount; k++)
-                    {
-                        if (IsShipThere(k,j-1))
-                            return false;
-                    }
-                }
-
-                //Проверяем не ложится ли корабль поверх других кораблей
-                for (int k = i; k < i + deckCount; k++)
-                {
-                    if (IsShipThere(k, j))
-                        return false;
-                }
-
-                //Проверяем правую грань корабля
-                if(j+1<11)
-                {
-                    for (int k = i;k<i+deckCount;k++)
-                    {
-                        if (IsShipThere(k, j + 1))
-                            return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-        /// <summary>
-        /// Проверяет наличие корабля в клетке
-        /// </summary>
-        /// <param name="j">Координата колонки (от 1 до 10)</param>
-        /// <param name="i">Координата строки (от 1 до 10)</param>
-        /// <returns></returns>
-        private bool IsShipThere(int i, int j)
-        {
-            if (_seaPlayer.Map[i - 1, j - 1].State == FieldState.Ship)
-                return true;
-            else 
-                return false;
-        }
+        }        
 
         private byte GetDeckCount()
         {

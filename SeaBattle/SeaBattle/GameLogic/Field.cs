@@ -15,16 +15,23 @@ using System.Windows.Shapes;
 
 namespace SeaBattle.GameLogic
 {
+    public enum FieldState
+    {
+        Ship,
+        Sea
+    }
+
     public class Field : Grid
     {
         public int Row { get; private set; }
         
         public int Column { get; private set; }
 
-        public FieldState State = FieldState.Sea;
+        public FieldState State { get;  set; }
 
         public Field(int row, int column)
         {
+            State = FieldState.Sea;
             Row = row;
             Column = column;
             Background = Brushes.Azure;
@@ -34,10 +41,5 @@ namespace SeaBattle.GameLogic
             b.BorderThickness = new Thickness(0.5);
             Children.Add(b);
         }       
-    }
-    public enum FieldState
-    {
-        Ship,
-        Sea
-    }
+    }    
 }

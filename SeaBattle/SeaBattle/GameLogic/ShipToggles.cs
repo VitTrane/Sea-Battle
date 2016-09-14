@@ -24,12 +24,13 @@ namespace SeaBattle.GameLogic
         /// <summary>
         /// Словарь радибатонов, для управления ими
         /// </summary>
-        public Dictionary<byte, RadioButton> toggles = new Dictionary<byte, RadioButton>();
+        public Dictionary<byte, RadioButton> Toggles { get; set; }
         
         public ShipToggles()
         {
             CountsOfDecks = new Dictionary<DeckCount, byte>(4);
             CountsOfShips = new Dictionary<byte, byte>(4);
+            Toggles = new Dictionary<byte, RadioButton>();
 
             CountsOfDecks.Add(DeckCount.onedeck, 1);
             CountsOfDecks.Add(DeckCount.twodeck, 2);
@@ -51,7 +52,7 @@ namespace SeaBattle.GameLogic
             CountsOfShips[shipDecks]--;
             if(CountsOfShips[shipDecks]==0)
             {
-                var toggle = toggles[shipDecks];
+                var toggle = Toggles[shipDecks];
                 toggle.IsEnabled = false;
                 toggle.IsChecked = false;
             }
