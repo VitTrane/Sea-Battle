@@ -73,18 +73,14 @@ namespace SeaBattle.GameLogic
             {
                 if (orientation == ShipOrientation.Horisontal)
                 {
-                    var converter = new System.Windows.Media.BrushConverter();
-                    var field = Map[startPositionY, startPositionX]; 
-                    field.Background = (Brush)converter.ConvertFromString("#b5e61d");
+                    var field = Map[startPositionY, startPositionX];
                     field.State = FieldState.Ship;
                     field.Ship = ship;
                     startPositionX++;
                 }
                 else 
                 {
-                    var converter = new System.Windows.Media.BrushConverter();
                     var field = Map[startPositionY, startPositionX];
-                    field.Background = (Brush)converter.ConvertFromString("#b5e61d");
                     field.State = FieldState.Ship;
                     field.Ship = ship;
                     startPositionY++;
@@ -121,6 +117,12 @@ namespace SeaBattle.GameLogic
 
             Ships.Remove(ship);
         }
+
+        private void GetShot(int x, int y, ShotStatus status) 
+        {
+
+        }
+
         /// <summary>
         /// Создает на поле клетки с именами столбцов и строк
         /// </summary>

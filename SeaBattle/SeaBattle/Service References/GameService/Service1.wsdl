@@ -26,7 +26,6 @@
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Common.Request" />
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Common.Respose" />
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" />
-      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xs:element name="Authorize">
         <xs:complexType>
           <xs:sequence>
@@ -83,15 +82,13 @@
       </xs:element>
       <xs:element name="Logout">
         <xs:complexType>
-          <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q8:guid" />
-          </xs:sequence>
+          <xs:sequence />
         </xs:complexType>
       </xs:element>
       <xs:element name="SendReady">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q9:SendReadyRequest" />
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q8:SendReadyRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -103,7 +100,7 @@
       <xs:element name="SendMessage">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q10:SendMessageRequest" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Common.Request" minOccurs="0" name="request" nillable="true" type="q9:SendMessageRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -120,98 +117,98 @@
       <xs:element name="DoShotCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q11:ShotResponse" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q10:ShotResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetListAvailableGamesCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q12:GetListGamesResponse" />
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q11:GetListGamesResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GiveConnectedOpponentInfo">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q13:CurentGameResponse" />
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q12:CurentGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ConnectToGameCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q14:CurentGameResponse" />
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q13:CurentGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendReadyCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q15:SendReadyResponse" />
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q14:SendReadyResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="StartGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q16:StartGameResponse" />
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q15:StartGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="EndGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q17:EndGameResponse" />
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q16:EndGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AbortGame">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q18:AbortGameResponse" />
+            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q17:AbortGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="StartChat">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q19:StartChatResponse" />
+            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q18:StartChatResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="RecieveMessage">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q20:RecieveMessageResponse" />
+            <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q19:RecieveMessageResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetTopPlayersCallback">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q21:GetTopPlayersResponse" />
+            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q20:GetTopPlayersResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetStatisticLastGamesCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q22:GetLastGamesResponse" />
+            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q21:GetLastGamesResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="CreateGameCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q23:CreateGameResponse" />
+            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q22:CreateGameResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendOpponentIsReady">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q24:SendOpponentIsReadyResponse" />
+            <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Common.Respose" minOccurs="0" name="response" nillable="true" type="q23:SendOpponentIsReadyResponse" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>

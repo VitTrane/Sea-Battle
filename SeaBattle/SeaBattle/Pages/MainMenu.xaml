@@ -63,5 +63,12 @@
                 Click="statisticsButton_Click"
                 Content="Статистика"
                 FontSize="18" />
+        <TextBlock x:Name="errorMessageTextBlock"
+                   Width="Auto"
+                   Height="30"
+                   Margin="0,188,0,0"
+                   FontSize="20"
+                   Foreground="Red"
+                   TextAlignment="Center" />
     </Grid>
 </UserControl>

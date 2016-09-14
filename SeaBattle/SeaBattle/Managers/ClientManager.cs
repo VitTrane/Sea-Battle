@@ -18,6 +18,9 @@ namespace SeaBattle.Managers
         private ServiceClient _client;
         private BattleShipCallback _callback;
 
+        public Guid ClientId { get; set; }
+        public string PlayerNickname { get; set; }
+
         public BattleShipCallback Callback
         {
             get { return _callback; }

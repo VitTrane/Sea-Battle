@@ -131,7 +131,7 @@ namespace SeaBattle.BattleShipServiceCallback
 
         public void GetListAvailableGamesCallback(GetListGamesResponse response)
         {
-            throw new NotImplementedException();
+            syncContext.Post(new SendOrPostCallback(OnBroadcast<GetListGamesResponse>), response);
         }
     }
 }

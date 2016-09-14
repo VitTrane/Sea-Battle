@@ -17,7 +17,7 @@
                    FontWeight="Bold"
                    Text="Игра"
                    TextWrapping="Wrap" />
-        <TextBlock x:Name="labelCheckFinder"
+        <TextBlock x:Name="textInfoGameTextBlock"
                    Width="466"
                    Height="30"
                    Margin="0,50,0,0"
@@ -27,7 +27,6 @@
                    FontWeight="Bold"
                    Foreground="#FFC9C9C9"
                    RenderTransformOrigin="0.5,0.5"
-                   Text="Ожидание подключения соперника..."
                    TextWrapping="Wrap" />
         <TextBlock x:Name="labelBack"
                    Width="132"
@@ -97,7 +96,8 @@
                   Margin="416,10,10,10"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
-                  Background="SkyBlue">
+                  Background="SkyBlue"
+                  MouseLeftButtonDown="opponentSquare_MouseLeftButtonDown">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
                     <RowDefinition Height="20*" />
@@ -273,17 +273,19 @@
               VerticalAlignment="Top">
             <TextBox x:Name="chatBox"
                      Width="650"
-                     Height="160"
-                     Margin="26,10,0,75"
-                     HorizontalAlignment="Left"
+                     Height="120"
+                     Margin="0,0,0,20"
+                     HorizontalAlignment="Center"
                      VerticalAlignment="Center"
                      TextWrapping="Wrap" />
             <TextBox x:Name="inputBox"
                      Width="512"
-                     Height="52"
+                     Height="32"
                      Margin="26,176,161,17"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
+                     FontSize="16"
+                     TextAlignment="Left"
                      TextWrapping="Wrap" />
             <Button x:Name="sendButton"
                     Width="130"
@@ -293,5 +295,13 @@
                     VerticalAlignment="Center"
                     Content="Отправить" />
         </Grid>
+        <Button x:Name="sendReadyButton"
+                Width="130"
+                Height="30"
+                Margin="0,68,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Click="sendReadyButton_Click"
+                Content="Готов к бою" />
     </Grid>
 </UserControl>

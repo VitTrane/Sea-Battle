@@ -98,6 +98,8 @@ namespace SeaBattle.Pages
             {
                 if (response.IsSuccess)
                 {
+                    ClientManager.Instance.PlayerNickname = usernameTextBox.Text;
+                    ClientManager.Instance.ClientId = response.ClientId;
                     Switcher.SwitchPage(new MainMenu());
                 }
                 else

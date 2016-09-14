@@ -61,34 +61,26 @@ namespace SeaBattle.Pages
 
         private void GetTopPlayers(object sender, ResponseEventArgs e)
         {
-            var c = this;
-            if (this != null)
+            GetTopPlayersResponse response = e.Response as GetTopPlayersResponse;
+            if (response != null)
             {
-                GetTopPlayersResponse response = e.Response as GetTopPlayersResponse;
-                if (response != null)
+                var topPlayers = response.TopPlayers;
+                foreach (var player in topPlayers)
                 {
-                    var topPlayers = response.TopPlayers;
-                    foreach (var player in topPlayers)
-                    {
-                        _topPlayers.Add(player);
-                    }
+                    _topPlayers.Add(player);
                 }
             }
         }
 
         private void GetLastGames(object sender, ResponseEventArgs e)
         {
-            var c = this;
-            if (this != null)
+            GetLastGamesResponse response = e.Response as GetLastGamesResponse;
+            if (response != null)
             {
-                GetLastGamesResponse response = e.Response as GetLastGamesResponse;
-                if (response != null)
+                var lastGames = response.Games;
+                foreach (var game in lastGames)
                 {
-                    var lastGames = response.Games;
-                    foreach (var game in lastGames)
-                    {
-                        _lastGames.Add(game);
-                    }
+                    _lastGames.Add(game);
                 }
             }
         }

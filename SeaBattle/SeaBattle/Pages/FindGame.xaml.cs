@@ -98,7 +98,7 @@ namespace SeaBattle.Pages
             {
                 if (response.IsSuccess)
                 {
-                    Switcher.SwitchPage(new Game());
+                    Switcher.SwitchPage(new Game(false));
                 }
                 else
                 {

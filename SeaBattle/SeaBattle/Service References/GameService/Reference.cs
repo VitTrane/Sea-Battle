@@ -1380,10 +1380,10 @@ namespace SeaBattle.GameService {
         System.Threading.Tasks.Task ConnectToGameAsync(SeaBattle.GameService.ConnectToGameRequest request);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Logout")]
-        void Logout(System.Guid userId);
+        void Logout();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/Logout")]
-        System.Threading.Tasks.Task LogoutAsync(System.Guid userId);
+        System.Threading.Tasks.Task LogoutAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendReady")]
         void SendReady(SeaBattle.GameService.SendReadyRequest request);
@@ -1538,12 +1538,12 @@ namespace SeaBattle.GameService {
             return base.Channel.ConnectToGameAsync(request);
         }
         
-        public void Logout(System.Guid userId) {
-            base.Channel.Logout(userId);
+        public void Logout() {
+            base.Channel.Logout();
         }
         
-        public System.Threading.Tasks.Task LogoutAsync(System.Guid userId) {
-            return base.Channel.LogoutAsync(userId);
+        public System.Threading.Tasks.Task LogoutAsync() {
+            return base.Channel.LogoutAsync();
         }
         
         public void SendReady(SeaBattle.GameService.SendReadyRequest request) {

@@ -1,4 +1,6 @@
-﻿using SeaBattle.Managers;
+﻿using SeaBattle.BattleShipServiceCallback;
+using SeaBattle.GameService;
+using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +30,16 @@ namespace SeaBattle.Pages
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ClientManager.Instance.Client.Logout();
             ClientManager.Instance.Dispose();
-            Switcher.SwitchPage(new Login());
+            Switcher.SwitchPage(new Login());            
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.SwitchPage(new Game());
+            ClientManager.Instance.Callback.SetHandler<CreateGameResponse>(CreateGame);
+            CreateGameRequest request = new CreateGameRequest();
+            ClientManager.Instance.Client.CreateGame(request);            
         }
 
         private void connectionGameButton_Click(object sender, RoutedEventArgs e)
@@ -45,6 +50,22 @@ namespace SeaBattle.Pages
         private void statisticsButton_Click(object sender, RoutedEventArgs e)
         {
             Switcher.SwitchPage(new Statistic());
+        }
+
+        private void CreateGame(object sender, ResponseEventArgs e)
+        {
+            CreateGameResponse response = e.Response as CreateGameResponse;
+            if (response != null)
+            {
+                if (response.IsSuccess)
+                {
+                    Switcher.SwitchPage(new Game(true));
+                }
+                else 
+                {
+                    errorMessageTextBlock.Text = response.Error;
+                }
+            }
         }
     }
 }
