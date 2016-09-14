@@ -14,11 +14,9 @@ namespace SeaBattle.Controllers
     {
         //
         // GET: /Index/
-        private User tempUser;
 
         public ActionResult Index()
         { 
-
             return View();
         }
 
@@ -32,43 +30,35 @@ namespace SeaBattle.Controllers
         {
             bool status = false;
             string message = "";
-            try
-            {
-                ClientManager.Instance.CreateClient();
-                var authrequeest = new AuthorizeRequest { Login = u.Login, Password = u.Password};
-                AuthorizeResponse authresponse = ClientManager.Instance.Client.Authorize(authrequeest);
-                if (ClientManager.Instance.Client.Authorize(authrequeest).IsSuccess)
-                {
-                    status = true;
-                    message = "Ok";
-                }
-                else
-                {
-                    status = false;
-                    message = "Error: " + ClientManager.Instance.Client.Authorize(authrequeest).Error;
-                }
-            }
-            catch (Exception e)
-            {
-                status = false;
-                message = "Exception: " + e.Message;
-            }
-            // make u logged in.
-            /*
-             tempUser = u;
-             bool status = false;
-             string message = "";
-             if (ModelState.IsValid)
-             {
 
-                     status = true;
-                     message = "";
-             }
-             else
-             {
-                 message = "Failed! Please try again";
-             }
-             */
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    ClientManager.Instance.CreateClient();
+                    var authrequest = new AuthorizeRequest { Login = u.Login, Password = u.Password };
+                    AuthorizeResponse authresponse = ClientManager.Instance.Client.Authorize(authrequest);
+                    if (authresponse.IsSuccess)
+                    {
+                        status = true;
+                        message = "Ok";
+                    }
+                    else
+                    {
+                        message = "Error: " + authresponse.Error;
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = "Exception: " + e.Message;
+                    ClientManager.Instance.Dispose();
+                }
+            }
+            else
+            {
+                message = "Error: Login or password are uncorrect";
+            }
+
             return new JsonResult { Data = new { status = status, message = message } };
         }
 
@@ -89,14 +79,14 @@ namespace SeaBattle.Controllers
                     ClientManager.Instance.CreateClient();
                     var registerrequeest = new RegisterRequest() { Login = u.Login, Password = u.Password, Email = u.Email };
                     RegisterResponse registerresponse = ClientManager.Instance.Client.Register(registerrequeest);
-                    if (ClientManager.Instance.Client.Register(registerrequeest).IsSuccess)
+                    if (registerresponse.IsSuccess)
                     {
                         status = true;
                         message = "Ok";
                     }
                     else
                     {
-                        message = "Error: " + ClientManager.Instance.Client.Register(registerrequeest).Error;
+                        message = "Error: " + registerresponse.Error;
                     }
                 }
                 else
@@ -106,7 +96,6 @@ namespace SeaBattle.Controllers
             }
             catch (Exception e)
             {
-                status = false;
                 message = "Exception: " + e.Message;
             }
 
@@ -130,6 +119,7 @@ namespace SeaBattle.Controllers
             {
                 message = "Failed! Please try again";
             }
+
             return new JsonResult { Data = new { status = status, message = message } };
         }
     }
