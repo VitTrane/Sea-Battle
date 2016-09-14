@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.GameService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,8 @@ namespace SeaBattle.GameLogic
         public int Column { get; private set; }
 
         public FieldState State { get;  set; }
+
+        public Ship Ship { get; set; }
 
         public Field(int row, int column)
         {

@@ -27,7 +27,6 @@ namespace SeaBattle.Pages
         private Sea _seaOpponent;
         private StateGame _stateGame;
 
-
         public Game()
         {
             InitializeComponent();
