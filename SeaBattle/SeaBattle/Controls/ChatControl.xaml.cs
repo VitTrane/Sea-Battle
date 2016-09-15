@@ -22,26 +22,7 @@ namespace SeaBattle.Controls
     /// Логика взаимодействия для ChatControl.xaml
     /// </summary>
     public partial class ChatControl : UserControl
-    {
-        public string ChatText
-        {
-            get { return (string)GetValue(ChatTextProperty); }
-            set { SetValue(ChatTextProperty, value); }
-        }
-
-        public static readonly DependencyProperty ChatTextProperty =
-            DependencyProperty.Register("ChatText", typeof(string), typeof(ChatControl), new UIPropertyMetadata(null));
-
-        public string ChatMessageText
-        {
-            get { return (string)GetValue(ChatMessageTextProperty); }
-            set { SetValue(ChatMessageTextProperty, value); }
-        }
-
-        public static readonly DependencyProperty ChatMessageTextProperty =
-            DependencyProperty.Register("ChatMessageText", typeof(string), typeof(ChatControl), new UIPropertyMetadata(null));
-
-
+    {       
         public ChatControl()
         {
             InitializeComponent();
@@ -62,7 +43,7 @@ namespace SeaBattle.Controls
 
         private void GetMessage(string message) 
         {
-            ChatText += Environment.NewLine + "[" + DateTime.Now.ToString() + "] " + message;
+            chatTextBox.Text += Environment.NewLine + "[" + DateTime.Now.ToString() + "] " + message;
             chatTextBox.ScrollToEnd();
         }
 
@@ -70,7 +51,8 @@ namespace SeaBattle.Controls
         {
             try
             {
-                SendMessageRequest request = new SendMessageRequest() { Message = ChatMessageText };
+                SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
+                messageTextBox.Text = "";
                 Managers.ClientManager.Instance.Client.SendMessage(request);
             }
             catch (Exception)
