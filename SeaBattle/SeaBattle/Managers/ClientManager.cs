@@ -58,8 +58,18 @@ namespace SeaBattle.Managers
         {
             if (_client == null)
             {
-                Callback = new BattleShipCallback();
-                _client = new ServiceClient(new InstanceContext(Callback), "NetTcpBinding_IService");
+                try
+                {
+                    Callback = new BattleShipCallback();
+                    _client = new ServiceClient(new InstanceContext(Callback), "NetTcpBinding_IService");
+                    _client.Open();
+                }
+                catch (Exception)
+                {
+
+                    Dispose();
+                }
+                
             }
         }
 
