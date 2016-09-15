@@ -88,6 +88,10 @@ namespace SeaBattle.GameLogic
             }
         }
 
+        /// <summary>
+        /// Удаляет корабль с поля
+        /// </summary>
+        /// <param name="ship">Корабль, который нужно удалить</param>
         public void DeleteShip(Ship ship)
         {
             int startPositionX = ship.StartPoint.X;
@@ -97,18 +101,14 @@ namespace SeaBattle.GameLogic
             {
                 if (ship.Orientation == ShipOrientation.Horisontal)
                 {
-                    var converter = new System.Windows.Media.BrushConverter();
                     var field = Map[startPositionY, startPositionX];
-                    field.Background = Brushes.Azure;
                     field.State = FieldState.Sea;
                     field.Ship = null;
                     startPositionX++;
                 }
                 else
                 {
-                    var converter = new System.Windows.Media.BrushConverter();
                     var field = Map[startPositionY, startPositionX];
-                    field.Background = Brushes.Azure;
                     field.State = FieldState.Sea;
                     field.Ship = null;
                     startPositionY++;
@@ -118,9 +118,85 @@ namespace SeaBattle.GameLogic
             Ships.Remove(ship);
         }
 
-        private void GetShot(int x, int y, ShotStatus status) 
+        /// <summary>
+        /// Получает выстрел сделанный по карте
+        /// </summary>
+        /// <param name="shot">Выстрел, который получили</param>
+        public void SetShot(Shot shot) 
         {
+            var field = Map[shot.XyCoordinate.X, shot.XyCoordinate.Y];
+            if (shot.Status == ShotStatus.Missed)
+            {
+                field.State = FieldState.Miss;
+            }
 
+            if (shot.Status == ShotStatus.Hit)
+            {
+                if (field.Ship != null)
+                {
+                    field.State = FieldState.Hit;
+                }
+            }
+
+            if (shot.Status == ShotStatus.Killed)
+            {
+                if (field.Ship != null)
+                {
+                    field.State = FieldState.Hit;
+                    field.Ship.IsKilled = true;
+                }
+            }
+        }
+
+        private void SetAroundShotArea(int x, int y, ShotStatus status) 
+        {
+            List<XYCoordinate> diagonalPoints = new List<XYCoordinate>();
+            diagonalPoints.Add(new XYCoordinate() { X = x + 1, Y = y + 1 });
+            diagonalPoints.Add(new XYCoordinate() { X = x - 1, Y = y - 1 });
+            diagonalPoints.Add(new XYCoordinate() { X = x - 1 , Y = y + 1 });
+            diagonalPoints.Add(new XYCoordinate() { X = x + 1, Y = y - 1 });
+
+            foreach (var point in diagonalPoints)
+            {
+                if (point.X >= 0 && point.X < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) 
+                {
+                    Map[point.X, point.Y].State = FieldState.Miss;
+                }
+            }
+
+            //TODO
+            Ship ship = Map[x, y].Ship;
+            int deckCount = ship.Decks.ToList().Count;
+            List<XYCoordinate> horizontalPoints = new List<XYCoordinate>();
+            List<XYCoordinate> verticalPoints = new List<XYCoordinate>();
+            verticalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X, Y = ship.StartPoint.Y + deckCount });
+            verticalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X, Y = ship.StartPoint.Y - 1 });
+            horizontalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X - 1, Y = ship.StartPoint.Y });
+            horizontalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X + deckCount, Y = ship.StartPoint.Y });
+
+            if (status == ShotStatus.Killed) 
+            {                               
+                if (ship.Orientation == ShipOrientation.Horisontal)
+                {
+                    foreach (var point in horizontalPoints)
+                    {
+                        if (point.X >= 0 && point.X < MAP_WIDTH) 
+                        {
+                            Map[point.X, point.Y].State = FieldState.Miss;
+                        }
+                    }
+                }
+                else 
+                {
+                    foreach (var point in verticalPoints)
+                    {
+                        if (point.X >= 0 && point.X < MAP_WIDTH)
+                        {
+                            Map[point.X, point.Y].State = FieldState.Miss;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -200,12 +276,12 @@ namespace SeaBattle.GameLogic
 
             if (orientation == ShipOrientation.Horisontal)
             {
-                if (j + deckCount - 1 > 10) // можно ли приватные константы из класса Sea сделать публичными и проверять на них?
+                if (j + deckCount - 1 > MAP_WIDTH)
                     return false;
             }
             else
             {
-                if (i + deckCount - 1 > 10) // аналогичный вопрос
+                if (i + deckCount - 1 > MAP_HEIGHT)
                     return false;
             }
 

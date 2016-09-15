@@ -269,9 +269,7 @@
       </xs:complexType>
       <xs:element name="AuthorizeRequest" nillable="true" type="tns:AuthorizeRequest" />
       <xs:complexType name="BaseRequest">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
-        </xs:sequence>
+        <xs:sequence />
         <xs:attribute ref="ser:Id" />
         <xs:attribute ref="ser:Ref" />
       </xs:complexType>
@@ -291,9 +289,7 @@
       <xs:complexType name="CreateGameRequest">
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseRequest">
-            <xs:sequence>
-              <xs:element minOccurs="0" name="UserId" type="ser:guid" />
-            </xs:sequence>
+            <xs:sequence />
           </xs:extension>
         </xs:complexContent>
       </xs:complexType>
@@ -362,6 +358,7 @@
           <xs:extension base="tns:BaseResponse">
             <xs:sequence>
               <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="CurrentShot" nillable="true" type="q1:Shot" />
+              <xs:element minOccurs="0" name="NextShotUserId" type="ser:guid" />
               <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="User" nillable="true" type="q2:DTOUser" />
             </xs:sequence>
           </xs:extension>
@@ -401,7 +398,9 @@
       <xs:complexType name="StartGameResponse">
         <xs:complexContent mixed="false">
           <xs:extension base="tns:BaseResponse">
-            <xs:sequence />
+            <xs:sequence>
+              <xs:element minOccurs="0" name="NextShotUserId" type="ser:guid" />
+            </xs:sequence>
           </xs:extension>
         </xs:complexContent>
       </xs:complexType>

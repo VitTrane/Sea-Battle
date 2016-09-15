@@ -72,5 +72,19 @@ namespace SeaBattle.GameLogic
                 toggle.IsChecked = true;
             }
         }
+
+        /// <summary>
+        /// Возвращает количество нераставленных кораблей
+        /// </summary>
+        public int GetNotSetShipCount()
+        {
+            int count=0;
+            foreach (var item in CountsOfShips.Values)
+            {
+                count += (int)item;
+            }
+
+            return count;
+        }
     }    
 }

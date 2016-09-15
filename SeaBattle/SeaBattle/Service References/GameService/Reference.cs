@@ -28,9 +28,6 @@ namespace SeaBattle.GameService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid ClientIdField;
-        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -38,19 +35,6 @@ namespace SeaBattle.GameService {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ClientId {
-            get {
-                return this.ClientIdField;
-            }
-            set {
-                if ((this.ClientIdField.Equals(value) != true)) {
-                    this.ClientIdField = value;
-                    this.RaisePropertyChanged("ClientId");
-                }
             }
         }
         
@@ -124,22 +108,6 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateGameRequest", Namespace="http://schemas.datacontract.org/2004/07/Common.Request", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class CreateGameRequest : SeaBattle.GameService.BaseRequest {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid UserIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -580,6 +548,9 @@ namespace SeaBattle.GameService {
         private SeaBattle.GameService.Shot CurrentShotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid NextShotUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SeaBattle.GameService.DTOUser UserField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -591,6 +562,19 @@ namespace SeaBattle.GameService {
                 if ((object.ReferenceEquals(this.CurrentShotField, value) != true)) {
                     this.CurrentShotField = value;
                     this.RaisePropertyChanged("CurrentShot");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid NextShotUserId {
+            get {
+                return this.NextShotUserIdField;
+            }
+            set {
+                if ((this.NextShotUserIdField.Equals(value) != true)) {
+                    this.NextShotUserIdField = value;
+                    this.RaisePropertyChanged("NextShotUserId");
                 }
             }
         }
@@ -683,6 +667,22 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="StartGameResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class StartGameResponse : SeaBattle.GameService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid NextShotUserIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid NextShotUserId {
+            get {
+                return this.NextShotUserIdField;
+            }
+            set {
+                if ((this.NextShotUserIdField.Equals(value) != true)) {
+                    this.NextShotUserIdField = value;
+                    this.RaisePropertyChanged("NextShotUserId");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

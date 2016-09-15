@@ -28,6 +28,7 @@ namespace SeaBattle.Pages
         private Sea _seaPlayer;
         private Sea _seaOpponent;
         private StateGame _stateGame;
+        private bool _isMyTurn;
 
         public Game(bool isHost)
         {
@@ -43,18 +44,16 @@ namespace SeaBattle.Pages
 
             if (isHost)
             {
-                sendReadyButton.IsEnabled = false;
-                SetEnableChat(false);
+                sendReadyButton.IsEnabled = false;                
                 _stateGame = StateGame.OpponentWaiting;
-                ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetOpponent);
-                textInfoGameTextBlock.Text = "Ожидание подключения соперника...";
+                SetEnableControls(_stateGame);
+                ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetOpponent);                
             }
             else 
-            {
-                SetEnableChat(true);
+            {                
                 _stateGame = StateGame.PreparationGame;
+                SetEnableControls(_stateGame);
                 sendReadyButton.IsEnabled = true;
-                textInfoGameTextBlock.Text = "Подготовка к игре...";
             }
 
             ClientManager.Instance.Callback.SetHandler<SendOpponentIsReadyResponse>(ResultOpponentSendReady);
@@ -62,92 +61,6 @@ namespace SeaBattle.Pages
             ClientManager.Instance.Callback.SetHandler<EndGameResponse>(EndGameGame);
             ClientManager.Instance.Callback.SetHandler<ShotResponse>(ResultFire);
         }
-
-        private void opponentSquare_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (_stateGame == StateGame.Game)
-            {
-                var element = (UIElement)e.Source;
-                int row = Grid.GetRow(element);
-                int column = Grid.GetColumn(element);
-
-                if (row > 0 && column > 0)
-                {
-                    XYCoordinate position = new XYCoordinate(){X=column,Y=row};
-                    Shot shot = new Shot() { XyCoordinate = position };
-                    ClientManager.Instance.Client.DoShot(shot);
-                }
-            }
-        }   
-
-        private void ResultFire(object sender, ResponseEventArgs e)
-        {
-            ShotResponse response = e.Response as ShotResponse;
-            if (response != null)
-            {
-                if (response.IsSuccess)
-                {
-                    Shot s = response.CurrentShot;
-                    //TODO доделать выстрел
-                }
-                else
-                {
-                }
-            } 
-        }
-
-        private void EndGameGame(object sender, ResponseEventArgs e)
-        {
-            EndGameResponse response = e.Response as EndGameResponse;
-            if (response != null)
-            {
-                if (response.IsSuccess)
-                {
-                    _stateGame = StateGame.Finished;
-                    textInfoGameTextBlock.Text = "Бой";
-                    //TODO: показать победителя
-                    ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
-                }
-                else
-                {
-                    //TODO: добавить popup с ошибками
-                }
-            } 
-        }
-
-        private void StartGame(object sender, ResponseEventArgs e)
-        {
-            StartGameResponse response = e.Response as StartGameResponse;
-            if (response != null)
-            {
-                if (response.IsSuccess)
-                {
-                    _stateGame = StateGame.Game;
-                    textInfoGameTextBlock.Text = "Бой";
-                    ClientManager.Instance.Callback.RemoveHandler<StartGameResponse>();
-                }
-                else
-                {
-                    //TODO: добавить popup с ошибками
-                }
-            }            
-        }
-
-        private void ResultOpponentSendReady(object sender, ResponseEventArgs e)
-        {
-            SendOpponentIsReadyResponse response = e.Response as SendOpponentIsReadyResponse;
-            if (response != null)
-            {
-                if (response.IsSuccess)
-                {
-                    ClientManager.Instance.Callback.RemoveHandler<SendOpponentIsReadyResponse>();
-                }
-                else
-                {
-                    //TODO: добавить popup с ошибками
-                }
-            }           
-        }        
 
         /// <summary>
         /// Получаем подключившегося соперника
@@ -159,19 +72,92 @@ namespace SeaBattle.Pages
             CurentGameResponse response = e.Response as CurentGameResponse;
             if (response != null)
             {
-                if (response.IsSuccess) 
+                if (response.IsSuccess)
                 {
-                   _stateGame = StateGame.PreparationGame;
-                   ClientManager.Instance.Callback.RemoveHandler<CurentGameResponse>();
+                    _stateGame = StateGame.PreparationGame;
+                    SetEnableControls(_stateGame);
+                    ClientManager.Instance.Callback.RemoveHandler<CurentGameResponse>();
                 }
             }
-        }        
+        } 
+
+        /// <summary>
+        /// Выстреливает по полю противника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void opponentSquare_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_isMyTurn)
+            {
+                if (_stateGame == StateGame.Game)
+                {
+                    var element = (UIElement)e.Source;
+                    int row = Grid.GetRow(element);
+                    int column = Grid.GetColumn(element);
+
+                    if (row > 0 && column > 0)
+                    {
+                        if (_seaOpponent.Map[column - 1, row - 1].State == FieldState.Sea)
+                        {
+                            XYCoordinate position = new XYCoordinate() { X = column - 1, Y = row - 1 };
+                            Shot shot = new Shot() { XyCoordinate = position };
+                            ClientManager.Instance.Client.DoShot(shot);
+                        }
+                    }
+                }
+            }
+        }   
+
+        /// <summary>
+        /// Обрабатывет результат выстрела
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResultFire(object sender, ResponseEventArgs e)
+        {
+            ShotResponse response = e.Response as ShotResponse;
+            if (response != null)
+            {
+                Shot shot = response.CurrentShot;
+                if (response.IsSuccess && _isMyTurn)
+                {
+                    _seaPlayer.SetShot(shot);
+                }
+                else
+                {
+                    _seaOpponent.SetShot(shot);
+                }
+            } 
+        }     
+
+        private void ResultOpponentSendReady(object sender, ResponseEventArgs e)
+        {
+            SendOpponentIsReadyResponse response = e.Response as SendOpponentIsReadyResponse;
+            if (response != null)
+            {
+                if (response.IsSuccess)
+                {
+                    ClientManager.Instance.Callback.RemoveHandler<SendOpponentIsReadyResponse>();                    
+                }
+                else
+                {
+                    //TODO: добавить popup с ошибками
+                }
+            }           
+        }   
 
         private void labelBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Managers.ClientManager.Instance.Client.LeaveGame();
             Switcher.SwitchPage(new MainMenu());
         }
 
+        /// <summary>
+        /// Ставит на поле выбранный корабль
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void seaPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_stateGame == StateGame.PreparationGame)
@@ -203,6 +189,11 @@ namespace SeaBattle.Pages
             }
         }        
 
+        /// <summary>
+        /// Удаляет с поля поставленный корабль
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void seaPlayer_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_stateGame == StateGame.PreparationGame)
@@ -225,14 +216,31 @@ namespace SeaBattle.Pages
             }
         }
 
+        /// <summary>
+        /// Сообщает противнику, что вы готовы к бою
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendReadyButton_Click(object sender, RoutedEventArgs e)
         {
-            ClientManager.Instance.Callback.SetHandler<SendReadyResponse>(ResultSendReady);
-            SendReadyRequest request = new SendReadyRequest() { ClientId = ClientManager.Instance.ClientId, Ships = _seaPlayer.Ships.ToArray()};
-            ClientManager.Instance.Client.SendReady(request);
-            sendButton.IsEnabled = true;
+            if (_shipToggles.GetNotSetShipCount() > 0)
+            {
+                messageTextBlock.Text = "Раставленны не все корабли";
+            }
+            else
+            {
+                ClientManager.Instance.Callback.SetHandler<SendReadyResponse>(ResultSendReady);
+                SendReadyRequest request = new SendReadyRequest() { Ships = _seaPlayer.Ships.ToArray() };
+                ClientManager.Instance.Client.SendReady(request);
+                sendButton.IsEnabled = true;
+            }
         }
 
+        /// <summary>
+        /// Получает ответ от сервера, правильно ли раставлины корабли
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResultSendReady(object sender, ResponseEventArgs e)
         {
             SendReadyResponse response = e.Response as SendReadyResponse;
@@ -244,9 +252,66 @@ namespace SeaBattle.Pages
                 }
                 else
                 {
-                    //TODO: добавить popup с ошибками
+                    messageTextBlock.Text = "Не правильно раставлены корабли";
                 }
             }            
+        }
+
+        /// <summary>
+        /// Начинает игру, если все игроки готовы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartGame(object sender, ResponseEventArgs e)
+        {
+            StartGameResponse response = e.Response as StartGameResponse;
+            if (response != null)
+            {
+                if (response.IsSuccess)
+                {
+                    _stateGame = StateGame.Game;
+                    SetEnableControls(_stateGame);
+                    ClientManager.Instance.Callback.RemoveHandler<StartGameResponse>();
+                    if (response.NextShotUserId == ClientManager.Instance.ClientId)
+                    {
+                        _isMyTurn = true;
+                    }
+                    else
+                    {
+                        _isMyTurn = false;
+                    }
+                }
+                else
+                {
+                    //TODO: добавить popup с ошибками
+                }
+            }
+        }
+
+        /// <summary>
+        /// Выполняеться когда, ктото из игроков выигрывает
+        /// </summary>
+        /// <param name="sender">Объект, который вызвал этот метод</param>
+        /// <param name="e">Дополнительные данные события</param>
+        private void EndGameGame(object sender, ResponseEventArgs e)
+        {
+            EndGameResponse response = e.Response as EndGameResponse;
+            if (response != null)
+            {
+                if (response.IsSuccess)
+                {
+                    _stateGame = StateGame.Finished;
+                    textInfoGameTextBlock.Text = "Бой";
+                    MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", response.Winner.Login),"Игра завершена", MessageBoxButton.OK);
+                    ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
+                    if (res == MessageBoxResult.OK)
+                        Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    //TODO: добавить popup с ошибками
+                }
+            }
         }
 
         /// <summary>
@@ -286,17 +351,35 @@ namespace SeaBattle.Pages
         }
 
         /// <summary>
-        /// Делает чат доступным или не доступным
+        /// В зависимости от состояния игры, делает доступными нужные контролы или недоступными
         /// </summary>
         /// <param name="isEnable">Доступен ли чат</param>
-        private void SetEnableChat(bool isEnable)
-        {
-            Chat.IsEnabled = isEnable;
-
-            if (isEnable)
+        private void SetEnableControls(StateGame stateGame)
+        { 
+            if (stateGame == StateGame.PreparationGame)
+            {
+                textInfoGameTextBlock.Text = "Подготовка к игре...";
                 Chat.Visibility = Visibility.Visible;
-            else
+                Chat.IsEnabled = true;
+                sendReadyButton.IsEnabled = true;
+                sendReadyButton.Visibility = Visibility.Visible;
+            }
+
+            if (stateGame == StateGame.OpponentWaiting)
+            {
+                textInfoGameTextBlock.Text = "Ожидание подключения соперника...";
                 Chat.Visibility = Visibility.Hidden;
+                Chat.IsEnabled = false;
+                sendReadyButton.IsEnabled = false;
+                sendReadyButton.Visibility = Visibility.Hidden;
+            }
+
+            if(stateGame == StateGame.Game)
+            {
+                Ships.Visibility = Visibility.Hidden;
+                Ships.IsEnabled = false;
+                textInfoGameTextBlock.Text = "Бой...";
+            }
         }
 
         private void AddTooggles()
