@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://aleksey6157.cloudapp.net:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="DTOUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CurrentGameId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Games" type="xs:int" />
+      <xs:element minOccurs="0" name="GamesWon" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTOUser" nillable="true" type="tns:DTOUser" />
+  <xs:complexType name="ArrayOfDTOAwaitingGame">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOAwaitingGame" nillable="true" type="tns:DTOAwaitingGame" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTOAwaitingGame" nillable="true" type="tns:ArrayOfDTOAwaitingGame" />
+  <xs:complexType name="DTOAwaitingGame">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreationTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:DTOUser" />
+      <xs:element minOccurs="0" name="GameId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTOAwaitingGame" nillable="true" type="tns:DTOAwaitingGame" />
+  <xs:complexType name="ArrayOfDTOFullUserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOFullUserInfo" nillable="true" type="tns:DTOFullUserInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTOFullUserInfo" nillable="true" type="tns:ArrayOfDTOFullUserInfo" />
+  <xs:complexType name="DTOFullUserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DataRegister" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Games" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PercentWonGames" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTOFullUserInfo" nillable="true" type="tns:DTOFullUserInfo" />
+  <xs:complexType name="ArrayOfDTOFullGameInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTOFullGameInfo" nillable="true" type="tns:DTOFullGameInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTOFullGameInfo" nillable="true" type="tns:ArrayOfDTOFullGameInfo" />
+  <xs:complexType name="DTOFullGameInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LongTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamePlayer1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamePlayer2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartGame" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Winner" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTOFullGameInfo" nillable="true" type="tns:DTOFullGameInfo" />
+</xs:schema>

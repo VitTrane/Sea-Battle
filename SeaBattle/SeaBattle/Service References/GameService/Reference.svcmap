@@ -19,10 +19,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://aleksey6157.cloudapp.net:8080/?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://aleksey6157.cloudapp.net:8080/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="1a4f6730-0175-447d-b0a2-f592df6804cb" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?singleWsdl" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="41cb4ab3-7236-44fd-b3a5-fe9488f762c1" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="fd8c85df-5336-42b2-867f-27be551b9942" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd4" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="92770150-c3c4-482d-9b18-9c7e12e5c86e" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd5" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="625142b1-40ba-4381-945c-326661d9f5b7" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd2" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="80bd0af8-466f-442e-adc5-492c8a92d0a2" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd3" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="eb46b66d-4e7c-4073-86cc-09d80ce77af5" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd0" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="c934bf30-6e4d-4453-83c8-2bb43b6ca39a" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd1" />
+    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="6fa0b636-a560-4610-80b6-de7f03723b7e" SourceId="1" SourceUrl="http://aleksey6157.cloudapp.net:8080/?xsd=xsd6" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

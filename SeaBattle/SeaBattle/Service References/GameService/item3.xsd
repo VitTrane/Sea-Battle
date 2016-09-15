@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Common.Respose" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Common.Respose" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://aleksey6157.cloudapp.net:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://aleksey6157.cloudapp.net:8080/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities" />
+  <xs:import schemaLocation="http://aleksey6157.cloudapp.net:8080/?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Common.DTO" />
+  <xs:complexType name="AuthorizeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuthorizeResponse" nillable="true" type="tns:AuthorizeResponse" />
+  <xs:complexType name="BaseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseResponse" nillable="true" type="tns:BaseResponse" />
+  <xs:complexType name="RegisterResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RegisterResponse" nillable="true" type="tns:RegisterResponse" />
+  <xs:complexType name="ShotResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="CurrentShot" nillable="true" type="q1:Shot" />
+          <xs:element minOccurs="0" name="NextShotUserId" type="ser:guid" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="User" nillable="true" type="q2:DTOUser" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ShotResponse" nillable="true" type="tns:ShotResponse" />
+  <xs:complexType name="GetListGamesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q3:ArrayOfDTOAwaitingGame" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetListGamesResponse" nillable="true" type="tns:GetListGamesResponse" />
+  <xs:complexType name="CurentGameResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Opponent" nillable="true" type="q4:DTOUser" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CurentGameResponse" nillable="true" type="tns:CurentGameResponse" />
+  <xs:complexType name="SendReadyResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="ConflictShip" nillable="true" type="q5:ArrayOfShip" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SendReadyResponse" nillable="true" type="tns:SendReadyResponse" />
+  <xs:complexType name="StartGameResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NextShotUserId" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StartGameResponse" nillable="true" type="tns:StartGameResponse" />
+  <xs:complexType name="EndGameResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Winner" nillable="true" type="q6:DTOUser" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EndGameResponse" nillable="true" type="tns:EndGameResponse" />
+  <xs:complexType name="AbortGameResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AbortGameResponse" nillable="true" type="tns:AbortGameResponse" />
+  <xs:complexType name="StartChatResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StartChatResponse" nillable="true" type="tns:StartChatResponse" />
+  <xs:complexType name="RecieveMessageResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecieveMessageResponse" nillable="true" type="tns:RecieveMessageResponse" />
+  <xs:complexType name="GetTopPlayersResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="TopPlayers" nillable="true" type="q7:ArrayOfDTOFullUserInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetTopPlayersResponse" nillable="true" type="tns:GetTopPlayersResponse" />
+  <xs:complexType name="GetLastGamesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q8:ArrayOfDTOFullGameInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetLastGamesResponse" nillable="true" type="tns:GetLastGamesResponse" />
+  <xs:complexType name="CreateGameResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateGameResponse" nillable="true" type="tns:CreateGameResponse" />
+  <xs:complexType name="SendOpponentIsReadyResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SendOpponentIsReadyResponse" nillable="true" type="tns:SendOpponentIsReadyResponse" />
+</xs:schema>

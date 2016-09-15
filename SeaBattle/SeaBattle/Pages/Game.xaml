@@ -8,14 +8,14 @@
              mc:Ignorable="d">
     <Grid x:Name="pageGame" Background="White">
         <TextBlock x:Name="authorizationTextBlock"
-                   Width="62"
+                   Width="Auto"
                    Height="30"
                    Margin="0,20,0,0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    FontSize="25"
                    FontWeight="Bold"
-                   Text="Игра"
+                   Text="Морской Бой"
                    TextWrapping="Wrap" />
         <TextBlock x:Name="textInfoGameTextBlock"
                    Width="466"
@@ -301,6 +301,7 @@
                 Margin="0,68,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Background="GreenYellow"
                 Click="sendReadyButton_Click"
                 Content="Готов к бою" />
     </Grid>
