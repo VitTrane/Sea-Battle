@@ -11,6 +11,7 @@ namespace SeaBattle.GameLogic
         OpponentWaiting,
         PreparationGame,
         Game,
+        WaitReadyOpponent,
         Finished
     }
 }

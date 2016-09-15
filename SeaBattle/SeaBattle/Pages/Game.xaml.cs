@@ -149,8 +149,15 @@ namespace SeaBattle.Pages
 
         private void labelBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Managers.ClientManager.Instance.Client.LeaveGame();
-            Switcher.SwitchPage(new MainMenu());
+            try
+            {
+                Managers.ClientManager.Instance.Client.LeaveGame();
+                Switcher.SwitchPage(new MainMenu());
+            }
+            catch (Exception)
+            {
+            }
+            
         }
 
         /// <summary>
@@ -233,6 +240,8 @@ namespace SeaBattle.Pages
                 SendReadyRequest request = new SendReadyRequest() { Ships = _seaPlayer.Ships.ToArray() };
                 ClientManager.Instance.Client.SendReady(request);
                 sendButton.IsEnabled = true;
+                _stateGame = StateGame.WaitReadyOpponent;
+                SetEnableControls(_stateGame);
             }
         }
 
@@ -252,6 +261,8 @@ namespace SeaBattle.Pages
                 }
                 else
                 {
+                    _stateGame = StateGame.PreparationGame;
+                    SetEnableControls(_stateGame);
                     messageTextBlock.Text = "Не правильно раставлены корабли";
                 }
             }            
@@ -372,6 +383,11 @@ namespace SeaBattle.Pages
                 Chat.IsEnabled = false;
                 sendReadyButton.IsEnabled = false;
                 sendReadyButton.Visibility = Visibility.Hidden;
+            }
+
+            if (stateGame == StateGame.WaitReadyOpponent)
+            {
+                sendReadyButton.IsEnabled = false;
             }
 
             if(stateGame == StateGame.Game)
