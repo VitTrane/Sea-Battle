@@ -78,10 +78,13 @@ namespace SeaBattle.Pages
             if (this != null)
             {
                 GetListGamesResponse response = e.Response as GetListGamesResponse;
-                List<DTOAwaitingGame> newGames = response.Games.Where(g => !Games.Contains(g)).ToList();
-                foreach (var game in newGames)
+                if (response != null)
                 {
-                    _games.Add(game);
+                    List<DTOAwaitingGame> newGames = response.Games.Where(g => !Games.Contains(g)).ToList();
+                    foreach (var game in newGames)
+                    {
+                        _games.Add(game);
+                    }
                 }
             }
         }

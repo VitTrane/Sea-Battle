@@ -66,7 +66,6 @@ namespace SeaBattle.Managers
                 }
                 catch (Exception)
                 {
-
                     Dispose();
                 }
                 
