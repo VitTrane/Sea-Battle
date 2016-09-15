@@ -37,9 +37,17 @@ namespace SeaBattle.Pages
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            ClientManager.Instance.Callback.SetHandler<CreateGameResponse>(CreateGame);
-            CreateGameRequest request = new CreateGameRequest();
-            ClientManager.Instance.Client.CreateGame(request);            
+            try
+            {
+                ClientManager.Instance.Callback.SetHandler<CreateGameResponse>(CreateGame);
+                CreateGameRequest request = new CreateGameRequest();
+                ClientManager.Instance.Client.CreateGame(request); 
+            }
+            catch (Exception)
+            {
+                ClientManager.Instance.Dispose();
+            }
+                       
         }
 
         private void connectionGameButton_Click(object sender, RoutedEventArgs e)

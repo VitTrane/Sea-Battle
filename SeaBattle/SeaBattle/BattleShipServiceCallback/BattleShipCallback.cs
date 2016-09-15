@@ -56,7 +56,7 @@ namespace SeaBattle.BattleShipServiceCallback
         /// <param name="eventData">Данные для обработчика</param>
         private void OnBroadcast<T>(object eventData)
         {
-            ResponseEventArgs eventArgs = new ResponseEventArgs() { Response = (AuthorizeResponse)eventData };
+            ResponseEventArgs eventArgs = new ResponseEventArgs() { Response = eventData as BaseResponse };
 
             if (_handlers.ContainsKey(typeof(T)) && _handlers[typeof(T)] != null)
             {

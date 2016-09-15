@@ -60,8 +60,10 @@ namespace SeaBattle.Pages
                 RegisterPlayer();
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ClientManager.Instance.Dispose();
+                var exe = ex;
                 //TODO: добавить выбрасывание popup c сообщением об ошибке
             }
         }
