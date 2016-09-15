@@ -15,37 +15,37 @@ var Game = React.createClass({
 		 var board2 = new Board();
         return {itemsMessages: [], text: '', playerCells:board1, enemyCells:board2, isReady: false};
     },
+	 
 
     render: function(){
             return(
-                   <div>
                       <div className="row">
 					        <div className="col left" id = "Player">
                                  <PlayField cells={this.state.playerCells} isPlayer={true}/>
-					         </div>
-                            <div className="col right"  id = "Enemy">
 					        </div>
-                       </div> 
-                       <div className="row">      
-                            <div id = "Chat">
-                                <h5>Chat:</h5>
-								<div id="chatContent">
-									<Messages items={this.state.itemsMessages}></Messages> 
+                            <div className="col center"  id = "Enemy">
+								<Field board={this.state.enemyCells} isReady={true} btAct={0}/>
+					        </div>
+							<div className="col right">      
+								<div id = "Chat">
+									<h5>Chat:</h5>
+									<div id="chatContent">
+										<Messages items={this.state.itemsMessages}></Messages> 
+									</div>
+									<form action="/" method="post" onSubmit={this.handleSend}>
+										<div className="input-field col s12">
+											<input id="message" type="text" pattern=".{1,1024}" title="от 1 до 1024 символов" class="validate"  required="true" autoComplete="off" 
+												value={this.state.text} onChange={this.handleMessageChange}>
+											</input>						
+										</div> 
+										<div className="row right">
+											<button className="btn waves-effect waves-light" type="submit" name="action">Send</button>
+											<a className="waves-effect waves-light btn" onClick={this.goBackClick}>Exit</a> 
+										</div>
+									</form>
 								</div>
-                                <form action="/" method="post" onSubmit={this.handleSend}>
-									<div className="input-field col s12">
-										<input id="message" type="text" pattern=".{1,1024}" title="от 1 до 1024 символов" class="validate"  required="true" autoComplete="off" 
-											value={this.state.text} onChange={this.handleMessageChange}>
-										</input>						
-									</div> 
-                                    <div className="row right">
-									    <button className="btn waves-effect waves-light" type="submit" name="action">Send</button>
-                                        <a className="waves-effect waves-light btn" onClick={this.goBackClick}>Exit</a> 
-                                    </div>
-                                </form>
-					        </div>
-                       </div>
-                    </div>
+							</div>
+                       </div>                  
                    )
             },
 			handleMessageChange: function(e) {

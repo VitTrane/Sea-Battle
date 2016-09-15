@@ -1,11 +1,17 @@
 ﻿#content{
     display:block;
+    width:100%
 }
 #tabUnderline {
     z-index: 1
 }
 .btn-flat{
     width: 100%
+}
+
+#container{
+    margin:20px;
+    
 }
 .logo{
     width: 100px;
@@ -22,7 +28,8 @@
 }
 .Field{
     display:table;
-    resize: none; 
+    resize: none;
+    border: 2px solid black; 
 }
 .FieldRow{
     display:table-row;
@@ -37,7 +44,7 @@
   width: 2em;
   float:left;
   display:table-column;
-  border: 1px solid black;
+  border: 1px solid #212121;
 }
 
 .cell.clean {

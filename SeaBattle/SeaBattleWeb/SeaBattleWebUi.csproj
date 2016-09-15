@@ -164,7 +164,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GameInfo.cs" />
+    <Compile Include="Models\LastGamesItem.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\TopPlayerItem.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\GameServiceReference\Reference.cs">
@@ -225,7 +228,10 @@
     <Content Include="Scripts\Home\Board.js" />
     <Content Include="Scripts\Home\EnemyField.jsx" />
     <Content Include="Scripts\Home\Field.jsx" />
+    <Content Include="Scripts\Home\LastGames.jsx" />
     <Content Include="Scripts\Home\PlayField.jsx" />
+    <Content Include="Scripts\Home\Statistic.jsx" />
+    <Content Include="Scripts\Home\TopPlayers.jsx" />
     <Content Include="Scripts\Home\Waiting.jsx" />
     <Content Include="Scripts\Home\Game.jsx" />
     <Content Include="Scripts\Home\Index.jsx" />
