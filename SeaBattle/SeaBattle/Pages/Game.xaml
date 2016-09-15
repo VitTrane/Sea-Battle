@@ -51,9 +51,9 @@
         <Grid x:Name="playingField"
               Width="646"
               Height="240"
-              Margin="0,75,0,0"
+              Margin="0,0,0,202"
               HorizontalAlignment="Center"
-              VerticalAlignment="Top">
+              VerticalAlignment="Center">
             <Grid x:Name="playerSquare"
                   Width="220"
                   Height="220"
@@ -266,11 +266,11 @@
             </Grid>
         </Grid>
         <Grid x:Name="Chat"
-              Width="699"
+              Width="700"
               Height="245"
-              Margin="0,309,0,0"
+              Margin="0,284,0,0"
               HorizontalAlignment="Center"
-              VerticalAlignment="Top">
+              VerticalAlignment="Center">
             <TextBox x:Name="chatBox"
                      Width="650"
                      Height="120"

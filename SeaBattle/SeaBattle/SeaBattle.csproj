@@ -150,13 +150,34 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\GameService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameService\item6.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GameService\SeaBattle.GameService.AuthorizeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\GameService\SeaBattle.GameService.RegisterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\GameService\Service1.wsdl" />
+    <None Include="Service References\GameService\Service.wsdl" />
     <None Include="SettingsValidData.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
