@@ -34,7 +34,7 @@ namespace SeaBattle.Controls
             RecieveMessageResponse response = e.Response as RecieveMessageResponse;
             if (response != null)
             {
-                if (response.IsSuccess)
+                if (response.IsSuccess && response.Message != null)
                 {
                     GetMessage(response.Message);
                 }
@@ -51,9 +51,12 @@ namespace SeaBattle.Controls
         {
             try
             {
-                SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
-                messageTextBox.Text = "";
-                Managers.ClientManager.Instance.Client.SendMessage(request);
+                if (String.IsNullOrWhiteSpace(messageTextBox.Text))
+                {
+                    SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
+                    messageTextBox.Text = "";
+                    Managers.ClientManager.Instance.Client.SendMessage(request);
+                }
             }
             catch (Exception)
             {

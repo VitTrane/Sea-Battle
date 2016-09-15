@@ -24,6 +24,7 @@
                  Grid.ColumnSpan="4"
                  AcceptsReturn="True"
                  AcceptsTab="True"
+                 FontSize="16"
                  IsReadOnly="True"
                  TextWrapping="Wrap"
                  VerticalScrollBarVisibility="Visible" />
@@ -35,7 +36,8 @@
                  Grid.Row="2"
                  Grid.Column="1"
                  Height="25"
-                 VerticalAlignment="Center" />
+                 VerticalAlignment="Center"
+                 FontSize="16" />
         <Button x:Name="sendMessageButton"
                 Grid.Row="2"
                 Grid.Column="3"
