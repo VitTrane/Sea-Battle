@@ -59,6 +59,9 @@
     </ApplicationDefinition>
     <Compile Include="BattleShipServiceCallback\BattleShipCallback.cs" />
     <Compile Include="ConfigSections\SettingsValidDataConfigSections.cs" />
+    <Compile Include="Controls\ChatControl.xaml.cs">
+      <DependentUpon>ChatControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameLogic\Field.cs" />
     <Compile Include="GameLogic\Sea.cs" />
     <Compile Include="GameLogic\ShipToggles.cs" />
@@ -71,6 +74,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="Controls\ChatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
