@@ -62,7 +62,7 @@ namespace SeaBattle.Pages
 
             DTOAwaitingGame game = (DTOAwaitingGame)gamesListView.ItemContainerGenerator.ItemFromContainer(dep);
 
-            ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetAvailableGames);
+            ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetConnectToGames);
             var request = new ConnectToGameRequest() { GameId = game.GameId};
             ClientManager.Instance.Client.ConnectToGame(request);            
         }
