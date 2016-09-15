@@ -314,6 +314,7 @@ namespace SeaBattle.Pages
                     textInfoGameTextBlock.Text = "Бой";
                     MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", response.Winner.Login),"Игра завершена", MessageBoxButton.OK);
                     ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
+                    chatBox.CloseChat();
                     if (res == MessageBoxResult.OK)
                         Switcher.SwitchPage(new MainMenu());
                 }

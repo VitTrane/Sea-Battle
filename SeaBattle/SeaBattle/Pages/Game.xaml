@@ -272,7 +272,7 @@
               Margin="0,298,0,0"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
-            <controls:ChatControl />
+            <controls:ChatControl x:Name="chatBox" />
         </Grid>
         <Button x:Name="sendReadyButton"
                 Width="130"
