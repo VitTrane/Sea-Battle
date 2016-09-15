@@ -239,7 +239,6 @@ namespace SeaBattle.Pages
                 ClientManager.Instance.Callback.SetHandler<SendReadyResponse>(ResultSendReady);
                 SendReadyRequest request = new SendReadyRequest() { Ships = _seaPlayer.Ships.ToArray() };
                 ClientManager.Instance.Client.SendReady(request);
-                sendButton.IsEnabled = true;
                 _stateGame = StateGame.WaitReadyOpponent;
                 SetEnableControls(_stateGame);
             }
