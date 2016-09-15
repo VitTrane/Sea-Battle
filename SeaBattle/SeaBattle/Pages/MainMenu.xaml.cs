@@ -30,9 +30,15 @@ namespace SeaBattle.Pages
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ClientManager.Instance.Client.Logout();
-            ClientManager.Instance.Dispose();
-            Switcher.SwitchPage(new Login());            
+            try
+            {
+                ClientManager.Instance.Client.Logout();
+                ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login()); 
+            }
+            catch (Exception)
+            {
+            }                       
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
