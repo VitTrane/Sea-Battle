@@ -120,17 +120,20 @@ namespace SeaBattle.Pages
             if (response != null)
             {
                 Shot shot = response.CurrentShot;
-                if (response.IsSuccess && _isMyTurn)
-                {                    
-                    _seaOpponent.SetShot(shot);
-                    if(shot.Status == ShotStatus.Missed)
-                        _isMyTurn = false;
-                }
-                else
+                if (shot != null)
                 {
-                    _seaPlayer.SetShot(shot);
-                    if (shot.Status == ShotStatus.Missed)
-                        _isMyTurn = true;
+                    if (response.IsSuccess && _isMyTurn)
+                    {
+                        _seaOpponent.SetShot(shot);
+                        if (shot.Status == ShotStatus.Missed)
+                            _isMyTurn = false;
+                    }
+                    else
+                    {
+                        _seaPlayer.SetShot(shot);
+                        if (shot.Status == ShotStatus.Missed)
+                            _isMyTurn = true;
+                    }
                 }
             } 
         }     

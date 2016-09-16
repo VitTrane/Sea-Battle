@@ -140,6 +140,7 @@ namespace SeaBattle.GameLogic
                 {
                     field.State = FieldState.Hit;
                 }
+                SetAroundShotArea(shot.XyCoordinate.X, shot.XyCoordinate.Y, shot.Status);
             }
         }
 
