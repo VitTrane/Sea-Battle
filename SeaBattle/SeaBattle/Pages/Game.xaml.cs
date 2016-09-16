@@ -123,10 +123,14 @@ namespace SeaBattle.Pages
                 if (response.IsSuccess && _isMyTurn)
                 {
                     _seaPlayer.SetShot(shot);
+                    if(shot.Status == ShotStatus.Missed)
+                        _isMyTurn = false;
                 }
                 else
                 {
                     _seaOpponent.SetShot(shot);
+                    if (shot.Status == ShotStatus.Missed)
+                        _isMyTurn = true;
                 }
             } 
         }     
@@ -215,7 +219,7 @@ namespace SeaBattle.Pages
                     {
                         if (_seaPlayer.Map[row-1,column-1].Ship!=null)
                         {
-                            _shipToggles.incShipCount((byte)_seaPlayer.Map[row - 1, column - 1].Ship.Decks.Length);
+                            _shipToggles.incShipCount((byte)_seaPlayer.Map[row - 1, column - 1].Ship.DeckCount);
                             _seaPlayer.DeleteShip(_seaPlayer.Map[row - 1, column - 1].Ship);                            
                         }
                     }
@@ -237,7 +241,7 @@ namespace SeaBattle.Pages
             else
             {
                 ClientManager.Instance.Callback.SetHandler<SendReadyResponse>(ResultSendReady);
-                SendReadyRequest request = new SendReadyRequest();
+                SendReadyRequest request = new SendReadyRequest() {Ships = _seaPlayer.Ships.ToArray() };
                 ClientManager.Instance.Client.SendReady(request);
                 _stateGame = StateGame.WaitReadyOpponent;
                 SetEnableControls(_stateGame);

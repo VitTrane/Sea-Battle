@@ -34,7 +34,7 @@ namespace SeaBattle.GameLogic
         /// <summary>
         /// Список кораблей
         /// </summary>
-        public List<Ship> Ships { get; private set; }
+        public List<DTOShip> Ships { get; private set; }
 
         /// <summary>
         /// Инициализация игрового поля
@@ -43,7 +43,7 @@ namespace SeaBattle.GameLogic
         public Sea(Grid bigSquare)
         {
             Map = new Field[MAP_WIDTH, MAP_HEIGHT];
-            Ships = new List<Ship>();
+            Ships = new List<DTOShip>();
             SeaGrid = bigSquare;
             setBattleMap();
             setMapNames();
@@ -58,14 +58,10 @@ namespace SeaBattle.GameLogic
         /// <param name="orientation">Ориентация корабля</param>
         public void CreateShip(int x, int y, int countDeck, ShipOrientation orientation) 
         {
-            Ship ship = new Ship();
+            DTOShip ship = new DTOShip();
+            ship.DeckCount = countDeck;
             ship.Orientation = orientation;
-            ship.StartPoint = new XYCoordinate() { X = x, Y = y };
-            ship.Decks = new Deck[countDeck];
-            for (int i = 0; i < countDeck; i++)
-            {
-                ship.Decks[i] = new Deck();
-            }
+            ship.Coordinates = new XYCoordinate() { X = x, Y = y };
             Ships.Add(ship);
             int startPositionX = x;
             int startPositionY = y;
@@ -92,12 +88,12 @@ namespace SeaBattle.GameLogic
         /// Удаляет корабль с поля
         /// </summary>
         /// <param name="ship">Корабль, который нужно удалить</param>
-        public void DeleteShip(Ship ship)
+        public void DeleteShip(DTOShip ship)
         {
-            int startPositionX = ship.StartPoint.X;
-            int startPositionY = ship.StartPoint.Y;
+            int startPositionX = ship.Coordinates.X;
+            int startPositionY = ship.Coordinates.Y;
 
-            for (int i = 0; i < ship.Decks.Length; i++)
+            for (int i = 0; i < ship.DeckCount; i++)
             {
                 if (ship.Orientation == ShipOrientation.Horisontal)
                 {
@@ -124,7 +120,7 @@ namespace SeaBattle.GameLogic
         /// <param name="shot">Выстрел, который получили</param>
         public void SetShot(Shot shot) 
         {
-            var field = Map[shot.XyCoordinate.X, shot.XyCoordinate.Y];
+            var field = Map[shot.XyCoordinate.Y, shot.XyCoordinate.X];
             if (shot.Status == ShotStatus.Missed)
             {
                 field.State = FieldState.Miss;
@@ -143,11 +139,16 @@ namespace SeaBattle.GameLogic
                 if (field.Ship != null)
                 {
                     field.State = FieldState.Hit;
-                    field.Ship.IsKilled = true;
                 }
             }
         }
 
+        /// <summary>
+        /// Раставляет промохи вокруг попадания
+        /// </summary>
+        /// <param name="x">Колонка</param>
+        /// <param name="y">Строка</param>
+        /// <param name="status">Статус выстрела</param>
         private void SetAroundShotArea(int x, int y, ShotStatus status) 
         {
             List<XYCoordinate> diagonalPoints = new List<XYCoordinate>();
@@ -160,19 +161,18 @@ namespace SeaBattle.GameLogic
             {
                 if (point.X >= 0 && point.X < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) 
                 {
-                    Map[point.X, point.Y].State = FieldState.Miss;
+                    Map[point.Y, point.X].State = FieldState.Miss;
                 }
             }
 
-            //TODO
-            Ship ship = Map[x, y].Ship;
-            int deckCount = ship.Decks.ToList().Count;
+            DTOShip ship = Map[y, x].Ship;
+            int deckCount = ship.DeckCount;
             List<XYCoordinate> horizontalPoints = new List<XYCoordinate>();
             List<XYCoordinate> verticalPoints = new List<XYCoordinate>();
-            verticalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X, Y = ship.StartPoint.Y + deckCount });
-            verticalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X, Y = ship.StartPoint.Y - 1 });
-            horizontalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X - 1, Y = ship.StartPoint.Y });
-            horizontalPoints.Add(new XYCoordinate() { X = ship.StartPoint.X + deckCount, Y = ship.StartPoint.Y });
+            verticalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X, Y = ship.Coordinates.Y + deckCount });
+            verticalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X, Y = ship.Coordinates.Y - 1 });
+            horizontalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X - 1, Y = ship.Coordinates.Y });
+            horizontalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X + deckCount, Y = ship.Coordinates.Y });
 
             if (status == ShotStatus.Killed) 
             {                               
@@ -182,7 +182,7 @@ namespace SeaBattle.GameLogic
                     {
                         if (point.X >= 0 && point.X < MAP_WIDTH) 
                         {
-                            Map[point.X, point.Y].State = FieldState.Miss;
+                            Map[point.Y, point.X].State = FieldState.Miss;
                         }
                     }
                 }
@@ -192,7 +192,7 @@ namespace SeaBattle.GameLogic
                     {
                         if (point.X >= 0 && point.X < MAP_WIDTH)
                         {
-                            Map[point.X, point.Y].State = FieldState.Miss;
+                            Map[point.Y, point.X].State = FieldState.Miss;
                         }
                     }
                 }

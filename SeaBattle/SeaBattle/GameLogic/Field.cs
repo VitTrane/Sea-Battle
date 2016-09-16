@@ -30,9 +30,9 @@ namespace SeaBattle.GameLogic
 
         public int Row { get; private set; }
         
-        public int Column { get; private set; }        
+        public int Column { get; private set; }
 
-        public Ship Ship { get; set; }
+        public DTOShip Ship { get; set; }
 
         public FieldState State
         {

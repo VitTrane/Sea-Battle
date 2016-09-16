@@ -140,10 +140,10 @@ namespace SeaBattle.GameService {
     public partial class SendReadyRequest : SeaBattle.GameService.BaseRequest {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.Ship[] ShipsField;
+        private SeaBattle.GameService.DTOShip[] ShipsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.Ship[] Ships {
+        public SeaBattle.GameService.DTOShip[] Ships {
             get {
                 return this.ShipsField;
             }
@@ -220,24 +220,21 @@ namespace SeaBattle.GameService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Ship", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTOShip", Namespace="http://schemas.datacontract.org/2004/07/Common.DTO")]
     [System.SerializableAttribute()]
-    public partial class Ship : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DTOShip : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.Deck[] DecksField;
+        private SeaBattle.GameService.XYCoordinate CoordinatesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsKilledField;
+        private int DeckCountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SeaBattle.GameService.ShipOrientation OrientationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.XYCoordinate StartPointField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -250,27 +247,27 @@ namespace SeaBattle.GameService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.Deck[] Decks {
+        public SeaBattle.GameService.XYCoordinate Coordinates {
             get {
-                return this.DecksField;
+                return this.CoordinatesField;
             }
             set {
-                if ((object.ReferenceEquals(this.DecksField, value) != true)) {
-                    this.DecksField = value;
-                    this.RaisePropertyChanged("Decks");
+                if ((object.ReferenceEquals(this.CoordinatesField, value) != true)) {
+                    this.CoordinatesField = value;
+                    this.RaisePropertyChanged("Coordinates");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsKilled {
+        public int DeckCount {
             get {
-                return this.IsKilledField;
+                return this.DeckCountField;
             }
             set {
-                if ((this.IsKilledField.Equals(value) != true)) {
-                    this.IsKilledField = value;
-                    this.RaisePropertyChanged("IsKilled");
+                if ((this.DeckCountField.Equals(value) != true)) {
+                    this.DeckCountField = value;
+                    this.RaisePropertyChanged("DeckCount");
                 }
             }
         }
@@ -284,19 +281,6 @@ namespace SeaBattle.GameService {
                 if ((this.OrientationField.Equals(value) != true)) {
                     this.OrientationField = value;
                     this.RaisePropertyChanged("Orientation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.XYCoordinate StartPoint {
-            get {
-                return this.StartPointField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StartPointField, value) != true)) {
-                    this.StartPointField = value;
-                    this.RaisePropertyChanged("StartPoint");
                 }
             }
         }
@@ -372,51 +356,6 @@ namespace SeaBattle.GameService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Deck", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
-    [System.SerializableAttribute()]
-    public partial class Deck : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SeaBattle.GameService.DeckStatus StatusField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SeaBattle.GameService.DeckStatus Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ShipOrientation", Namespace="http://schemas.datacontract.org/2004/07/Entity.Enums")]
     public enum ShipOrientation : int {
@@ -426,17 +365,6 @@ namespace SeaBattle.GameService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Vertical = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeckStatus", Namespace="http://schemas.datacontract.org/2004/07/Entity.Enums")]
-    public enum DeckStatus : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ok = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Damaged = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -464,9 +392,6 @@ namespace SeaBattle.GameService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid ClientIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -479,19 +404,6 @@ namespace SeaBattle.GameService {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ClientId {
-            get {
-                return this.ClientIdField;
-            }
-            set {
-                if ((this.ClientIdField.Equals(value) != true)) {
-                    this.ClientIdField = value;
-                    this.RaisePropertyChanged("ClientId");
-                }
             }
         }
         
@@ -734,6 +646,9 @@ namespace SeaBattle.GameService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime DateTime {
             get {
@@ -756,6 +671,19 @@ namespace SeaBattle.GameService {
                 if ((object.ReferenceEquals(this.MessageField, value) != true)) {
                     this.MessageField = value;
                     this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -826,6 +754,22 @@ namespace SeaBattle.GameService {
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthorizeResponse", Namespace="http://schemas.datacontract.org/2004/07/Common.Respose")]
     [System.SerializableAttribute()]
     public partial class AuthorizeResponse : SeaBattle.GameService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ClientIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ClientId {
+            get {
+                return this.ClientIdField;
+            }
+            set {
+                if ((this.ClientIdField.Equals(value) != true)) {
+                    this.ClientIdField = value;
+                    this.RaisePropertyChanged("ClientId");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1103,6 +1047,155 @@ namespace SeaBattle.GameService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Ship", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
+    [System.SerializableAttribute()]
+    public partial class Ship : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.Deck[] DecksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsKilledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.ShipOrientation OrientationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.XYCoordinate StartPointField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.Deck[] Decks {
+            get {
+                return this.DecksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DecksField, value) != true)) {
+                    this.DecksField = value;
+                    this.RaisePropertyChanged("Decks");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsKilled {
+            get {
+                return this.IsKilledField;
+            }
+            set {
+                if ((this.IsKilledField.Equals(value) != true)) {
+                    this.IsKilledField = value;
+                    this.RaisePropertyChanged("IsKilled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.ShipOrientation Orientation {
+            get {
+                return this.OrientationField;
+            }
+            set {
+                if ((this.OrientationField.Equals(value) != true)) {
+                    this.OrientationField = value;
+                    this.RaisePropertyChanged("Orientation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.XYCoordinate StartPoint {
+            get {
+                return this.StartPointField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StartPointField, value) != true)) {
+                    this.StartPointField = value;
+                    this.RaisePropertyChanged("StartPoint");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Deck", Namespace="http://schemas.datacontract.org/2004/07/Entity.GameEntities")]
+    [System.SerializableAttribute()]
+    public partial class Deck : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.DeckStatus StatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DeckStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeckStatus", Namespace="http://schemas.datacontract.org/2004/07/Entity.Enums")]
+    public enum DeckStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ok = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Damaged = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

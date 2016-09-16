@@ -34,16 +34,16 @@ namespace SeaBattle.Controls
             RecieveMessageResponse response = e.Response as RecieveMessageResponse;
             if (response != null)
             {
-                if (response.IsSuccess && response.Message != null)
+                if (response.Message != null)
                 {
-                    GetMessage(response.Message);
+                    GetMessage(response.Name, response.Message);
                 }
             }
         }
 
-        private void GetMessage(string message) 
+        private void GetMessage(string nickname,string message) 
         {
-            chatTextBox.Text += Environment.NewLine + "[" + DateTime.Now.ToString() + "] " + message;
+            chatTextBox.Text += Environment.NewLine + string.Format("[{0}] {1}: {2}", DateTime.Now.ToString(), nickname, message);
             chatTextBox.ScrollToEnd();
         }
 

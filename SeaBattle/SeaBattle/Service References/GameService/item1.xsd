@@ -8,13 +8,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ShotStatus" nillable="true" type="tns:ShotStatus" />
-  <xs:simpleType name="DeckStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Ok" />
-      <xs:enumeration value="Damaged" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="DeckStatus" nillable="true" type="tns:DeckStatus" />
   <xs:simpleType name="ShipOrientation">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Horisontal" />
@@ -22,4 +15,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ShipOrientation" nillable="true" type="tns:ShipOrientation" />
+  <xs:simpleType name="DeckStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="Damaged" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DeckStatus" nillable="true" type="tns:DeckStatus" />
 </xs:schema>

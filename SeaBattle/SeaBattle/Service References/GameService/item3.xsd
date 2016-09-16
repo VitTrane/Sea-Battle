@@ -6,14 +6,15 @@
   <xs:complexType name="AuthorizeResponse">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
-        <xs:sequence />
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="AuthorizeResponse" nillable="true" type="tns:AuthorizeResponse" />
   <xs:complexType name="BaseResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ClientId" type="ser:guid" />
       <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
     </xs:sequence>
@@ -111,6 +112,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
