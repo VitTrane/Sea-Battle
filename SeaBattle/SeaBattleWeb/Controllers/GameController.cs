@@ -49,5 +49,27 @@ namespace SeaBattle.Controllers
             return new JsonResult { Data = new { status = status, message = message } };
         }
 
+        /// <summary>
+        /// Метод выхода из игры.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult LeaveGame()
+        {
+            bool status = false;
+            string message = "";
+            try
+            {
+                ClientManager.Instance.Client.LeaveGame();
+                status = true;
+                message = "Ok";
+            }
+            catch (Exception e)
+            {
+                message = "Exception: " + e.Message;
+            }
+
+            return new JsonResult { Data = new { status = status, message = message } };
+        }
     }
 }
