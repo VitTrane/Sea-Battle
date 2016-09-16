@@ -121,14 +121,14 @@ namespace SeaBattle.Pages
             {
                 Shot shot = response.CurrentShot;
                 if (response.IsSuccess && _isMyTurn)
-                {
-                    _seaPlayer.SetShot(shot);
+                {                    
+                    _seaOpponent.SetShot(shot);
                     if(shot.Status == ShotStatus.Missed)
                         _isMyTurn = false;
                 }
                 else
                 {
-                    _seaOpponent.SetShot(shot);
+                    _seaPlayer.SetShot(shot);
                     if (shot.Status == ShotStatus.Missed)
                         _isMyTurn = true;
                 }

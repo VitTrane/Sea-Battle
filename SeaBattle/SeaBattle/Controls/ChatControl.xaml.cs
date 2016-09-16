@@ -51,7 +51,7 @@ namespace SeaBattle.Controls
         {
             try
             {
-                if (String.IsNullOrWhiteSpace(messageTextBox.Text))
+                if (!String.IsNullOrWhiteSpace(messageTextBox.Text))
                 {
                     SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
                     messageTextBox.Text = "";
