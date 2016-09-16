@@ -53,6 +53,7 @@ namespace SeaBattle.Controls
             {
                 if (!String.IsNullOrWhiteSpace(messageTextBox.Text))
                 {
+                    chatTextBox.Text += Environment.NewLine + string.Format("[{0}] {1}: {2}", DateTime.Now.ToString(), "Вы", messageTextBox.Text);
                     SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
                     messageTextBox.Text = "";
                     Managers.ClientManager.Instance.Client.SendMessage(request);

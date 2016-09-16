@@ -398,6 +398,10 @@ namespace SeaBattle.Pages
             {
                 Ships.Visibility = Visibility.Hidden;
                 Ships.IsEnabled = false;
+                OrientationGrid.Visibility = Visibility.Hidden;
+                OrientationGrid.IsEnabled = false;                
+                sendReadyButton.IsEnabled = false;
+                sendReadyButton.Visibility = Visibility.Hidden;
                 textInfoGameTextBlock.Text = "Бой...";
             }
         }

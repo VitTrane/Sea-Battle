@@ -224,7 +224,7 @@
                            TextAlignment="Left"
                            TextWrapping="Wrap" />
             </Grid>
-            <Grid x:Name="Orientation"
+            <Grid x:Name="OrientationGrid"
                   Width="176"
                   Height="83"
                   Margin="235,141,235,16"
