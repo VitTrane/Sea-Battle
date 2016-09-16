@@ -27,17 +27,24 @@ namespace SeaBattle.Controllers
         {
             bool status = false;
             string message = "";
-            ClientManager.Instance.Client.CreateGame(new CreateGameRequest());
-            var resp = new CreateGameResponse();
-            ClientManager.Instance.Callback.CreateGameCallBack(resp);
-            if (resp.IsSuccess)
+            try
             {
-                status = true;
-                message = "Ok";
+                ClientManager.Instance.Client.CreateGame(new CreateGameRequest());
+                var resp = new CreateGameResponse();
+                ClientManager.Instance.Callback.CreateGameCallBack(resp);
+                if (resp.IsSuccess)
+                {
+                    status = true;
+                    message = "Ok";
+                }
+                else
+                {
+                    message = "Error" + resp.Error + resp.ExtensionData;
+                }
             }
-            else
+            catch (Exception e)
             {
-                message = resp.Error + resp.ExtensionData;
+                message = "Exception: " + e.Message;
             }
             return new JsonResult { Data = new { status = status, message = message } };
         }
