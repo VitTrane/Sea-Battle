@@ -192,9 +192,19 @@ namespace SeaBattle.GameLogic
                 }
                 else // Если у коробля 1 палуба, то закрашиваем и по вертикали и по горизонтали
                 {
+                    List<XYCoordinate> resultPoints = new List<XYCoordinate>();
+                    //Находим точки которые подходят по горизонтали
                     foreach (var point in horizontalPoints)
                     {
-                        if (point.X >= 0 && point.X < MAP_WIDTH && point.Y >= 0 && point.Y < MAP_HEIGHT)
+                        if (point.X >= 0 && point.X < MAP_WIDTH)
+                        {
+                            resultPoints.Add(point);
+                        }
+                    }
+                    //из найденых точек выбераем только те, которые подходят по вертикали и закрашиваем поля
+                    foreach (var point in verticalPoints)
+                    {
+                        if (point.Y >= 0 && point.Y < MAP_HEIGHT)
                         {
                             Map[point.Y, point.X].State = FieldState.Miss;
                         }
