@@ -158,11 +158,13 @@ namespace SeaBattle.GameLogic
                 int deckCount = killedShip.DeckCount;
                 List<XYCoordinate> horizontalPoints = new List<XYCoordinate>();
                 List<XYCoordinate> verticalPoints = new List<XYCoordinate>();
+                List<XYCoordinate> allPoinsPoints = new List<XYCoordinate>();
                 verticalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X, Y = killedShip.Coordinates.Y + deckCount });
                 verticalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X, Y = killedShip.Coordinates.Y - 1 });
                 horizontalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X - 1, Y = killedShip.Coordinates.Y });
                 horizontalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X + deckCount, Y = killedShip.Coordinates.Y });
-
+                allPoinsPoints.AddRange(verticalPoints);
+                allPoinsPoints.AddRange(horizontalPoints);
                 if (status == ShotStatus.Killed)
                 {
                     //Если у корабля больше чем 1 палуба, то закрашиваем либо по вертикали либо по горизонтали
@@ -189,28 +191,17 @@ namespace SeaBattle.GameLogic
                             }
                         }
                     }
-                }
-                else // Если у коробля 1 палуба, то закрашиваем и по вертикали и по горизонтали
-                {
-                    List<XYCoordinate> resultPoints = new List<XYCoordinate>();
-                    //Находим точки которые подходят по горизонтали
-                    foreach (var point in horizontalPoints)
+                    else //Если у корабля 1 палуба
                     {
-                        if (point.X >= 0 && point.X < MAP_WIDTH)
+                        foreach (var point in allPoinsPoints)
                         {
-                            resultPoints.Add(point);
-                        }
-                    }
-                    //из найденых точек выбераем только те, которые подходят по вертикали и закрашиваем поля
-                    foreach (var point in verticalPoints)
-                    {
-                        if (point.Y >= 0 && point.Y < MAP_HEIGHT)
-                        {
-                            Map[point.Y, point.X].State = FieldState.Miss;
-                        }
+                            if (point.X >= 0 && point.X < MAP_WIDTH && point.Y >= 0 && point.Y < MAP_HEIGHT)
+                            {
+                                Map[point.Y, point.X].State = FieldState.Miss;
+                            }
+                        }  
                     }
                 }
-
             }
         }
 

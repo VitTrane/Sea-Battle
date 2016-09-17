@@ -49,7 +49,9 @@ namespace SeaBattle.Pages
             lastGamesListView.ItemsSource = _lastGames;
 
             ClientManager.Instance.Callback.SetHandler<GetTopPlayersResponse>(GetTopPlayers);
-            ClientManager.Instance.Callback.SetHandler<GetLastGamesResponse>(GetLastGames);    
+            ClientManager.Instance.Callback.SetHandler<GetLastGamesResponse>(GetLastGames);
+
+            RequestStatistics();
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -82,6 +84,18 @@ namespace SeaBattle.Pages
                 {
                     _lastGames.Add(game);
                 }
+            }
+        }
+
+        private void RequestStatistics() 
+        {
+            try
+            {
+                ClientManager.Instance.Client.GetTopPlayers();
+                ClientManager.Instance.Client.GetLastGames();
+            }
+            catch (Exception)
+            {
             }
         }
     }
