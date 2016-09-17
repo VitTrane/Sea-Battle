@@ -120,7 +120,7 @@ namespace SeaBattle.Pages
 
                     if (row > 0 && column > 0)
                     {
-                        if (_seaOpponent.Map[column - 1, row - 1].State == FieldState.Sea)
+                        if (_seaOpponent.Map[row - 1, column - 1].State == FieldState.Sea)
                         {
                             XYCoordinate position = new XYCoordinate() { X = column - 1, Y = row - 1 };
                             Shot shot = new Shot() { XyCoordinate = position };
