@@ -1,20 +1,11 @@
 ﻿using SeaBattle.GameService;
-using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SeaBattle.BattleShipServiceCallback
-{
-    public class ResponseEventArgs : EventArgs
-    {
-        public BaseResponse Response { get; set; }
-    }
-
+{   
     public class BattleShipCallback : IServiceCallback
     {
         private SynchronizationContext syncContext;

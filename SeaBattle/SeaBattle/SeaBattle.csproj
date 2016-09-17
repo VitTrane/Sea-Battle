@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BattleShipServiceCallback\BattleShipCallback.cs" />
+    <Compile Include="BattleShipServiceCallback\ResponseEventArgs.cs" />
     <Compile Include="ConfigSections\SettingsValidDataConfigSections.cs" />
     <Compile Include="Controls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>

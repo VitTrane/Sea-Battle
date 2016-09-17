@@ -124,19 +124,37 @@ namespace SeaBattle.Pages
                 {
                     if (response.IsSuccess && _isMyTurn)
                     {
-                        _seaOpponent.SetShot(shot);
-                        if (shot.Status == ShotStatus.Missed)
-                            _isMyTurn = false;
+                        _seaOpponent.SetShot(shot, response.KilledShipInfo);
+                        TransferTurn(response.NextShotUserId);
                     }
                     else
                     {
-                        _seaPlayer.SetShot(shot);
-                        if (shot.Status == ShotStatus.Missed)
-                            _isMyTurn = true;
+                        _seaPlayer.SetShot(shot, response.KilledShipInfo);
+                        TransferTurn(response.NextShotUserId);
                     }
                 }
             } 
-        }     
+        }
+
+        /// <summary>
+        /// Устанавливает чей следующий ход
+        /// </summary>
+        /// <param name="nextuserId">Id следующего игрока</param>
+        private void TransferTurn(Guid nextuserId) 
+        {   
+            if(nextuserId == ClientManager.Instance.ClientId)
+            {
+                _isMyTurn = true;
+                turnInfoTextBlock.Text = "Ваш ход";
+                turnInfoTextBlock.Foreground = Brushes.LightGreen;
+            }
+            else
+            {
+                _isMyTurn = false;
+                turnInfoTextBlock.Text = "Ход противника";
+                turnInfoTextBlock.Foreground = Brushes.Red;
+            }  
+        }
 
         private void ResultOpponentSendReady(object sender, ResponseEventArgs e)
         {
@@ -289,14 +307,7 @@ namespace SeaBattle.Pages
                     _stateGame = StateGame.Game;
                     SetEnableControls(_stateGame);
                     ClientManager.Instance.Callback.RemoveHandler<StartGameResponse>();
-                    if (response.NextShotUserId == ClientManager.Instance.ClientId)
-                    {
-                        _isMyTurn = true;
-                    }
-                    else
-                    {
-                        _isMyTurn = false;
-                    }
+                    TransferTurn(response.NextShotUserId);
                 }
                 else
                 {
@@ -380,7 +391,7 @@ namespace SeaBattle.Pages
                 Chat.Visibility = Visibility.Visible;
                 Chat.IsEnabled = true;
                 sendReadyButton.IsEnabled = true;
-                sendReadyButton.Visibility = Visibility.Visible;
+                sendReadyButton.Visibility = Visibility.Visible;                
             }
 
             if (stateGame == StateGame.OpponentWaiting)
@@ -390,6 +401,7 @@ namespace SeaBattle.Pages
                 Chat.IsEnabled = false;
                 sendReadyButton.IsEnabled = false;
                 sendReadyButton.Visibility = Visibility.Hidden;
+                turnInfoTextBlock.Visibility = Visibility.Hidden;
             }
 
             if (stateGame == StateGame.WaitReadyOpponent)
@@ -406,6 +418,7 @@ namespace SeaBattle.Pages
                 sendReadyButton.IsEnabled = false;
                 sendReadyButton.Visibility = Visibility.Hidden;
                 textInfoGameTextBlock.Text = "Бой...";
+                turnInfoTextBlock.Visibility = Visibility.Visible;
             }
         }
 
