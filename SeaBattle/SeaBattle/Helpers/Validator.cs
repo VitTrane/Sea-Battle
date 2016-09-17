@@ -13,7 +13,8 @@ namespace SeaBattle.Helpers
         public static readonly int MIN_LENGTH_USERNAME = 1;
         public static readonly int MAX_LENGTH_USERNAME = 16;
         public static readonly int MIN_LENGTH_PASSWORD = 6;
-        public static readonly int MAX_LENGTH_PASSWORD = 16;        
+        public static readonly int MAX_LENGTH_PASSWORD = 16;
+        public static readonly int MAX_LENGTH_MESSAGE = 1024;
 
         static Validator()
         {
@@ -24,6 +25,7 @@ namespace SeaBattle.Helpers
                 MAX_LENGTH_USERNAME = config.MaxLengthUsername;
                 MIN_LENGTH_PASSWORD = config.MinLengthPassword;
                 MAX_LENGTH_PASSWORD = config.MaxLengthPassword;
+                MAX_LENGTH_MESSAGE = config.MaxLengthChatMessage;
             }
         }
 

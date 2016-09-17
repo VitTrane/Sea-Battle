@@ -5,6 +5,7 @@ using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using SeaBattle.Helpers;
 
 namespace SeaBattle.Controls
 {
@@ -16,6 +17,7 @@ namespace SeaBattle.Controls
         public ChatControl()
         {
             InitializeComponent();
+            messageTextBox.MaxLength = Validator.MAX_LENGTH_MESSAGE;
             ClientManager.Instance.Callback.SetHandler<RecieveMessageResponse>(GetMessage);
         }
 

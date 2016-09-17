@@ -43,5 +43,15 @@ namespace SeaBattle.ConfigSections
                 return int.Parse(str);
             }
         }
+
+        [ConfigurationProperty("maxLengthChatMessage")]
+        public int MaxLengthChatMessage
+        {
+            get
+            {
+                var str = (base["maxLengthChatMessage"]).ToString();
+                return int.Parse(str);
+            }
+        }
     }
 }
