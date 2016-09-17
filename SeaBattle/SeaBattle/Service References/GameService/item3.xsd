@@ -33,8 +33,9 @@
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
           <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="CurrentShot" nillable="true" type="q1:Shot" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="KilledShipInfo" nillable="true" type="q2:DTOShip" />
           <xs:element minOccurs="0" name="NextShotUserId" type="ser:guid" />
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="User" nillable="true" type="q2:DTOUser" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="User" nillable="true" type="q3:DTOUser" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -44,7 +45,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q3:ArrayOfDTOAwaitingGame" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q4:ArrayOfDTOAwaitingGame" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -54,7 +55,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Opponent" nillable="true" type="q4:DTOUser" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Opponent" nillable="true" type="q5:DTOUser" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -64,7 +65,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="ConflictShip" nillable="true" type="q5:ArrayOfShip" />
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Entity.GameEntities" minOccurs="0" name="ConflictShip" nillable="true" type="q6:ArrayOfShip" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -84,7 +85,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Winner" nillable="true" type="q6:DTOUser" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Winner" nillable="true" type="q7:DTOUser" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -122,7 +123,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="TopPlayers" nillable="true" type="q7:ArrayOfDTOFullUserInfo" />
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="TopPlayers" nillable="true" type="q8:ArrayOfDTOFullUserInfo" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -132,7 +133,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q8:ArrayOfDTOFullGameInfo" />
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Common.DTO" minOccurs="0" name="Games" nillable="true" type="q9:ArrayOfDTOFullGameInfo" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

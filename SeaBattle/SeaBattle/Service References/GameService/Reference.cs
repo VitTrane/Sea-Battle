@@ -460,6 +460,9 @@ namespace SeaBattle.GameService {
         private SeaBattle.GameService.Shot CurrentShotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SeaBattle.GameService.DTOShip KilledShipInfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid NextShotUserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -474,6 +477,19 @@ namespace SeaBattle.GameService {
                 if ((object.ReferenceEquals(this.CurrentShotField, value) != true)) {
                     this.CurrentShotField = value;
                     this.RaisePropertyChanged("CurrentShot");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SeaBattle.GameService.DTOShip KilledShipInfo {
+            get {
+                return this.KilledShipInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KilledShipInfoField, value) != true)) {
+                    this.KilledShipInfoField = value;
+                    this.RaisePropertyChanged("KilledShipInfo");
                 }
             }
         }

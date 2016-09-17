@@ -118,7 +118,7 @@ namespace SeaBattle.GameLogic
         /// Получает выстрел сделанный по карте
         /// </summary>
         /// <param name="shot">Выстрел, который получили</param>
-        public void SetShot(Shot shot) 
+        public void SetShot(Shot shot, DTOShip killedShip = null) 
         {
             var field = Map[shot.XyCoordinate.Y, shot.XyCoordinate.X];
             if (shot.Status == ShotStatus.Missed)
@@ -128,19 +128,14 @@ namespace SeaBattle.GameLogic
 
             if (shot.Status == ShotStatus.Hit)
             {
-                if (field.Ship != null)
-                {
-                    field.State = FieldState.Hit;
-                }
+                field.State = FieldState.Hit;
+                SetAroundShotArea(shot.XyCoordinate.X, shot.XyCoordinate.Y, shot.Status);
             }
 
             if (shot.Status == ShotStatus.Killed)
             {
-                if (field.Ship != null)
-                {
-                    field.State = FieldState.Hit;
-                }
-                SetAroundShotArea(shot.XyCoordinate.X, shot.XyCoordinate.Y, shot.Status);
+                field.State = FieldState.Hit;
+                SetAroundShotArea(shot.XyCoordinate.X, shot.XyCoordinate.Y, shot.Status, killedShip);
             }
         }
 
@@ -150,7 +145,7 @@ namespace SeaBattle.GameLogic
         /// <param name="x">Колонка</param>
         /// <param name="y">Строка</param>
         /// <param name="status">Статус выстрела</param>
-        private void SetAroundShotArea(int x, int y, ShotStatus status) 
+        private void SetAroundShotArea(int x, int y, ShotStatus status, DTOShip killedShip = null) 
         {
             List<XYCoordinate> diagonalPoints = new List<XYCoordinate>();
             diagonalPoints.Add(new XYCoordinate() { X = x + 1, Y = y + 1 });
@@ -158,45 +153,64 @@ namespace SeaBattle.GameLogic
             diagonalPoints.Add(new XYCoordinate() { X = x - 1 , Y = y + 1 });
             diagonalPoints.Add(new XYCoordinate() { X = x + 1, Y = y - 1 });
 
+            //Растановка промахов по диагональным клеткам от выстрела
             foreach (var point in diagonalPoints)
             {
-                if (point.X >= 0 && point.X < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) 
+                if (point.X >= 0 && point.X < MAP_WIDTH && point.Y >= 0 && point.Y < MAP_HEIGHT) 
                 {
                     Map[point.Y, point.X].State = FieldState.Miss;
                 }
             }
 
-            DTOShip ship = Map[y, x].Ship;
-            int deckCount = ship.DeckCount;
-            List<XYCoordinate> horizontalPoints = new List<XYCoordinate>();
-            List<XYCoordinate> verticalPoints = new List<XYCoordinate>();
-            verticalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X, Y = ship.Coordinates.Y + deckCount });
-            verticalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X, Y = ship.Coordinates.Y - 1 });
-            horizontalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X - 1, Y = ship.Coordinates.Y });
-            horizontalPoints.Add(new XYCoordinate() { X = ship.Coordinates.X + deckCount, Y = ship.Coordinates.Y });
+            //Растановка промахов по по горизонтали и вертикали вокруг убитого корабля
+            if (killedShip != null)
+            {
+                int deckCount = killedShip.DeckCount;
+                List<XYCoordinate> horizontalPoints = new List<XYCoordinate>();
+                List<XYCoordinate> verticalPoints = new List<XYCoordinate>();
+                verticalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X, Y = killedShip.Coordinates.Y + deckCount });
+                verticalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X, Y = killedShip.Coordinates.Y - 1 });
+                horizontalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X - 1, Y = killedShip.Coordinates.Y });
+                horizontalPoints.Add(new XYCoordinate() { X = killedShip.Coordinates.X + deckCount, Y = killedShip.Coordinates.Y });
 
-            if (status == ShotStatus.Killed) 
-            {                               
-                if (ship.Orientation == ShipOrientation.Horisontal)
+                if (status == ShotStatus.Killed)
+                {
+                    //Если у корабля больше чем 1 палуба, то закрашиваем либо по вертикали либо по горизонтали
+                    if (killedShip.DeckCount > 1)
+                    {
+                        if (killedShip.Orientation == ShipOrientation.Horisontal)
+                        {
+                            foreach (var point in horizontalPoints)
+                            {
+                                if (point.X >= 0 && point.X < MAP_WIDTH)
+                                {
+                                    Map[point.Y, point.X].State = FieldState.Miss;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var point in verticalPoints)
+                            {
+                                if (point.Y >= 0 && point.Y < MAP_HEIGHT)
+                                {
+                                    Map[point.Y, point.X].State = FieldState.Miss;
+                                }
+                            }
+                        }
+                    }
+                }
+                else // Если у коробля 1 палуба, то закрашиваем и по вертикали и по горизонтали
                 {
                     foreach (var point in horizontalPoints)
                     {
-                        if (point.X >= 0 && point.X < MAP_WIDTH) 
+                        if (point.X >= 0 && point.X < MAP_WIDTH && point.Y >= 0 && point.Y < MAP_HEIGHT)
                         {
                             Map[point.Y, point.X].State = FieldState.Miss;
                         }
                     }
                 }
-                else 
-                {
-                    foreach (var point in verticalPoints)
-                    {
-                        if (point.X >= 0 && point.X < MAP_WIDTH)
-                        {
-                            Map[point.Y, point.X].State = FieldState.Miss;
-                        }
-                    }
-                }
+
             }
         }
 
