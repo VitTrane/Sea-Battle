@@ -14,6 +14,9 @@ namespace SeaBattle.Common
         private ServiceClient _client;
         private BattleShipCallback _callback;
 
+        public Guid ClientId { get; set; }
+        public string PlayerNickname { get; set; }
+
         public BattleShipCallback Callback
         {
             get { return _callback; }
@@ -51,8 +54,17 @@ namespace SeaBattle.Common
         {
             if (_client == null)
             {
-                Callback = new BattleShipCallback();
-                _client = new ServiceClient(new InstanceContext(Callback), "NetTcpBinding_IService");
+                try
+                {
+                    Callback = new BattleShipCallback();
+                    _client = new ServiceClient(new InstanceContext(Callback), "NetTcpBinding_IService");
+                    _client.Open();
+                }
+                catch (Exception)
+                {
+                    Dispose();
+                }
+
             }
         }
 

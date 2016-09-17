@@ -160,6 +160,7 @@
     <Compile Include="Common\App_Start\ReactConfig.cs" />
     <Compile Include="Common\BattleShipCallback.cs" />
     <Compile Include="Common\ClientManager.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
