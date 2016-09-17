@@ -43,8 +43,7 @@ namespace SeaBattle.Pages
             AddTooggles();
 
             if (isHost)
-            {
-                sendReadyButton.IsEnabled = false;                
+            {             
                 _stateGame = StateGame.OpponentWaiting;
                 SetEnableControls(_stateGame);
                 ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetOpponent);                
@@ -53,7 +52,6 @@ namespace SeaBattle.Pages
             {                
                 _stateGame = StateGame.PreparationGame;
                 SetEnableControls(_stateGame);
-                sendReadyButton.IsEnabled = true;
             }
 
             ClientManager.Instance.Callback.SetHandler<SendOpponentIsReadyResponse>(ResultOpponentSendReady);
@@ -71,17 +69,14 @@ namespace SeaBattle.Pages
                 if (response.IsSuccess)
                 {
                     _stateGame = StateGame.Finished;
-                    MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", ClientManager.Instance.PlayerNickname), "Игра завершена", MessageBoxButton.OK);
-                    ClientManager.Instance.Callback.RemoveHandler<AbortGameResponse>();
-                    chatBox.CloseChat();
-                    if (res == MessageBoxResult.OK)
-                        Switcher.SwitchPage(new MainMenu());
+                    ShowGameResult(ClientManager.Instance.PlayerNickname, "Противник покинул игру");
                 }
                 else
                 {
-                    //TODO: добавить popup с ошибками
+                    MessageBox.Show(response.Error);
                 }
             }
+            ClientManager.Instance.Callback.RemoveHandler<AbortGameResponse>();
         }
 
         /// <summary>
@@ -197,7 +192,7 @@ namespace SeaBattle.Pages
                 Managers.ClientManager.Instance.Client.LeaveGame();
                 Switcher.SwitchPage(new MainMenu());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             
@@ -327,10 +322,6 @@ namespace SeaBattle.Pages
                     ClientManager.Instance.Callback.RemoveHandler<StartGameResponse>();
                     TransferTurn(response.NextShotUserId);
                 }
-                else
-                {
-                    //TODO: добавить popup с ошибками
-                }
             }
         }
 
@@ -345,20 +336,13 @@ namespace SeaBattle.Pages
             if (response != null)
             {
                 if (response.IsSuccess)
-                {
+                {                    
                     _stateGame = StateGame.Finished;
-                    MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", response.Winner.Login),"Игра завершена", MessageBoxButton.OK);
-                    ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
-                    chatBox.CloseChat();
-                    if (res == MessageBoxResult.OK)
-                        Switcher.SwitchPage(new MainMenu());
-                }
-                else
-                {
-                    //TODO: добавить popup с ошибками
+                    ShowGameResult(response.Winner.Login, "Игра завершена");
                 }
             }
-        }
+            ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
+        }        
 
         /// <summary>
         /// Возвращает количество палуб для выбраного корабля
@@ -399,7 +383,7 @@ namespace SeaBattle.Pages
         /// <summary>
         /// В зависимости от состояния игры, делает доступными нужные контролы или недоступными
         /// </summary>
-        /// <param name="isEnable">Доступен ли чат</param>
+        /// <param name="stateGame">Состояние игры</param>
         private void SetEnableControls(StateGame stateGame)
         { 
             if (stateGame == StateGame.PreparationGame)
@@ -440,6 +424,15 @@ namespace SeaBattle.Pages
                 textInfoGameTextBlock.Text = "Бой...";
                 infoTextBlock.Visibility = Visibility.Visible;
             }
+        }
+
+        private void ShowGameResult(string winner, string caption)
+        {
+            _stateGame = StateGame.Finished;
+            MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", winner), caption, MessageBoxButton.OK);
+            chatBox.CloseChat();
+            if (res == MessageBoxResult.OK)
+                Switcher.SwitchPage(new MainMenu());
         }
 
         private void AddTooggles()

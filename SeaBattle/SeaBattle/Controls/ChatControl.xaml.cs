@@ -2,6 +2,7 @@
 using SeaBattle.GameService;
 using SeaBattle.Managers;
 using System;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -48,10 +49,16 @@ namespace SeaBattle.Controls
                     Managers.ClientManager.Instance.Client.SendMessage(request);
                 }
             }
-            catch (Exception)
+            catch (TimeoutException ex)
             {
+                MessageBox.Show("Ошибка!: превышенно время ожидания");
+                ClientManager.Instance.Dispose();
             }
-            
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
+                ClientManager.Instance.Dispose();
+            } 
         }
 
         public void CloseChat() 

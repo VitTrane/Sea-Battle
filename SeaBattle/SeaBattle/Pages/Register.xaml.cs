@@ -5,6 +5,7 @@ using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,12 +61,16 @@ namespace SeaBattle.Pages
                 RegisterPlayer();
                 
             }
-            catch (Exception ex)
+            catch (TimeoutException ex)
             {
+                MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
-                var exe = ex;
-                //TODO: добавить выбрасывание popup c сообщением об ошибке
             }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
+                ClientManager.Instance.Dispose();
+            }  
         }
 
         /// <summary>

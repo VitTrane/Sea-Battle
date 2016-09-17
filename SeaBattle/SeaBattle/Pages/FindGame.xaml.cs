@@ -74,7 +74,6 @@ namespace SeaBattle.Pages
         /// <param name="e"></param>
         private void GetAvailableGames(object sender, ResponseEventArgs e)
         {
-            var c = this;
             if (this != null)
             {
                 GetListGamesResponse response = e.Response as GetListGamesResponse;
@@ -105,7 +104,7 @@ namespace SeaBattle.Pages
                 }
                 else
                 {
-                    //TODO: добавить popup с ошибками
+                    MessageBox.Show(response.Error);
                 }
             }
             ClientManager.Instance.Callback.RemoveHandler<CurentGameResponse>();

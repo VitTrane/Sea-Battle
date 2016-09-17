@@ -4,6 +4,7 @@ using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,9 +38,16 @@ namespace SeaBattle.Pages
                 ClientManager.Instance.Dispose();
                 Switcher.SwitchPage(new Login()); 
             }
-            catch (Exception)
+            catch (TimeoutException ex)
             {
-            }                       
+                MessageBox.Show("Ошибка!: превышенно время ожидания");
+                ClientManager.Instance.Dispose();
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
+                ClientManager.Instance.Dispose();
+            }                     
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
@@ -50,10 +58,16 @@ namespace SeaBattle.Pages
                 CreateGameRequest request = new CreateGameRequest();
                 ClientManager.Instance.Client.CreateGame(request); 
             }
-            catch (Exception)
+            catch (TimeoutException ex)
             {
+                MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
             }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
+                ClientManager.Instance.Dispose();
+            }  
                        
         }
 
