@@ -23,7 +23,7 @@
 #chatTextArea {
     display:block;
     overflow-y: scroll;
-    max-height: 100px;
+    /*max-height: 350px;*/
     resize: none; 
 }
 .Field{

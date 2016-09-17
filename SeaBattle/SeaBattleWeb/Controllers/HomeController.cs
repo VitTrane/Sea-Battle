@@ -103,15 +103,53 @@ namespace SeaBattle.Controllers
         }
 
         [HttpPost]
+        public JsonResult Shot(XYCoordinate shot)
+        {
+            var t = shot;
+            bool status = false;
+            string message = "";
+            string shotSt = "";//{damaged, killed, miss}
+            
+
+            return new JsonResult { Data = new { status = status, message = message, shotStatus = shotSt} };
+        }
+
+        [HttpPost]
+        public JsonResult TakeShot()
+        {
+            bool status = false;
+            string message = "";
+            string shotSt = "miss";//{damaged, killed, miss}
+            int xs = 0;
+            int ys = 0;
+            status = true;
+            
+
+            return new JsonResult { Data = new { status = status, message = message, x = xs, y = ys, shotStatus = shotSt } };
+        }
+
+        [HttpPost]
+        public JsonResult StartGame(ShipMap map)
+        {
+           
+            bool status = false;
+            string message = "";
+            string enemyName = "";
+            bool isplayerturn = false;
+            //to do to send player shot
+
+            return new JsonResult { Data = new { status = status, message = message, enemy = enemyName, isPlayerTurn = isplayerturn } };
+        }
+
+        [HttpPost]
         public JsonResult SendMessage(Message mess)
         {
             bool status = false;
             string message;
             string sendingMess = mess.Text;
-            //to send message from Game
             if (ModelState.IsValid)
             {
-                //to send mees to server
+                //to send mess to server
                 status = true;
                 message = "ok";
             }
@@ -121,6 +159,29 @@ namespace SeaBattle.Controllers
             }
 
             return new JsonResult { Data = new { status = status, message = message } };
+        }
+
+        [HttpPost]
+        public JsonResult GetMessage()
+        {
+            bool status = false;
+            bool isended = false;//The end of the game for some reason
+            string message = "";
+            string newMess = "";
+            //insert new message into the newMess, the message is for the info about some error, status = true - there's message for player.
+
+            return new JsonResult { Data = new { status = status, message = message, newMessage = newMess, isEnded = isended } };
+        }
+        //Exit game
+        [HttpPost]
+        public JsonResult ExitGame(Message m)
+        {
+
+            bool status = false;
+            string message = "";
+            string isEnded = m.Text;//false - the user left game before the end
+            //
+            return new JsonResult { Data = new { status = status, message = message} };
         }
     }
 }

@@ -157,7 +157,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ReactConfig.cs" />
+    <Compile Include="Common\App_Start\ReactConfig.cs" />
     <Compile Include="Common\BattleShipCallback.cs" />
     <Compile Include="Common\ClientManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Models\LastGamesItem.cs" />
+    <Compile Include="Models\ShipMap.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\TopPlayerItem.cs" />
     <Compile Include="Models\User.cs" />
@@ -177,9 +178,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\App_Start\FilterConfig.cs" />
+    <Compile Include="Common\App_Start\RouteConfig.cs" />
+    <Compile Include="Common\App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\materialize.css" />
     <Content Include="Content\images\logo1.png" />
     <Content Include="Content\js\materialize.js" />
@@ -225,22 +226,24 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\Home\Board.js" />
-    <Content Include="Scripts\Home\EnemyField.jsx" />
-    <Content Include="Scripts\Home\Field.jsx" />
-    <Content Include="Scripts\Home\LastGames.jsx" />
-    <Content Include="Scripts\Home\PlayField.jsx" />
-    <Content Include="Scripts\Home\Statistic.jsx" />
-    <Content Include="Scripts\Home\TopPlayers.jsx" />
-    <Content Include="Scripts\Home\Waiting.jsx" />
-    <Content Include="Scripts\Home\Game.jsx" />
-    <Content Include="Scripts\Home\Index.jsx" />
+    <Content Include="index.js" />
+    <Content Include="Scripts\Helpers\Board.js" />
+    <Content Include="Scripts\Views\App.jsx" />
+    <Content Include="Scripts\Views\Index.js" />
+    <Content Include="Scripts\Views\JoinGame.jsx" />
+    <Content Include="Scripts\Views\LastGames.jsx" />
+    <Content Include="Scripts\Views\PlayField.jsx" />
+    <Content Include="Scripts\Views\Statistic.jsx" />
+    <Content Include="Scripts\Views\TopPlayers.jsx" />
+    <Content Include="Scripts\Views\Waiting.jsx" />
+    <Content Include="Scripts\Views\Game.jsx" />
     <Content Include="Content\css\style.css" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
-    <Content Include="Scripts\Home\LogIn.jsx" />
-    <Content Include="Scripts\Home\Menu.jsx" />
-    <Content Include="Scripts\Home\Registration.jsx" />
-    <Content Include="Scripts\Home\SignUp.jsx" />
+    <Content Include="Scripts\Views\LogIn.jsx" />
+    <Content Include="Scripts\Views\Menu.jsx" />
+    <Content Include="Scripts\Views\Registration.jsx" />
+    <Content Include="Scripts\Views\SignUp.jsx" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -261,6 +264,8 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\Helpers\GameStateCtrl.js" />
+    <Content Include="Scripts\Helpers\GlobalStateCtrl.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
