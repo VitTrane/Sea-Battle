@@ -32,6 +32,7 @@ namespace SeaBattle.Pages
         {
             try
             {
+                ClientManager.Instance.Client.LeaveGame();
                 ClientManager.Instance.Client.Logout();
                 ClientManager.Instance.Dispose();
                 Switcher.SwitchPage(new Login()); 

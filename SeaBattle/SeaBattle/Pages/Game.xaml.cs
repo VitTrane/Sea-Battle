@@ -60,6 +60,28 @@ namespace SeaBattle.Pages
             ClientManager.Instance.Callback.SetHandler<StartGameResponse>(StartGame);
             ClientManager.Instance.Callback.SetHandler<EndGameResponse>(EndGameGame);
             ClientManager.Instance.Callback.SetHandler<ShotResponse>(ResultFire);
+            ClientManager.Instance.Callback.SetHandler<AbortGameResponse>(AbortGame);
+        }
+
+        private void AbortGame(object sender, ResponseEventArgs e)
+        {
+            AbortGameResponse response = e.Response as AbortGameResponse;
+            if (response != null)
+            {
+                if (response.IsSuccess)
+                {
+                    _stateGame = StateGame.Finished;
+                    MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", ClientManager.Instance.PlayerNickname), "Игра завершена", MessageBoxButton.OK);
+                    ClientManager.Instance.Callback.RemoveHandler<AbortGameResponse>();
+                    chatBox.CloseChat();
+                    if (res == MessageBoxResult.OK)
+                        Switcher.SwitchPage(new MainMenu());
+                }
+                else
+                {
+                    //TODO: добавить popup с ошибками
+                }
+            }
         }
 
         /// <summary>
@@ -145,14 +167,14 @@ namespace SeaBattle.Pages
             if(nextuserId == ClientManager.Instance.ClientId)
             {
                 _isMyTurn = true;
-                turnInfoTextBlock.Text = "Ваш ход";
-                turnInfoTextBlock.Foreground = Brushes.LightGreen;
+                infoTextBlock.Text = "Ваш ход";
+                infoTextBlock.Foreground = Brushes.LightGreen;
             }
             else
             {
                 _isMyTurn = false;
-                turnInfoTextBlock.Text = "Ход противника";
-                turnInfoTextBlock.Foreground = Brushes.Red;
+                infoTextBlock.Text = "Ход противника";
+                infoTextBlock.Foreground = Brushes.Red;
             }  
         }
 
@@ -164,10 +186,6 @@ namespace SeaBattle.Pages
                 if (response.IsSuccess)
                 {
                     ClientManager.Instance.Callback.RemoveHandler<SendOpponentIsReadyResponse>();                    
-                }
-                else
-                {
-                    //TODO: добавить popup с ошибками
                 }
             }           
         }   
@@ -329,7 +347,6 @@ namespace SeaBattle.Pages
                 if (response.IsSuccess)
                 {
                     _stateGame = StateGame.Finished;
-                    textInfoGameTextBlock.Text = "Бой";
                     MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", response.Winner.Login),"Игра завершена", MessageBoxButton.OK);
                     ClientManager.Instance.Callback.RemoveHandler<EndGameResponse>();
                     chatBox.CloseChat();
@@ -401,11 +418,15 @@ namespace SeaBattle.Pages
                 Chat.IsEnabled = false;
                 sendReadyButton.IsEnabled = false;
                 sendReadyButton.Visibility = Visibility.Hidden;
-                turnInfoTextBlock.Visibility = Visibility.Hidden;
+                infoTextBlock.Visibility = Visibility.Hidden;
             }
 
             if (stateGame == StateGame.WaitReadyOpponent)
             {
+                Ships.Visibility = Visibility.Hidden;
+                Ships.IsEnabled = false;
+                OrientationGrid.Visibility = Visibility.Hidden;
+                OrientationGrid.IsEnabled = false; 
                 sendReadyButton.IsEnabled = false;
             }
 
@@ -415,10 +436,9 @@ namespace SeaBattle.Pages
                 Ships.IsEnabled = false;
                 OrientationGrid.Visibility = Visibility.Hidden;
                 OrientationGrid.IsEnabled = false;                
-                sendReadyButton.IsEnabled = false;
                 sendReadyButton.Visibility = Visibility.Hidden;
                 textInfoGameTextBlock.Text = "Бой...";
-                turnInfoTextBlock.Visibility = Visibility.Visible;
+                infoTextBlock.Visibility = Visibility.Visible;
             }
         }
 
