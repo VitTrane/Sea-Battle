@@ -10,8 +10,8 @@
     <Grid x:Name="pageGame" Background="White">
         <TextBlock x:Name="authorizationTextBlock"
                    Width="Auto"
-                   Height="25"
-                   Margin="0,0,0,542"
+                   Height="36"
+                   Margin="0,0,0,532"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="22"
@@ -20,7 +20,7 @@
                    TextWrapping="Wrap" />
         <TextBlock x:Name="textInfoGameTextBlock"
                    Width="466"
-                   Height="25"
+                   Height="33"
                    Margin="0,0,0,474"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
