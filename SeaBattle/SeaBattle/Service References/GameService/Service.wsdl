@@ -116,6 +116,9 @@
   <wsdl:message name="IService_SendOpponentIsReady_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendOpponentIsReady" />
   </wsdl:message>
+  <wsdl:message name="IService_WatchDog_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:WatchDog" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="Authorize">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Authorize" message="tns:IService_Authorize_InputMessage" />
@@ -196,6 +199,9 @@
     </wsdl:operation>
     <wsdl:operation name="SendOpponentIsReady">
       <wsdl:output wsaw:Action="http://tempuri.org/IService/SendOpponentIsReady" message="tns:IService_SendOpponentIsReady_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WatchDog">
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/WatchDog" message="tns:IService_WatchDog_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IService" type="tns:IService">
@@ -363,6 +369,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WatchDog">
+      <soap12:operation soapAction="http://tempuri.org/IService/WatchDog" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IService" type="tns:IService">
     <wsp:PolicyReference URI="#NetTcpBinding_IService_policy" />
@@ -525,6 +537,12 @@
     </wsdl:operation>
     <wsdl:operation name="SendOpponentIsReady">
       <soap12:operation soapAction="http://tempuri.org/IService/SendOpponentIsReady" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WatchDog">
+      <soap12:operation soapAction="http://tempuri.org/IService/WatchDog" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

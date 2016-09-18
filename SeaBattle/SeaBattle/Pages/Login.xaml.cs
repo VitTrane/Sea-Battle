@@ -4,6 +4,7 @@ using SeaBattle.Helpers;
 using SeaBattle.Managers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;

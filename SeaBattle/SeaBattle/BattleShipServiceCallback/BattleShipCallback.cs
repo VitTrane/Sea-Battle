@@ -124,5 +124,9 @@ namespace SeaBattle.BattleShipServiceCallback
         {
             syncContext.Post(new SendOrPostCallback(OnBroadcast<GetListGamesResponse>), response);
         }
+
+        public void WatchDog()
+        {
+        }
     }
 }

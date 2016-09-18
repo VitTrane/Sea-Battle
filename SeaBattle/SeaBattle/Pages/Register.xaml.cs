@@ -51,7 +51,9 @@ namespace SeaBattle.Pages
             }
             if (!Validator.IsValidPassword(passwordBox.Password))
             {
-                errorMessageTextBlock.Text = "Пароль должен иметь от 6 до 16 символов";
+                errorMessageTextBlock.Text = string.Format("Пароль должен иметь от {0} до {1} символов", 
+                    Validator.MIN_LENGTH_PASSWORD,
+                    Validator.MAX_LENGTH_PASSWORD);
                 return;
             }
 

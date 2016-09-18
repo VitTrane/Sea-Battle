@@ -84,6 +84,8 @@
                    Margin="0,128,0,0"
                    FontSize="20"
                    Foreground="Red"
+                   Text="{Binding ErrorText,
+                                  Mode=OneWay}"
                    TextAlignment="Center" />
     </Grid>
 </UserControl>

@@ -1569,6 +1569,9 @@ namespace SeaBattle.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/SendOpponentIsReady")]
         void SendOpponentIsReady(SeaBattle.GameService.SendOpponentIsReadyResponse response);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/WatchDog")]
+        void WatchDog();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
