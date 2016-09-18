@@ -16,6 +16,7 @@ using SeaBattle.GameService;
 using SeaBattle.GameLogic;
 using SeaBattle.Managers;
 using SeaBattle.BattleShipServiceCallback;
+using System.ServiceModel;
 
 namespace SeaBattle.Pages
 {
@@ -192,7 +193,17 @@ namespace SeaBattle.Pages
                 Managers.ClientManager.Instance.Client.LeaveGame();
                 Switcher.SwitchPage(new MainMenu());
             }
-            catch (Exception ex)
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show("Ошибка!: превышенно время ожидания");
+                ClientManager.Instance.Dispose();
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
+                ClientManager.Instance.Dispose();
+            }
+            catch(Exception ex)
             {
             }
             

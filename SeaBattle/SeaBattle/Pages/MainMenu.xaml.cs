@@ -42,12 +42,17 @@ namespace SeaBattle.Pages
             {
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login()); 
             }
             catch (CommunicationException ex)
             {
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
-            }                     
+                Switcher.SwitchPage(new Login()); 
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
@@ -62,13 +67,14 @@ namespace SeaBattle.Pages
             {
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login()); 
             }
             catch (CommunicationException ex)
             {
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
-            }  
-                       
+                Switcher.SwitchPage(new Login()); 
+            }                         
         }
 
         private void connectionGameButton_Click(object sender, RoutedEventArgs e)

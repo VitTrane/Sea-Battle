@@ -60,6 +60,9 @@ namespace SeaBattle.Pages
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
             }
+            catch (Exception ex)
+            {
+            }
         }
 
         /// <summary>
