@@ -10,7 +10,7 @@ namespace SeaBattle.Helpers
         {
             Style st = new Style();
             st.TargetType = typeof(ListViewItem);
-            Setter backGroundSetter = new Setter();
+            Setter backGroundSetter = new Setter();            
             backGroundSetter.Property = ListViewItem.BackgroundProperty;
             ListView listView = ItemsControl.ItemsControlFromItemContainer(container) as ListView;
             int index = listView.ItemContainerGenerator.IndexFromContainer(container);
@@ -23,7 +23,13 @@ namespace SeaBattle.Helpers
             {
                 backGroundSetter.Value = Brushes.White;
             }
+
+            Setter alignmentSetter = new Setter();
+            alignmentSetter.Property = ListViewItem.HorizontalContentAlignmentProperty;
+            alignmentSetter.Value = HorizontalAlignment.Center;
+
             st.Setters.Add(backGroundSetter);
+            st.Setters.Add(alignmentSetter);
             return st;
         }
     }

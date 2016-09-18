@@ -6,6 +6,26 @@
              d:DesignHeight="600"
              d:DesignWidth="800"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ArrowUp">
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding}" />
+                <Path VerticalAlignment="Center"
+                      Data="M 5,5 15,5 10,0 5,5"
+                      Fill="Black" />
+            </DockPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ArrowDown">
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding}" />
+                <Path VerticalAlignment="Center"
+                      Data="M 5,0 10,5 15,0 5,0"
+                      Fill="Black" />
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+
     <Grid x:Name="statisticGamePage" Background="White">
         <TextBlock x:Name="backTextBlock"
                    Width="70"
@@ -43,6 +63,7 @@
                     VerticalAlignment="Center">
             <TabItem Width="150" Header="Рейтинг игроков">
                 <ListView x:Name="topPlayersListView"
+                          GridViewColumnHeader.Click="topPlayersListView_Click"
                           ItemContainerStyleSelector="{DynamicResource listViewItemStyleSelector}"
                           ItemsSource="{Binding TopPlayers}">
                     <ListView.Resources>

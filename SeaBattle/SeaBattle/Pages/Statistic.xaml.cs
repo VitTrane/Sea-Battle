@@ -17,6 +17,7 @@ using SeaBattle.GameService;
 using System.Collections.ObjectModel;
 using SeaBattle.BattleShipServiceCallback;
 using System.ServiceModel;
+using System.ComponentModel;
 
 namespace SeaBattle.Pages
 {
@@ -25,8 +26,11 @@ namespace SeaBattle.Pages
     /// </summary>
     public partial class Statistic : UserControl
     {
-        ObservableCollection<DTOFullGameInfo> _lastGames;
-        ObservableCollection<DTOFullUserInfo> _topPlayers;
+        private ListSortDirection _sortDirection;
+        private GridViewColumnHeader _sortColumn;
+
+        private ObservableCollection<DTOFullGameInfo> _lastGames;
+        private ObservableCollection<DTOFullUserInfo> _topPlayers;
 
         public ObservableCollection<DTOFullUserInfo> TopPlayers
         {
@@ -110,6 +114,58 @@ namespace SeaBattle.Pages
             catch(Exception ex)
             {
             }
+        }
+
+        private void topPlayersListView_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            if (_sortColumn == column)
+            {
+                _sortDirection = _sortDirection == ListSortDirection.Ascending ?
+                                                   ListSortDirection.Descending :
+                                                   ListSortDirection.Ascending;
+            }
+            else
+            {
+                if (_sortColumn != null)
+                {
+                    _sortColumn.Column.HeaderTemplate = null;
+                    _sortColumn.Column.Width = _sortColumn.ActualWidth - 20;
+                }
+
+                _sortColumn = column;
+                _sortDirection = ListSortDirection.Ascending;
+                column.Column.Width = column.ActualWidth + 20;
+            }
+
+            if (_sortDirection == ListSortDirection.Ascending)
+            {
+                column.Column.HeaderTemplate =
+                                   Resources["ArrowUp"] as DataTemplate;
+            }
+            else
+            {
+                column.Column.HeaderTemplate =
+                                    Resources["ArrowDown"] as DataTemplate;
+            }
+
+            string header = string.Empty;
+            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            ICollectionView resultDataView = CollectionViewSource.GetDefaultView(
+                                                          topPlayersListView.ItemsSource);
+            resultDataView.SortDescriptions.Clear();
+            resultDataView.SortDescriptions.Add(
+                               new SortDescription(header, _sortDirection));
         }
     }
 }

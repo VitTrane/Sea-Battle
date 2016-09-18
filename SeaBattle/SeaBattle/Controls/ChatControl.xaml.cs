@@ -18,6 +18,9 @@ namespace SeaBattle.Controls
         {
             InitializeComponent();
             messageTextBox.MaxLength = Validator.MAX_LENGTH_MESSAGE;
+
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+                return;
             ClientManager.Instance.Callback.SetHandler<RecieveMessageResponse>(GetMessage);
         }
 
