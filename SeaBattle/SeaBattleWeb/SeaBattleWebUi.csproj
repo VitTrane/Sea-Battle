@@ -229,6 +229,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.js" />
     <Content Include="Scripts\Helpers\Board.js" />
+    <Content Include="Scripts\Helpers\WaitingStateCtrl.js" />
     <Content Include="Scripts\Views\App.jsx" />
     <Content Include="Scripts\Views\Index.js" />
     <Content Include="Scripts\Views\JoinGame.jsx" />
@@ -239,7 +240,6 @@
     <Content Include="Scripts\Views\Waiting.jsx" />
     <Content Include="Scripts\Views\Game.jsx" />
     <Content Include="Content\css\style.css" />
-    <Content Include="package.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\Views\LogIn.jsx" />
     <Content Include="Scripts\Views\Menu.jsx" />

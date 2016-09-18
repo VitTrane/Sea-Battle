@@ -16,7 +16,6 @@
 	   case 3:
 	     return <JoinGame stateCtrl = {this.state.stateCtrl} onUpdate = {this.onStUpdate}/>;
 	   case 4:
-         /*this.state.stateCtrl.InitGame();*/
 	     return <Game stateCtrl = {this.state.stateCtrl} onUpdate = {this.onStUpdate}/>;
 	   case 5:
 	     return <Statistics stateCtrl = {this.state.stateCtrl} onUpdate = {this.onStUpdate}/>;

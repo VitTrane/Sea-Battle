@@ -48,7 +48,7 @@ GameStateCtrl.prototype.ListenToMessage = function () {
 };
 
 GameStateCtrl.prototype.sendMessage = function (mess) {
-    var d = { text: mess }
+    var d = { text: mess };
     var mes = "You: " + mess;
     var nextItems = this.messages.concat([{ text: mes, id: Date.now() }]);
     this.messages = nextItems;
@@ -119,7 +119,7 @@ GameStateCtrl.prototype.exit = function () {
 GameStateCtrl.prototype.shot = function(i,j)
 {
     if (this.isStarted && this.isPlayerTurn && !this.isEnded) {
-        var d = { X: j, Y: i }
+        var d = { X: j, Y: i };
         $.ajax({
             type: "POST",
             url: "/home/Shot",

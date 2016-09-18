@@ -1,4 +1,22 @@
 ﻿var Waiting = React.createClass({
+	 getInitialState: function() {
+		
+        return {waitCtrl: new WaitingStateCtrl()};
+    },
+	checkGame: function()
+	{	if(!this.state.waitCtrl.isFounded){
+			this.state.waitCtrl.waiting();
+		}
+		else
+		{
+			this.props.stateCtrl.gamePreparing(this.state.waitCtrl.enemyName);
+			this.props.onUpdate();
+		}
+
+	},
+	componentDidMount: function() {
+		window.setInterval(this.checkGame, 2000);
+	},
     render: function(){
             return(
 					<div>
@@ -15,6 +33,8 @@
             },
 			goBackClick: function(e)
 			{	
-				React.render(<Menu/>, document.getElementById('content'));
+				this.props.stateCtrl.waitCtrl.exit();
+				this.props.stateCtrl.openMenu();
+				this.props.onUpdate();
 			} 
 });

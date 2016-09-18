@@ -177,10 +177,30 @@ namespace SeaBattle.Controllers
         public JsonResult ExitGame(Message m)
         {
 
-            bool status = false;
+            bool status = true;//true - everything is ok
             string message = "";
             string isEnded = m.Text;//false - the user left game before the end
             //
+            return new JsonResult { Data = new { status = status, message = message} };
+        }
+        //Create game
+        [HttpPost]
+        public JsonResult CreateGame()
+        {
+            bool status = false;
+            string message = "";
+            string userName = "";//The name of the person who wanna play with you
+            bool founded = false;//true - somebody wanna play with you
+            //
+            return new JsonResult { Data = new { status = status, message = message, isFounded = founded, userName = userName } };
+        }
+        [HttpPost]
+        public JsonResult StopWaitForPlayer()
+        {
+            bool status = true;
+            string message = "";
+
+            //remove the game from actual list
             return new JsonResult { Data = new { status = status, message = message} };
         }
     }
