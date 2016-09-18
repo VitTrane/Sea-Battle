@@ -167,7 +167,6 @@
     </Compile>
     <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Models\LastGamesItem.cs" />
-    <Compile Include="Models\ShipMap.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\TopPlayerItem.cs" />
     <Compile Include="Models\User.cs" />
@@ -229,6 +228,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.js" />
     <Content Include="Scripts\Helpers\Board.js" />
+    <Content Include="Scripts\Helpers\JoinGameStateCtrl.js" />
     <Content Include="Scripts\Helpers\WaitingStateCtrl.js" />
     <Content Include="Scripts\Views\App.jsx" />
     <Content Include="Scripts\Views\Index.js" />

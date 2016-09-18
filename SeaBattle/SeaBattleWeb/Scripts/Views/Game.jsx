@@ -33,7 +33,7 @@ var Game = React.createClass({
 	getPlayField: function()
 			{
 				var startGame = function()
-					{
+					{ 
 						if(this.state.gameCtrl.playerBoard.isReadyForGame()){
 							this.state.gameCtrl.start();
 							this.onUpdate();

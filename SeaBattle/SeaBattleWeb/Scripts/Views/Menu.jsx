@@ -36,6 +36,9 @@
 	
 	joinGameClick: function(e)
 	{
+		e.preventDefault();
+		this.props.stateCtrl.joinGame();
+		this.props.onUpdate();
 	},
 	
 	statisticsClick: function(e)

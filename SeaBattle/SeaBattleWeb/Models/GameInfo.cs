@@ -8,6 +8,12 @@ namespace SeaBattle.Models
     public class GameInfo
     {
         public string Creator { get; set;}
-        public DateTime CreateDate{ get; set;}
+        public string CreationDate{ get; set;}
+        public GameInfo() { }
+        public GameInfo(string name, string date)
+        {
+            this.CreationDate = date;
+            this.Creator = name;
+        }
     }
 }

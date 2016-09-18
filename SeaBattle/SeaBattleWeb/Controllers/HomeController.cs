@@ -7,6 +7,7 @@ using SeaBattle.Models;
 using React;
 using SeaBattle.GameServiceReference;
 using SeaBattle.Common;
+using Newtonsoft.Json;
 
 namespace SeaBattle.Controllers
 {
@@ -105,7 +106,6 @@ namespace SeaBattle.Controllers
         [HttpPost]
         public JsonResult Shot(XYCoordinate shot)
         {
-            var t = shot;
             bool status = false;
             string message = "";
             string shotSt = "";//{damaged, killed, miss}
@@ -129,9 +129,9 @@ namespace SeaBattle.Controllers
         }
 
         [HttpPost]
-        public JsonResult StartGame(ShipMap map)
+        public JsonResult StartGame(Message map)
         {
-           
+            var t = JsonConvert.DeserializeObject(map.Text);//Ship map: cell value clean or ship.
             bool status = false;
             string message = "";
             string enemyName = "";
@@ -202,6 +202,26 @@ namespace SeaBattle.Controllers
 
             //remove the game from actual list
             return new JsonResult { Data = new { status = status, message = message} };
+        }
+        [HttpPost]
+        public JsonResult GetGames()
+        {
+            bool status = true;
+            string message = "";
+            List<GameInfo> games= new List<GameInfo>();
+            games.Add(new GameInfo("asdf",DateTime.Now.ToString()));
+            games.Add(new GameInfo("jklmf", DateTime.Now.ToString()));
+            var t = new JsonResult{Data = new{games = games.ToArray(), status = status, message = message}};
+            return t;
+            
+        }
+        [HttpPost]
+        public JsonResult GetGames(GameInfo info)
+        {
+            bool status = true;
+            string message = "";
+           //to do to connect
+            return  new JsonResult { Data = new {status = status, message = message } };
         }
     }
 }

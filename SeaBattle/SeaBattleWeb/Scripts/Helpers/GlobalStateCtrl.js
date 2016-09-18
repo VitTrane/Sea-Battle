@@ -11,6 +11,7 @@ var GlobalStateCtrl = function () {
     this.state = 0;
     this.gameCtrl;
     this.waitCtrl;
+    this.joinCtrl;
 };
 
 GlobalStateCtrl.prototype.openMenu = function () {
@@ -22,6 +23,10 @@ GlobalStateCtrl.prototype.createGame = function () {
 };
 GlobalStateCtrl.prototype.gamePreparing = function () {
     this.state = 4;
+};
+GlobalStateCtrl.prototype.joinGame = function () {
+    this.joinCtrl = new JoinGameStateCtrl();
+    this.state = 3;
 };
 
 GlobalStateCtrl.prototype.initGame= function(enemyName)

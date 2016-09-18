@@ -70,11 +70,11 @@ GameStateCtrl.prototype.sendMessage = function (mess) {
 
 };
 GameStateCtrl.prototype.start = function () {
-    var d = {map: this.playerBoard.board};
+    var d = JSON.stringify(this.playerBoard.board);
     $.ajax({
         type: "Post",
         url: "/home/StartGame",
-        data: d,
+        data: { text: d },
         success: function (data) {
             if (data.status) {
                 this.isPlayerTurn = data.isPlayerTurn;

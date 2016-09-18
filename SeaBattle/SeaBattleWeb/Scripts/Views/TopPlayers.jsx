@@ -1,6 +1,6 @@
 ﻿var TopPlayers = React.createClass({
 /*getInitialState: function() {
-         
+      this   
         
     },*/
 
