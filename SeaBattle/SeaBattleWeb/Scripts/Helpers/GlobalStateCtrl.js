@@ -21,7 +21,8 @@ GlobalStateCtrl.prototype.createGame = function () {
     this.initWait();
     this.state = 2;
 };
-GlobalStateCtrl.prototype.gamePreparing = function () {
+GlobalStateCtrl.prototype.gamePreparing = function (enemyName) {
+    this.initGame(enemyName);
     this.state = 4;
 };
 GlobalStateCtrl.prototype.joinGame = function () {
@@ -32,8 +33,7 @@ GlobalStateCtrl.prototype.joinGame = function () {
 GlobalStateCtrl.prototype.initGame= function(enemyName)
 {
     this.gameCtrl = new GameStateCtrl();
-    this.gameCtrl.enemyName = enemyName;
-    
+    this.gameCtrl.enemyName = enemyName;   
 };
 GlobalStateCtrl.prototype.initWait= function () {
     this.waitCtrl = new WaitingStateCtrl();

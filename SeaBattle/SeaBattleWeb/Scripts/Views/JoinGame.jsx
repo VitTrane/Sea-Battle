@@ -15,34 +15,42 @@
 
 var JoinGame = React.createClass({
   getInitialState: function() {
-     return {joinCtrl: this.props.stateCtrl.joinCtrl};
+     return {joinCtrl: this.props.stateCtrl.joinCtrl, loocking: true};
     },
 	getGames: function() {
-
+	if(this.state.looking || this.state.looking === undefined){
 			this.state.joinCtrl.getGames();
 			this.onUpdate();
+			}
 	},
 	onUpdate: function(){
 		 this.setState({joinCtrl: this.props.stateCtrl.joinCtrl});
 	},
 	componentDidMount: function() {
-    
 		window.setInterval(this.getGames, 3000);
 	},
-	joinGameClick: function(e)
-	{	e.preventDefault();
-		this.state.JoinCtrl.enemyInfo = e.currentTarget.value;
-		this.state.JoinCtrl.joinGame();
-		this.state.JoinCtrl.gamePreparing(e.currentTarget.value.Creator);
-		this.props.onUpdate();
-	},
     render: function(){
+	var joinGameClick = function(e)
+	{	this.state.looking =false;
+		e.preventDefault();
+		var i = e.currentTarget.id;
+		this.state.joinCtrl.setEnemy(i);
+		this.state.joinCtrl.joinGame();
+		this.props.stateCtrl.gamePreparing(this.state.joinCtrl.enemyInfo.Creator);
+		this.props.onUpdate();
+	};
+	var exitClick = function(e)
+	{	this.state.looking =false;
+		e.preventDefault();
+		this.props.stateCtrl.openMenu();
+		this.props.onUpdate();
+	};
 	var t = this.state.joinCtrl.games;
 	getRows = function(item,i)
 	{
 		return(
 			<div className="row center">
-				<a className="waves-effect waves-teal btn-flat" onClick={this.joinGameClick} value ={item}>Join to {item.Creator} ({item.CreationDate})</a>
+				<a className="waves-effect waves-teal btn-flat" onClick={joinGameClick.bind(this)}  id={i}>Join to {item.Creator} ({item.CreationDate})</a>
 			</div>
 		);	
 	};
@@ -52,7 +60,9 @@ var JoinGame = React.createClass({
 				{
 					t.map(getRows.bind(this))
 				}
-				
+				<div className="row center">
+						<a className="waves-effect waves-light btn" onClick={exitClick.bind(this)}>Go Back</a>        
+				</div>
 		</div>);
 }
 });

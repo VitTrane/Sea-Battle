@@ -3,6 +3,9 @@
     this.isLoaded = false;
     this.enemyInfo;
 };
+JoinGameStateCtrl.prototype.setEnemy = function (i) {
+    this.enemyInfo = this.games[i];
+};
 JoinGameStateCtrl.prototype.getGames = function () {
     $.ajax({
         type: "POST",
@@ -21,7 +24,7 @@ JoinGameStateCtrl.prototype.getGames = function () {
 JoinGameStateCtrl.prototype.joinGame = function () {
     $.ajax({
         type: "POST",
-        url: "/home/JoinGames",
+        url: "/home/JoinGame",
         data: {Creator:this.enemyInfo.Creator,CreationDate:this.enemyInfo.CreationDate},
         success: function (data) {
             if (!data.status) {

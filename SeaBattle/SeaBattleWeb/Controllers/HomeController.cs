@@ -216,7 +216,7 @@ namespace SeaBattle.Controllers
             
         }
         [HttpPost]
-        public JsonResult GetGames(GameInfo info)
+        public JsonResult JoinGame(GameInfo info)
         {
             bool status = true;
             string message = "";
