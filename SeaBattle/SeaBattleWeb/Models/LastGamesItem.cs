@@ -7,8 +7,19 @@ namespace SeaBattle.Models
 {
     public class LastGamesItem
     {
-        public string Winner { get; set; }
-        public DateTime DateStart { get; set; }
-        public String Duration { get; set; }
+        public string FirstPlayer { get; set; }
+        public string SecondPlayer { get; set; }
+        public string Winner { get; set; }  
+        public string DateStart { get; set; }
+        public string Duration { get; set; }
+        public LastGamesItem() { }
+        public LastGamesItem(string fp, string sp, string w, string st, string d)
+        {
+            this.FirstPlayer = fp;
+            this.SecondPlayer = sp;
+            this.Winner = w;
+            this.DateStart = st;
+            this.Duration = d;
+        }
     }
 }

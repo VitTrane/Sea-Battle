@@ -12,13 +12,14 @@ var GlobalStateCtrl = function () {
     this.gameCtrl;
     this.waitCtrl;
     this.joinCtrl;
+    this.statisticCtrl;
 };
 
 GlobalStateCtrl.prototype.openMenu = function () {
     this.state = 1;
 };
 GlobalStateCtrl.prototype.createGame = function () {
-    this.initWait();
+    this.waitCtrl = new WaitingStateCtrl();
     this.state = 2;
 };
 GlobalStateCtrl.prototype.gamePreparing = function (enemyName) {
@@ -35,11 +36,25 @@ GlobalStateCtrl.prototype.initGame= function(enemyName)
     this.gameCtrl = new GameStateCtrl();
     this.gameCtrl.enemyName = enemyName;   
 };
-GlobalStateCtrl.prototype.initWait= function () {
-    this.waitCtrl = new WaitingStateCtrl();
+GlobalStateCtrl.prototype.seeStatistic = function () {
+    this.statisticCtrl = new StatisticsStateCtrl();
+    this.state = 5;
+};
+GlobalStateCtrl.prototype.logOut = function () {
+    $.ajax({
+        type: "Post",
+        url: "/home/LogOut",
+        success: function (data) {
+            if (!data.status) {
+                alert(data.message);
+            }
+        }.bind(this),
+        error: function (e) {
+            console.log(e);
+            alert('Error! Please try again');
+        }
+    });
+
+    this.state = 0;
 };
 
-GlobalStateCtrl.prototype.getTopPlayers = function ()
-{
-    var items = [];
-};

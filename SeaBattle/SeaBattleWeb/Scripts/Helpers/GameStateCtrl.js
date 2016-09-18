@@ -9,7 +9,7 @@
     
 };
 
-/*GameStateCtrl.startListenMessages = function () {
+/*GameStateCtrl.prototype.startListenMessages = function () {
     (function poll() {
         setTimeout(function () {
             $.ajax({

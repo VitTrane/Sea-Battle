@@ -223,5 +223,34 @@ namespace SeaBattle.Controllers
            //to do to connect
             return  new JsonResult { Data = new {status = status, message = message } };
         }
+        [HttpPost]
+        public JsonResult GetLastGames()
+        {
+            bool status = true;
+            string message = "";
+            List<LastGamesItem> games = new List<LastGamesItem>();
+            games.Add(new LastGamesItem("ssssss","bbbbb","bbbbb",DateTime.Now.ToString(),"02:30"));
+            return new JsonResult { Data = new { games = games.ToArray(), status = status, message = message } };
+          
+        }
+        [HttpPost]
+        public JsonResult GetTopPlayers()
+        {
+            bool status = true;
+            string message = "";
+            List<TopPlayerItem> pl = new List<TopPlayerItem>();
+            pl.Add(new TopPlayerItem("asdf", 10, 0.5 ,DateTime.Now.ToString()));
+            return new JsonResult { Data = new { players = pl.ToArray(), status = status, message = message } };
+
+        }
+        [HttpPost]
+        public JsonResult LogOut(Message m)
+        {
+
+            bool status = true;//true - everything is ok
+            string message = "";
+            //
+            return new JsonResult { Data = new { status = status, message = message } };
+        }
     }
 }

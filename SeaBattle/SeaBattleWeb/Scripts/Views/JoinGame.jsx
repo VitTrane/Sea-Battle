@@ -1,18 +1,4 @@
-﻿var Games = React.createClass({
-  render: function() {
-		var createItem = function(item) {
-		  return (
-					<tr>
-						<th data-field="id" value = {item.Creator}>item.Сreator.toString()</th>
-						<th data-field="date" value = {item.CreationDate}>item.CreationDate.toString</th>
-				    </tr>
-				);
-		};
-		return this.props.games.map(createItem.bind(this));		
-
-	}
-});
-
+﻿
 var JoinGame = React.createClass({
   getInitialState: function() {
      return {joinCtrl: this.props.stateCtrl.joinCtrl, loocking: true};
@@ -27,7 +13,7 @@ var JoinGame = React.createClass({
 		 this.setState({joinCtrl: this.props.stateCtrl.joinCtrl});
 	},
 	componentDidMount: function() {
-		window.setInterval(this.getGames, 3000);
+		window.setInterval(this.getGames, 2000);
 	},
     render: function(){
 	var joinGameClick = function(e)
@@ -46,11 +32,11 @@ var JoinGame = React.createClass({
 		this.props.onUpdate();
 	};
 	var t = this.state.joinCtrl.games;
-	getRows = function(item,i)
+	var getRows = function(item,i)
 	{
 		return(
 			<div className="row center">
-				<a className="waves-effect waves-teal btn-flat" onClick={joinGameClick.bind(this)}  id={i}>Join to {item.Creator} ({item.CreationDate})</a>
+				<a className="waves-effect waves-teal btn-flat" onClick={joinGameClick.bind(this)}  id={i} key = {i}>Join to {item.Creator} ({item.CreationDate})</a>
 			</div>
 		);	
 	};
