@@ -60,21 +60,33 @@ namespace SeaBattle.Pages
             try
             {
                 ClientManager.Instance.CreateClient();
-                RegisterPlayer();
-                
+                RegisterPlayer();                
             }
             catch (TimeoutException ex)
             {
+                string message = string.Format("{0},\n {1} \n {2}", "Превышенно время ожидания",
+                    ex.ToString(), ex.StackTrace);
+                ClientManager.Instance.Logger.WriteLineError(message);
+
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
             }
             catch (CommunicationException ex)
             {
+                string message = string.Format("{0},\n {1} \n {2}", "Проблемы соединения с серверро",
+                    ex.ToString(), ex.StackTrace);
+                ClientManager.Instance.Logger.WriteLineError(message);
+
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
             }
             catch (Exception ex)
             {
+                string message = string.Format("{0} \n {1},\n {2}", ex.Message,
+                    ex.ToString(), ex.StackTrace);
+                ClientManager.Instance.Logger.WriteLineError(message);
+
+                ClientManager.Instance.Dispose();
             }
         }
 
@@ -89,8 +101,7 @@ namespace SeaBattle.Pages
             {
                 if (response.IsSuccess)
                 {
-                    Autorize();
-                    
+                    Autorize();                    
                 }
                 else
                 {

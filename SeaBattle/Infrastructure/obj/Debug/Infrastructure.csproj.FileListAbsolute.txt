@@ -1,0 +1,4 @@
+E:\My\Git\GitHubSeaBattle\SeaBattle\Infrastructure\bin\Debug\Infrastructure.dll
+E:\My\Git\GitHubSeaBattle\SeaBattle\Infrastructure\bin\Debug\Infrastructure.pdb
+E:\My\Git\GitHubSeaBattle\SeaBattle\Infrastructure\obj\Debug\Infrastructure.dll
+E:\My\Git\GitHubSeaBattle\SeaBattle\Infrastructure\obj\Debug\Infrastructure.pdb

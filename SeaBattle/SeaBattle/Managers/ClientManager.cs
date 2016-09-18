@@ -1,4 +1,5 @@
-﻿using SeaBattle.BattleShipServiceCallback;
+﻿using Infrastructure;
+using SeaBattle.BattleShipServiceCallback;
 using SeaBattle.GameService;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace SeaBattle.Managers
         private ServiceClient _client;
         private BattleShipCallback _callback;
 
+        public ILogger Logger { get; set; }
         public Guid ClientId { get; set; }
         public string PlayerNickname { get; set; }
 
@@ -44,6 +46,7 @@ namespace SeaBattle.Managers
         private ClientManager()
         {
             _responses = new Dictionary<Type, BaseResponse>();
+            Logger = new FileLogger();
         }
 
         /// <summary>
@@ -73,9 +76,22 @@ namespace SeaBattle.Managers
             { 
                 _client.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _client.Abort();                
+                string message = string.Format("{0} \n {1},\n {2}", ex.Message,
+                    ex.ToString(), ex.StackTrace);
+                Logger.WriteLineError(message);
+
+                try
+                {
+                    _client.Abort(); 
+                }
+                catch (Exception e)
+                {
+                    string m = string.Format("{0} \n {1},\n {2}", e.Message,
+                    e.ToString(), e.StackTrace);
+                    Logger.WriteLineError(message);
+                }                               
             }
             _client = null;
         }

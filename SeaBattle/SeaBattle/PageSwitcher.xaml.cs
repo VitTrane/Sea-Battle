@@ -42,8 +42,11 @@ namespace SeaBattle
                 {
                     ClientManager.Instance.Client.LeaveGame();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    string message = string.Format("{0} \n {1},\n {2}",ex.Message,
+                    ex.ToString(), ex.StackTrace);
+                    ClientManager.Instance.Logger.WriteLineError(message);
                 }
 
                 ClientManager.Instance.Dispose();

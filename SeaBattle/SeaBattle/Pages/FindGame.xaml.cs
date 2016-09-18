@@ -40,7 +40,19 @@ namespace SeaBattle.Pages
 
             gamesListView.ItemsSource = _games;
             ClientManager.Instance.Callback.SetHandler<GetListGamesResponse>(GetAvailableGames);
-            ClientManager.Instance.Client.GetListAvailableGames();
+
+            try
+            {
+                ClientManager.Instance.Client.GetListAvailableGames();
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("{0} \n {1},\n {2}", ex.Message,
+                    ex.ToString(), ex.StackTrace);
+                ClientManager.Instance.Logger.WriteLineError(message);
+
+                ClientManager.Instance.Dispose();
+            }           
         }
 
         private void backTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
