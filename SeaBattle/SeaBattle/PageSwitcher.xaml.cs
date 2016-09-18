@@ -1,4 +1,5 @@
-﻿using SeaBattle.Pages;
+﻿using SeaBattle.Managers;
+using SeaBattle.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,24 @@ namespace SeaBattle
         public void Navigate(UserControl nextPage)
         {
             this.Content = nextPage;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (ClientManager.Instance.Client != null) 
+            {
+                try
+                {
+                    ClientManager.Instance.Client.LeaveGame();
+                }
+                catch (Exception)
+                {
+                }
+
+                ClientManager.Instance.Dispose();
+            }
+
+            base.OnClosing(e);
         }
     }
 }
