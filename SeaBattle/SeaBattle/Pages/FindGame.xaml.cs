@@ -52,6 +52,7 @@ namespace SeaBattle.Pages
                 ClientManager.Instance.Logger.WriteLineError(message);
 
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }           
         }
 
@@ -76,7 +77,19 @@ namespace SeaBattle.Pages
 
             ClientManager.Instance.Callback.SetHandler<CurentGameResponse>(GetConnectToGames);
             var request = new ConnectToGameRequest() { GameId = game.GameId};
-            ClientManager.Instance.Client.ConnectToGame(request);            
+            try
+            {
+                ClientManager.Instance.Client.ConnectToGame(request); 
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("{0} \n {1},\n {2}", ex.Message,
+                    ex.ToString(), ex.StackTrace);
+                ClientManager.Instance.Logger.WriteLineError(message);
+
+                ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
+            }                       
         }
 
         /// <summary>
@@ -86,17 +99,40 @@ namespace SeaBattle.Pages
         /// <param name="e"></param>
         private void GetAvailableGames(object sender, ResponseEventArgs e)
         {
-            if (this != null)
+            GetListGamesResponse response = e.Response as GetListGamesResponse;
+            if (response != null)
             {
-                GetListGamesResponse response = e.Response as GetListGamesResponse;
-                if (response != null)
+                if (response.Games != null) 
                 {
-                    List<DTOAwaitingGame> newGames = response.Games.Where(g => !Games.Contains(g)).ToList();
+                    //Список создателей, которые уже есть у нас в списке
+                    List<DTOUser> creators = new List<DTOUser>();
+                    foreach (var game in _games)
+                    {
+                        creators.Add(game.Creator);
+                    }
+
+                    //Добавляем новые игры, которых у нас нету в списке
+                    List<DTOAwaitingGame> newGames = response.Games.ToList();
                     foreach (var game in newGames)
                     {
-                        _games.Add(game);
+                        DTOUser creator = creators.FirstOrDefault(c => c.Login.Equals(game.Creator.Login));
+                        if (creator == null)
+                        {
+                            _games.Add(game);
+                        }
                     }
-                }
+
+                    //Удаляем игры которых у же нету в списке, который пришел
+                    foreach (var creator in creators)
+                    {
+                        var removedCreator = newGames.FirstOrDefault(g=>g.Creator.Login.Equals(creator.Login));
+                        if (removedCreator == null)
+                        {
+                            var game = _games.First(g => g.Creator.Login.Equals(creator.Login));
+                            _games.Remove(game);
+                        }
+                    }
+                }                
             }
         }
 

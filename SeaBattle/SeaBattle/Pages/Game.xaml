@@ -274,7 +274,7 @@
         </Grid>
         <Grid x:Name="Chat"
               Width="636"
-              Height="200"
+              Height="194"
               Margin="0,298,0,0"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">

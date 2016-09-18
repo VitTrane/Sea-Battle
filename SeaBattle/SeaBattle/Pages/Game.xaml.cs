@@ -201,6 +201,7 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (CommunicationException ex)
             {
@@ -210,16 +211,16 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (Exception ex)
             {
                 string message = string.Format("{0} \n {1},\n {2}", ex.Message,
                     ex.ToString(), ex.StackTrace);
                 ClientManager.Instance.Logger.WriteLineError(message);
-
                 ClientManager.Instance.Dispose();
-            }
-            
+                Switcher.SwitchPage(new Login());
+            }         
         }
 
         /// <summary>
@@ -455,8 +456,12 @@ namespace SeaBattle.Pages
             _stateGame = StateGame.Finished;
             MessageBoxResult res = MessageBox.Show(String.Format("Победил игрок {0}", winner), caption, MessageBoxButton.OK);
             chatBox.CloseChat();
+
             if (res == MessageBoxResult.OK)
+            {
+                ClientManager.Instance.Client.LeaveGame();
                 Switcher.SwitchPage(new MainMenu());
+            }
         }
 
         private void AddTooggles()

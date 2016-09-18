@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using SeaBattle.Helpers;
+using System.Windows.Input;
+using SeaBattle.Pages;
 
 namespace SeaBattle.Controls
 {
@@ -48,10 +50,11 @@ namespace SeaBattle.Controls
             {
                 if (!String.IsNullOrWhiteSpace(messageTextBox.Text))
                 {
-                    chatTextBox.Text += Environment.NewLine + string.Format("[{0}] {1}: {2}", DateTime.Now.ToString(), "Вы", messageTextBox.Text);
+                    chatTextBox.Text += Environment.NewLine + string.Format("[{0}] {1}: {2}", DateTime.Now.ToString(), "Вы", messageTextBox.Text);                    
                     SendMessageRequest request = new SendMessageRequest() { Message = messageTextBox.Text };
                     messageTextBox.Text = "";
                     Managers.ClientManager.Instance.Client.SendMessage(request);
+                    chatTextBox.ScrollToEnd();
                 }
             }
             catch (TimeoutException ex)
@@ -62,6 +65,7 @@ namespace SeaBattle.Controls
 
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (CommunicationException ex)
             {
@@ -71,6 +75,7 @@ namespace SeaBattle.Controls
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             } 
             catch(Exception ex)
             {
@@ -80,12 +85,21 @@ namespace SeaBattle.Controls
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
         }
 
         public void CloseChat() 
         {
             ClientManager.Instance.Callback.RemoveHandler<RecieveMessageResponse>();
+        }
+
+        private void messageTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                sendMessageButton_Click(null, null);
+            }
         }
     }
 }

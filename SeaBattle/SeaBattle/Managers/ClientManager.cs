@@ -73,7 +73,7 @@ namespace SeaBattle.Managers
         public void Dispose()
         {
             try
-            { 
+            {
                 _client.Close();
             }
             catch (Exception ex)
@@ -81,17 +81,16 @@ namespace SeaBattle.Managers
                 string message = string.Format("{0} \n {1},\n {2}", ex.Message,
                     ex.ToString(), ex.StackTrace);
                 Logger.WriteLineError(message);
-
                 try
                 {
-                    _client.Abort(); 
+                    _client.Abort();
                 }
                 catch (Exception e)
                 {
                     string m = string.Format("{0} \n {1},\n {2}", e.Message,
-                    e.ToString(), e.StackTrace);
+                        e.ToString(), e.StackTrace);
                     Logger.WriteLineError(message);
-                }                               
+                }
             }
             _client = null;
         }

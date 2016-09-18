@@ -84,10 +84,13 @@ namespace SeaBattle.Pages
             GetLastGamesResponse response = e.Response as GetLastGamesResponse;
             if (response != null)
             {
-                var lastGames = response.Games;
-                foreach (var game in lastGames)
+                if (response.Games != null)
                 {
-                    _lastGames.Add(game);
+                    var lastGames = response.Games;
+                    foreach (var game in lastGames)
+                    {
+                        _lastGames.Add(game);
+                    }
                 }
             }
         }
@@ -107,6 +110,7 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (CommunicationException ex)
             {
@@ -116,14 +120,15 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (Exception ex)
             {
                 string message = string.Format("{0} \n {1},\n {2}", ex.Message,
                     ex.ToString(), ex.StackTrace);
                 ClientManager.Instance.Logger.WriteLineError(message);
-
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
         }
 

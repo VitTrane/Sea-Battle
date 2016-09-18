@@ -36,7 +36,7 @@ namespace SeaBattle.Pages
                 ClientManager.Instance.Client.LeaveGame();
                 ClientManager.Instance.Client.Logout();
                 ClientManager.Instance.Dispose();
-                Switcher.SwitchPage(new Login()); 
+                Switcher.SwitchPage(new Login());
             }
             catch (TimeoutException ex)
             {
@@ -46,6 +46,7 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (CommunicationException ex)
             {
@@ -55,14 +56,15 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (Exception ex)
             {
                 string message = string.Format("{0} \n {1},\n {2}", ex.Message,
                     ex.ToString(), ex.StackTrace);
                 ClientManager.Instance.Logger.WriteLineError(message);
-
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
         }
 
@@ -82,6 +84,7 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: превышенно время ожидания");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (CommunicationException ex)
             {
@@ -91,6 +94,7 @@ namespace SeaBattle.Pages
 
                 MessageBox.Show("Ошибка!: Проблемы соединения с серверром");
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }
             catch (Exception ex)
             {
@@ -99,6 +103,7 @@ namespace SeaBattle.Pages
                 ClientManager.Instance.Logger.WriteLineError(message);
 
                 ClientManager.Instance.Dispose();
+                Switcher.SwitchPage(new Login());
             }                      
         }
 
