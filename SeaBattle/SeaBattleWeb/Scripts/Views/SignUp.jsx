@@ -44,7 +44,8 @@ goToMenu: function(data)
 {
 	if(data.status)
 	{
-		React.render(<Menu/>, document.getElementById('content'));
+		this.props.stateCtrl.openMenu();
+		this.props.onUpdate();
 	}
 	else
 	{

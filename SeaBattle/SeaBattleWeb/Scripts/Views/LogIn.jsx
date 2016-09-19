@@ -36,8 +36,9 @@ var LogIn = React.createClass({
 	{
 		if(data.status)
 		{
-			this.props.stateCtrl.OpenMenu();
-			this.props.onUpdate();
+			
+		this.props.stateCtrl.openMenu();
+		this.props.onUpdate();
 		}
 		else
 		{
